@@ -1,8 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "almacenamientoParam.h"
 
-int main()
+#define TESTER
+
+int main(int argc, char argv[])
 {
-    printf("Hello world!\n");
+    #ifndef TESTER
+    tArgumentos1 *registroParam = malloc(sizeof(tArgumentos1));
+    registroParam = verificarEntrada(argc, argv);
+    ejecucion(registroParam);
+    exit(EXIT_SUCCESS);
+    #else
+    ejecutarTest();
+    #endif // TESTER
     return 0;
 }

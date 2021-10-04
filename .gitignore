@@ -1,3 +1,9 @@
 /bin/
 
 *.cbp
+
+*.depend
+
+*.layout
+
+/obj/
