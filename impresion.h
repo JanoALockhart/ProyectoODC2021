@@ -11,6 +11,8 @@ void papFractionary10BaseTDBase(int * TBase, int * n, int * digit);
 
 void mostrarResultadoFinal(char * resultadoEntero, char * resultadoFraccional);
 
-void mostrarError(int * nroError);
+void mostrarError(int nroError);
+
+void mostrarAyuda();
 
 #endif // IMPRESION_H_INCLUDED

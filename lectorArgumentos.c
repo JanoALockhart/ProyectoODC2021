@@ -35,8 +35,6 @@ char*** identificarParametro(char *param, tArgumentos1 *registro){
 
     dirDevolver = malloc(sizeof(char*));
 
-    printf("%c",*param);
-    printf("%i",*param!='-');
     if((*param)!='-'){
         mostrarError(ERROR_EN_EL_INGRESO_DE_ARGUMENTO);
 
@@ -74,12 +72,12 @@ char*** identificarParametro(char *param, tArgumentos1 *registro){
                     free(dirDevolver);
                     dirDevolver = NULL;
                 }else{
-                    exit(ERROR_ARGUMENTOS_REPETIDOS);
+                    mostrarError(ERROR_ARGUMENTOS_REPETIDOS);
                 }
                 break;
             }
             default:{
-                exit(ERROR_ARGUMENTO_NO_EXISTENTE);
+                mostrarError(ERROR_ARGUMENTO_NO_EXISTENTE);
             }
         }
     }
@@ -167,7 +165,7 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
     //Algoritmo
     //Si hay mas parametros de los posibles, algo se ingresó mal
     if(cantParam>9){
-        exit(ERROR_EN_EL_INGRESO_DE_ARGUMENTO);
+        mostrarError(ERROR_EN_EL_INGRESO_DE_ARGUMENTO);
     }
 
     //Buscar el parametro -h
