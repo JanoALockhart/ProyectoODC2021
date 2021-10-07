@@ -7,7 +7,7 @@
 #define ERROR_BASE 200
 #define VALOR_ARGN_NO_INGRESADO 202
 #define ERROR_ARGN_INVALIDO 203
-#define LIMITES_NUM_INCUMPLIDOS
+#define LIMITES_NUM_INCUMPLIDOS 204
 
 #define BASE_MENOR 2
 #define BASE_MAYOR 16
@@ -42,7 +42,7 @@ int* soloNumeros(char* cadena){
     do{
         *pCarac = *(cadena+(*numCarac));
         *soloCar = ('0'<=*pCarac && *pCarac<='9')||(*pCarac=='\0');
-    }while(*pCarac!='\0' && *soloCar)
+    }while(*pCarac!='\0' && *soloCar);
 
     free(pCarac);
     free(numCarac);
@@ -87,7 +87,7 @@ int limitesEnteroYFracc(char* strNum){
     free(cantInt);
     free(pos);
 
-    return ((cantInt <= MAX_PARTE_ENTERA_INPUT) && (cantFracc <= MAX_PARTE_FRACC_INPUT));
+    return ((*cantInt <= MAX_PARTE_ENTERA_INPUT) && (*cantFracc <= MAX_PARTE_FRACC_INPUT));
 
 }
 
@@ -117,7 +117,7 @@ void verificarArgN(char* strNumero, int baseOrigen){
 
     *numCarac = 0;
     do{
-        *pCaract = *(strNumero+(*numCarac));
+        *pCarac = *(strNumero+(*numCarac));
         //Revisar con getValue que el caracter este entre 0..9,A..F y sea menor a la base
         //sugerir: getValue devuelve null si no esta en este rango
         //mandar error apropiado

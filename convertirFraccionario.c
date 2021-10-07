@@ -1,5 +1,5 @@
 #include <math.h>
-
+#include <stdlib.h>
 #include "convertirFraccionario.h"
 
 /**
@@ -30,9 +30,9 @@ float* transformarFraccionarioAB10(char *fraccionario, int baseInicial, int paso
     *valor=0;
 
     *pCarac = *(fraccionario+(*pos));
-    while(*pCarac!='\0')){
+    while(*pCarac!='\0'){
         //valor = getValue(*pCarac);//DESCOMENTAR LINEA //REVISAR
-        *total += (*valor)*(1/pow(baseInicial,(*pos)+1);
+        *total += (*valor)*(1/pow(baseInicial,(*pos)+1));
         if(pasoAPaso){
             //papBA10();//REVISAR
         }
@@ -69,8 +69,8 @@ char* argregarCaracterFinal(char* strNum, int cantDig, int digito){
 
     nuevoPunt = (char *) realloc(strNum,(cantDig+1)*sizeof(char));
     carac = getValue(digito);//REVISAR
-    *(nuevoPunt+cantDigitos)=*carac;
-    *(nuevoPunt+cantDigitos+1)='\0';
+    *(nuevoPunt+cantDig)=*carac;
+    *(nuevoPunt+cantDig+1)='\0';
 
     free(carac);
 
@@ -92,7 +92,7 @@ Return: un puntero a una cadena de caracteres que representa
     el numero fraccionario sin el "0.". El espacio de memoria
     apuntado por el puntero debe liberarse con un free().
 */
-char* transformarFraccionarioABaseDestino(float fraccionario, float baseDestino, int pasoAPaso){
+char* transformarFraccionarioABaseDestino(float fraccionario, int baseDestino, int pasoAPaso){
     float *numIntermedio;
     int *cantDigitos, *digitoEntero;
     char *result;
@@ -120,7 +120,7 @@ char* transformarFraccionarioABaseDestino(float fraccionario, float baseDestino,
 
     free(numIntermedio);
     free(cantDigitos);
-    free(digito);
+    free(digitoEntero);
 
     return result;
 }

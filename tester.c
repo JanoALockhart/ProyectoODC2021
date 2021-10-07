@@ -4,16 +4,26 @@
 #include <string.h>
 #include "almacenamientoParam.h"
 #include "lectorArgumentos.h"
+#include "convertirFraccionario.h"
 
 //#define TEST_ESH
 //#define TEST_IDENTIFPARAM
-#define TEST_ENTERO
+//#define TEST_ENTERO
+#define TEST_FRACC
 
 void ejecutarTest(){
 
     //printf("%d \n",sizeof(tArgumentos1));
     //printf("%d \n",sizeof(tArgumentos2));
     //printf("%d \n",sizeof(tParam));
+
+
+    #ifdef TEST_FRACC
+
+    char* strNum = transformarFraccionarioABaseDestino(0.123, 2, 0);
+    printf("%s \n",strNum);
+
+    #endif // TEST_FRACC
 
     #ifdef TEST_ESH
     char* arg[3]= {"-h","-","-h0"};
@@ -57,7 +67,7 @@ void ejecutarTest(){
     printf("stringAlmacenado: %s \n",pruebaParam->argN);
     #endif // TEST_IDENTIFPARAM
 
-    #ifdef TEST_ENTERO
+    #ifdef TEST_ALMACENAR
 
 
     tArgumentos1 *registroParam = malloc(sizeof(tArgumentos1));

@@ -1,5 +1,6 @@
 #include <math.h>
-
+#include <stdlib.h>
+#include <ctype.h>
 int * stringLength(char * string){
     int * length;
     length=(int *) malloc(sizeof(int));
@@ -71,7 +72,7 @@ int * decimal10BaseTDBase(char * n, int * DBase){
     *output+=(*number) * (int) pow( 10 , (*count));
     return output;
 }
-
+/*
 int main(){
     char i[50]="11101";
     char t[50]="29";
@@ -81,4 +82,4 @@ int main(){
     printf("Decimal %i \n",*decimalOBaseT10Base(&i,base));
     printf("Decimal %i \n",*decimal10BaseTDBase(&t,base));
     return 0;
-}
+}*/

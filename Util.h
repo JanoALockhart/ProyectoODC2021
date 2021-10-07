@@ -1,14 +1,14 @@
 #ifndef UTIL_H_INCLUDED
 #define UTIL_H_INCLUDED
 
-int isValid(char * n, int * base)
+int isValid(char * n, int * base);
 
-int getValue(char * value)
+int getValue(char * value);
 
-char isValue(int * n)
+char isValue(int * n);
 
-int stringLength(char * string)
+int stringLength(char * string);
 
-void separateComma(char * n, char * parteEntera, char * parteFraccionaria)
+void separateComma(char * n, char * parteEntera, char * parteFraccionaria);
 
 #endif // UTIL_H_INCLUDED
