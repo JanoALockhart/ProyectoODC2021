@@ -1,6 +1,8 @@
 #include <math.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include "impresion.h"
+
 int * stringLength(char * string){
     int * length;
     length=(int *) malloc(sizeof(int));
@@ -9,67 +11,81 @@ int * stringLength(char * string){
     return (length);
 }
 
-int * getValue(char * value){
-    int * output;
-    output=(int *) malloc(sizeof(int));
-    switch(tolower(*value)){
-        case 'a':{ *output=10; break; }
-        case 'b':{ *output=11; break; }
-        case 'c':{ *output=12; break; }
-        case 'd':{ *output=13; break; }
-        case 'e':{ *output=14; break; }
-        case 'f':{ *output=15; break; }
-        case '0':{ *output=0; break; }
-        case '1':{ *output=1; break; }
-        case '2':{ *output=2; break; }
-        case '3':{ *output=3; break; }
-        case '4':{ *output=4; break; }
-        case '5':{ *output=5; break; }
-        case '6':{ *output=6; break; }
-        case '7':{ *output=7; break; }
-        case '8':{ *output=8; break; }
-        case '9':{ *output=9; break; }
-        default:{ *output=100000; break; }
-    }
-    return output;
-}
-
-int * decimalOBaseT10Base(char * n, int * Obase){
+/**
+Funcion devuelve el resultado de transformar el numero decimal desde su base de origen a base 10.
+Parametros:
+    -n: Puntero al primer elemento de una cadena de caracteres que representara a un número en base de origen
+    -OBase: Puntero a un entero que representará la base de origen
+    -vervose: Puntero a un entero que, si el valor que apunte es:
+                0. Entonces NO se imprimirá el paso a paso.
+                1. Entonces se imprimirá el paso a paso.
+Return: Un puntero a entero que va a contener al número n en base 10.
+*/
+int * decimalOBaseT10Base(char * n, int * Obase, int vervose){
     int * total;
     int * count;
     int * numberLength;
     int * value;
+    int * exp;
     total=(int *) malloc(sizeof(int));
-    count=(int *) malloc(sizeof(int));
-    numberLength=(int *) malloc(sizeof(int));
-    value=(int *) malloc(sizeof(int));
-    *total=0;
-    *count=1;
-    numberLength=stringLength(n);
-    while((*count)<=(*numberLength)){
-        value=(getValue((n+(*count)-1)));
-        (*total) += (*value) * (int) pow( (double)(*Obase) , (double)(*numberLength)-(*count) );
-        (*count)++;
-    }
+    if((*n!='0' || *n!='1') && *(n+1)){
+        count=(int *) malloc(sizeof(int));
+        numberLength=(int *) malloc(sizeof(int));
+        value=(int *) malloc(sizeof(int));
+        exp=(int *) malloc(sizeof(int));
+        *total=0;
+        *count=1;
+        numberLength=stringLength(n);
+        while((*count)<=(*numberLength)){
+            value=(getValue((n+(*count)-1)));
+            *exp=((*numberLength)-(*count));
+            (*total) += (*value) * (int) pow( (double)(*Obase) , (double) (*exp) );
+            if(vervose) papDecimalOBaseT10Base(total, value, Obase, exp);
+            (*count)++;
+        }
+    } else *total=(*n=='0')?0:1;
+    free(count);
+    free(numberLength);
+    free(value);
+    free(exp);
     return total;
 }
 
-int * decimal10BaseTDBase(char * n, int * DBase){
-    int * output;
-    double * count;
+/**
+Funcion devuelve el resultado de transformar el numero decimal desde base 10 a una base destino.
+Parametros:
+    -n: Puntero a un entero que apuntara al número entero en base 10 que se quiere convertir
+    -DBase: Puntero a un entero que representará la base destino
+    -vervose: Puntero a un entero que, si el valor que apunte es:
+                0. Entonces NO se imprimirá el paso a paso.
+                1. Entonces se imprimirá el paso a paso.
+Return: Un puntero a una cadena de caracteres que va a contener al número n en base destino.
+*/
+char * decimal10BaseTDBase(int * n, int * DBase, int vervose){
+    char * output;
+    int * count;
     int * number;
-    number=(int *) malloc(sizeof(int));
-    output=(int *) malloc(sizeof(int));
-    count=(double *) malloc(sizeof(double));
-    *count=0.0;
-    *output=0;
-    *number=atoi(n);
-    while((*number)>=(*DBase)){
-        *output=( ((*number)%(*DBase)) * (int) pow( 10 , (*count)) ) + *output;
-        *number=(*number)/(*DBase);
-        (*count)++;
-    }
-    *output+=(*number) * (int) pow( 10 , (*count));
+    int * rem;
+    output=(char *) malloc(sizeof(char));
+    if((*n!='0' || *n!='1') && *(n+1)){
+        number=(int *) malloc(sizeof(int));
+        rem=(int *) malloc(sizeof(int));
+        count=(int *) malloc(sizeof(int));
+        *count=0;
+        *number=*n;
+        while((*number)>=(*DBase)){
+            *rem=(*number)%(*DBase);
+            addTerminalChar(output, count, rem);
+            *number=(*number)/(*DBase);
+            if(vervose) papDecimal10BaseTDBase(number, DBase, rem);
+            (*count)++;
+        }
+        addTerminalChar(output, count, number);
+        reverse(output, count);
+    }else *output=(*n=='0')?0:1;
+    free(count);
+    free(number);
+    free(rem);
     return output;
 }
 /*
@@ -77,9 +93,12 @@ int main(){
     char i[50]="11101";
     char t[50]="29";
     int * base;
+    int * vervose;
     base=(int *) malloc(sizeof(int));
+    vervose=(int *) malloc(sizeof(int));
     *base=2;
-    printf("Decimal %i \n",*decimalOBaseT10Base(&i,base));
-    printf("Decimal %i \n",*decimal10BaseTDBase(&t,base));
+    *vervose=0;
+    printf("Decimal %i \n",*decimalOBaseT10Base(&i,base,vervose));
+    printf("Decimal %s \n",decimal10BaseTDBase(&t,base,vervose));
     return 0;
 }*/
