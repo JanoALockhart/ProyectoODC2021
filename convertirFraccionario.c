@@ -1,6 +1,8 @@
 #include <math.h>
 #include <stdlib.h>
 #include "convertirFraccionario.h"
+#include "Util.h"
+#include "impresion.h"
 
 /**
 Funcion devuelve el resultado de transformar el numero
@@ -31,7 +33,7 @@ float* transformarFraccionarioAB10(char *fraccionario, int baseInicial, int paso
 
     *pCarac = *(fraccionario+(*pos));
     while(*pCarac!='\0'){
-        //valor = getValue(*pCarac);//DESCOMENTAR LINEA //REVISAR
+        valor = getValue(pCarac);//DESCOMENTAR LINEA //REVISAR
         *total += (*valor)*(1/pow(baseInicial,(*pos)+1));
         if(pasoAPaso){
             //papBA10();//REVISAR
@@ -62,29 +64,30 @@ Return: un puntero a una cadena de caracteres que representa
     apuntado por el puntero debe liberarse con un free().
 */
 char* transformarFraccionarioABaseDestino(float fraccionario, int baseDestino, int pasoAPaso){
-    float *numIntermedio;
+    float *numIntermedio, *fraccImprimir;
     int *cantDigitos, *digitoEntero;
     char *result;
 
-    numIntermedio = (float *) malloc(sizeof(int));
+
+    numIntermedio = (float *) malloc(sizeof(float));
     cantDigitos = (int *) malloc(sizeof(int));
     digitoEntero = (int *) malloc(sizeof(int));
     result = (char *) malloc(sizeof(char));
+    fraccImprimir = (float *) malloc(sizeof(float));
 
     *result = '\0';
     *cantDigitos=0;
     *numIntermedio = fraccionario;
-    while(*cantDigitos<MAX_PARTE_FRACC_OUTPUT){
-        *(numIntermedio)*= baseDestino;
-        *digitoEntero = floor(*(numIntermedio));
+    while((*cantDigitos)<MAX_PARTE_FRACC_OUTPUT){
+            *fraccImprimir = *numIntermedio;
+        (*numIntermedio) = (*numIntermedio)*baseDestino;
+        *digitoEntero = (int)floor(*(numIntermedio));
         result = agregarCaracterFinal(result, cantDigitos, digitoEntero);
-
         if(pasoAPaso){
-            //pap10AB();//REVISAR
+            papFractionary10BaseTDBase(&baseDestino, fraccImprimir, digitoEntero);
         }
-
         (*cantDigitos)++;
-        *numIntermedio -= *numIntermedio-floor(*numIntermedio);
+        *numIntermedio = (*numIntermedio)-floor(*numIntermedio);
     }
 
     free(numIntermedio);

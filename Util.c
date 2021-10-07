@@ -177,8 +177,9 @@ char* agregarCaracterFinal(char* strNum, int * cantDig, int * digito){
     carac = (char *) malloc(sizeof(char));
 
     nuevoPunt = (char *) realloc(strNum,((*cantDig)+1)*sizeof(char));
-    carac = getValue(digito);
-    *(nuevoPunt+*cantDig)=*carac;
+
+    carac = isValue(digito);
+    *(nuevoPunt+(*cantDig))=*carac;
     *(nuevoPunt+(*cantDig)+1)='\0';
 
     free(carac);

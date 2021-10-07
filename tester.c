@@ -19,8 +19,7 @@ void ejecutarTest(){
 
 
     #ifdef TEST_FRACC
-
-    char* strNum = transformarFraccionarioABaseDestino(0.123, 2, 0);
+    char* strNum = transformarFraccionarioABaseDestino(0.6789, 16, 1);
     printf("%s \n",strNum);
 
     #endif // TEST_FRACC
