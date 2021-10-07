@@ -1,14 +1,16 @@
-int isValid(char * n, int * base){
+/*int * isValid(char * n, int * base){
     int * validity;
     int * cantFrac;
     int * dEnteros;
     int * dFracciones;
     int * i;
+    int * value;
     validity=(int *) malloc(sizeof(int));
     cantFrac=(int *) malloc(sizeof(int));
     dEnteros=(int *) malloc(sizeof(int));
     dFracciones=(int *) malloc(sizeof(int));
     i=(int *) malloc(sizeof(int));
+    value=(int *) malloc(sizeof(int));
     *validity=1;
     *dEnteros=0;
     *dFracciones=0;
@@ -17,15 +19,21 @@ int isValid(char * n, int * base){
     for(;(*(n+*i)) && (*dFracciones)<5 && (*cantFrac)<2 && (*validity); (*i)++){
         if((*(n+*i))=='.' || (*(n+*i))==',') (*cantFrac)++;
         else{
-            if(getValue((n+*i))>=base) *validity=0;
+            value=getValue((n+*i));
+            if((*value)>=base) *validity=0;
             if(*cantFrac) (*dFracciones)++; else (*dEnteros)++;
         }
     }
     if(*(cantFrac)>=2 || *(dEnteros)>=10 || *(dFracciones)>5) *validity=0;
-    return *validity;
+    free(cantFrac);
+    free(dEnteros);
+    free(dFracciones);
+    free(i);
+    free(value);
+    return validity;
 }
 
-int getValue(char * value){
+int * getValue(char * value){
     int * output;
     output=(int *) malloc(sizeof(int));
     switch(tolower(*value)){
@@ -45,12 +53,12 @@ int getValue(char * value){
         case '7':{ *output=7; break; }
         case '8':{ *output=8; break; }
         case '9':{ *output=9; break; }
-        default: printf("GIGA FAIL \n"); break;
+        default:{ *output=100000; break; }
     }
-    return (*output);
-}
+    return output;
+}*/
 
-char isValue(int * n){
+char * isValue(int * n){
     char * output;
     output=(char *) malloc(sizeof(char));
     switch(*n){
@@ -72,15 +80,15 @@ char isValue(int * n){
         case 9:{ *output='9'; break; }
         default: printf("GIGA FAIL \n"); break;
     }
-    return (*output);
+    return (output);
 }
 
-int stringLength(char * string){
+int * stringLength(char * string){
     int * length;
     length=(int *) malloc(sizeof(int));
     *length=0;
     while(*(string+*length)) (*length)++;
-    return (*length);
+    return (length);
 }
 
 void separateComma(char * n, char * parteEntera, char * parteFraccionaria){
@@ -108,17 +116,39 @@ void separateComma(char * n, char * parteEntera, char * parteFraccionaria){
     }
 }
 
-/*
 void addTerminalChar(char * string, int * stringLength, int * n){
-    *(string+*stringLength) = isValue(n);
-    *(string+*stringLength+1) = ‘\0’;
-}*/
+    *(string+(*stringLength)) = *(isValue(n));
+    *(string+(*stringLength)+1) = '\0';
+}
+
+void reverse(char * string, int * stringLength){
+    int * count;
+    char * aux;
+    count=(int *) malloc(sizeof(int));
+    aux=(char *) malloc(sizeof(char));
+    *count=0;
+    while((*count)<((*stringLength)/2)){
+        *(aux)=*(string+*count),*(string+*count)=*(string+((*stringLength)-(*count))),*(string+((*stringLength)-(*count)))=*(aux);
+        (*count)++;
+    }
+}
 
 int main(){
-    int base;
-    char string[5]="E1.0";
-    base=16;
-    if(isValid(string,base)){
+    int base, bingChilling;
+    int * tres;
+    int * bingus;
+    tres=(int *) malloc(sizeof(int));
+    bingus=(int *) malloc(sizeof(int));
+    *tres=1;
+    *bingus=11;
+    char * string[3];
+    *string='n';
+    *(string+1)=' ';
+    *(string+2)='\n';
+    addTerminalChar(string, tres, bingus);
+    printf("%s",string);
+   /* base=16;
+    if(*isValid(string,base)){
         printf("TRUE\n");
     }else{
         printf("FALSE\n");
@@ -127,13 +157,14 @@ int main(){
     testIsValue=(int *) malloc(sizeof(int));
     for(int i=0;i<16;i++){
         *testIsValue=i;
-        printf("1 a %c \n",isValue(testIsValue));
+        printf("1 a %c \n",*isValue(testIsValue));
     }
-    printf("Length of string %i \n",stringLength(string));
+    bingChilling=
+    printf("Length of string %i \n",*stringLength(string));
     char entera[4];
     char fraccionaria[4];
     separateComma(string,entera,fraccionaria);
     printf("Parte entera %s \n",entera);
-    printf("Parte fraccionaria %s",fraccionaria);
+    printf("Parte fraccionaria %s",fraccionaria);*/
     return 0;
 }
