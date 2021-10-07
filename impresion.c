@@ -74,8 +74,8 @@ Parametros:
     -n: Puntero al numero a multiplicarse por la base de destino.
     -digit: Puntero al dígito entero que resulta de multiplicar la base de destino con n.
 */
-void papFractionary10BaseTDBase(int * DBase, int * n, int * digit){
-    printf("%i * %i = %i // %i",*DBase, *n, (*n)*(*DBase), *digit);
+void papFractionary10BaseTDBase(int * DBase, float * n, int * digit){
+    printf("%i * %f = %f // %i \n",*DBase, *n, (*n)*(*DBase), *digit);
 }
 
 /**
