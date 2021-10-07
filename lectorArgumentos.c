@@ -5,7 +5,7 @@
 #include "almacenamientoParam.h"
 #include "lectorArgumentos.h"
 #include "verificadorArgumentos.h"
-
+#include "impresion.h"
 
 /**
 Metodo que compia el valor del argumento pasado por parametro
@@ -31,23 +31,24 @@ Parametros:
     -registro: es el registro que almacenará el valor del parametro
 */
 char*** identificarParametro(char *param, tArgumentos1 *registro){
-
     char*** dirDevolver;
 
     dirDevolver = malloc(sizeof(char*));
 
+    printf("%c",*param);
+    printf("%i",*param!='-');
+    if((*param)!='-'){
+        mostrarError(ERROR_EN_EL_INGRESO_DE_ARGUMENTO);
 
-    if(*param!='-'){
-        exit(ERROR_EN_EL_INGRESO_DE_ARGUMENTO);
     }else if(*(param+1)=='\0' || (*(param+2)!='\0')){
-        exit(ERROR_EN_EL_INGRESO_DE_ARGUMENTO);
+        mostrarError(ERROR_EN_EL_INGRESO_DE_ARGUMENTO);
     }else{
         switch(*(param+1)){
             case 'n' :{
                 if((registro->argN) == NULL){
                     *dirDevolver = &(registro->argN);
                 }else{
-                    exit(ERROR_ARGUMENTOS_REPETIDOS);
+                    mostrarError(ERROR_ARGUMENTOS_REPETIDOS);
                 }
                 break;
             }
@@ -55,7 +56,7 @@ char*** identificarParametro(char *param, tArgumentos1 *registro){
                 if((registro->argS) == NULL){
                     *dirDevolver = &(registro->argS);
                 }else{
-                    exit(ERROR_ARGUMENTOS_REPETIDOS);
+                    mostrarError(ERROR_ARGUMENTOS_REPETIDOS);
                 }
                 break;
             }
@@ -63,7 +64,7 @@ char*** identificarParametro(char *param, tArgumentos1 *registro){
                 if((registro->argD) == NULL){
                     *dirDevolver = &(registro->argD);
                 }else{
-                    exit(ERROR_ARGUMENTOS_REPETIDOS);
+                    mostrarError(ERROR_ARGUMENTOS_REPETIDOS);
                 }
                 break;
             }
@@ -154,8 +155,6 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
     //Asignaciones de memoria
     numParam = (int*) malloc(sizeof(int));
     regArgs = (tArgumentos1 *) malloc(sizeof(tArgumentos1));
-    pPalabra = (char**) malloc(sizeof(char*));
-
 
     //Inicializar registro
     (regArgs->argN)=NULL;
@@ -180,11 +179,8 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
         //Si no hay parametro -h leer el resto de los parametros y guardar sus valores
         argAGuardar = NULL;
         for(*numParam=1; (*numParam)<cantParam; (*numParam)++){
-            printf("hola");
-            *pPalabra = *(arrParam+(*numParam));
-            printf("hola");
-            printf("%s",*pPalabra);
 
+            pPalabra = (arrParam+(*numParam));
             if(argAGuardar==NULL){
                 argAGuardar = identificarParametro(*pPalabra,regArgs);
             }else{
@@ -213,7 +209,6 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
 
     free(numParam);
     free(estaH);
-    free(pPalabra);
 
     return regArgs;
 }
