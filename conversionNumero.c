@@ -1,3 +1,9 @@
+#include "convertirEntero.h";
+
+#include "convertirFraccionario.h";
+
+#include "impresion.h";
+
 int ejecuccion(){
     int * decimalB10;
     float * fractionaryB10;
@@ -10,4 +16,6 @@ int ejecuccion(){
         *fractionaryB10=transformarFraccionarioAB10(fractionaryB10, p->argS, *(p->argV));
         mostrarResultadoFinal(decimal10BaseTDBase(decimalB10, p->argD, *(p->argV)), transformarFraccionarioABaseDestino(fractionaryB10, p->argD, *(p->argV));
     }
+    free(decimalB10);
+    free(fractionaryB10);
 }

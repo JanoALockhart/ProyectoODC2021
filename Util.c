@@ -25,6 +25,7 @@ int isValid(char * n, int * base){
             value=getValue((n+*i));
             if((*value)>=base) *validity=0;
             if(*cantFrac) (*dFracciones)++; else (*dEnteros)++;
+            free(value);
         }
     }
     if(*(cantFrac)>=2 || *(dEnteros)>=10 || *(dFracciones)>5) *validity=0;
@@ -32,7 +33,6 @@ int isValid(char * n, int * base){
     free(dEnteros);
     free(dFracciones);
     free(i);
-    free(value);
     return validity;
 }
 
@@ -117,6 +117,8 @@ void separateComma(char * n, char * parteEntera, char * parteFraccionaria){
         }
         *(parteFraccionaria+*pos)='\0';
     }
+    free(pos);
+    free(i);
 }
 
 void addTerminalChar(char * string, int * stringLength, int * n){
