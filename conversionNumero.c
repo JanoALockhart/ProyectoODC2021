@@ -11,6 +11,8 @@ Atributo:
 int ejecuccion(tArgumentos1* p){
     int * decimalB10;
     float * fractionaryB10;
+    char * decimalPartNumber;
+    char * fractionaryPartNumber;
     char * decimalBF;
     char * fractionaryBF;
     int * vervose;
@@ -21,14 +23,16 @@ int ejecuccion(tArgumentos1* p){
     decimalBF=(char *) malloc(sizeof(char));
     fractionaryBF=(char *) malloc(sizeof(char));
     vervose = (int *) malloc(sizeof(int));
+    decimalPartNumber=(char *) malloc(sizeof(char));
+    fractionaryPartNumber=(char *) malloc(sizeof(char));
 
     *vervose = p->argV;
     if(p->argH) mostrarAyuda();
     else{
-        separateComma(p->argN, decimalB10, fractionaryB10);
+        separateComma(p->argN, decimalPartNumber, fractionaryPartNumber);
 
-        decimalB10=decimalOBaseT10Base(decimalB10, p->argS, vervose);
-        fractionaryB10=transformarFraccionarioAB10(fractionaryB10, p->argS, p->argV);
+        decimalB10=decimalOBaseT10Base(decimalPartNumber, p->argS, vervose);
+        fractionaryB10=transformarFraccionarioAB10(fractionaryPartNumber, p->argS, p->argV);
 
         decimalBF=decimal10BaseTDBase(decimalB10, p->argD, vervose);
         fractionaryBF=transformarFraccionarioABaseDestino(*fractionaryB10, p->argD, p->argV);
@@ -39,4 +43,6 @@ int ejecuccion(tArgumentos1* p){
     free(fractionaryB10);
     free(decimalBF);
     free(fractionaryBF);
+    free(decimalPartNumber);
+    free(fractionaryPartNumber);
 }
