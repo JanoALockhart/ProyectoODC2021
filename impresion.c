@@ -97,6 +97,10 @@ void mostrarError(int * nroError){
         case ERROR_ARGUMENTOS_REPETIDOS: printf("ERROR %i: Se han introducido más de una vez un argumento válido",ERROR_ARGUMENTOS_REPETIDOS); break;
         case ERROR_ARGUMENTO_NO_EXISTENTE: printf("ERROR %i: Se han introducido argumento inválido",ERROR_ARGUMENTO_NO_EXISTENTE); break;
         case ERROR_EN_EL_INGRESO_DE_ARGUMENTO: printf("ERROR %i: Se han introducido erroneamente valores de argumentos.",ERROR_EN_EL_INGRESO_DE_ARGUMENTO); break;
+        case ERROR_BASE: printf("ERROR %i: Se han introducido erroneamente alguna base.",ERROR_BASE);
+        case VALOR_ARGN_NO_INGRESADO: printf("ERROR %i: No se ha introducido el numero.",VALOR_ARGN_NO_INGRESADO);
+        case LIMITES_NUM_INCUMPLIDOS: printf("ERROR %i: El número o bien tiene más de 10 dígitos decimales o más de 5 dígitos fraccionales.",LIMITES_NUM_INCUMPLIDOS);
+        case NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN: printf("ERROR %i: El número no es posible de expresar en la base.",NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN);
 
     }
 }
