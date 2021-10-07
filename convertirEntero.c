@@ -1,9 +1,6 @@
 #include <math.h>
-
 #include <stdlib.h>
-
 #include "Util.h"
-
 #include "impresion.h"
 
 /**
@@ -75,25 +72,11 @@ char * decimal10BaseTDBase(int * n, int * DBase, int vervose){
             if(vervose) papDecimal10BaseTDBase(number, DBase, rem);
             (*count)++;
         }
-        addTerminalChar(output, count, number);
+        output=agregarCaracterFinal(output, count, number);
         reverse(output, count);
     }else *output=(*n=='0')?0:1;
     free(count);
     free(number);
     free(rem);
     return output;
-}
-
-int main(){
-    char i[50]="11101";
-    char t[50]="29";
-    int * base;
-    int * vervose;
-    base=(int *) malloc(sizeof(int));
-    vervose=(int *) malloc(sizeof(int));
-    *base=2;
-    *vervose=0;
-    printf("Decimal %i \n",*decimalOBaseT10Base(&i,base,vervose));
-    printf("Decimal %s \n",decimal10BaseTDBase(&t,base,vervose));
-    return 0;
 }

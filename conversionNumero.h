@@ -1,6 +1,6 @@
 #ifndef CONVERSIONNUMERO_H_INCLUDED
 #define CONVERSIONNUMERO_H_INCLUDED
 
-int ejecuccion();
+int ejecuccion(tArgumentos1* p);
 
 #endif // CONVERSIONNUMERO_H_INCLUDED

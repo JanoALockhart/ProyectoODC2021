@@ -11,7 +11,7 @@ int * stringLength(char * string);
 
 void separateComma(char * n, char * parteEntera, char * parteFraccionaria);
 
-void addTerminalChar(char * string, int * stringLength, int * n);
+char* agregarCaracterFinal(char * string, int * stringLength, int * n);
 
 void reverse(char * string, int * stringLength);
 

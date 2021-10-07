@@ -85,7 +85,7 @@ Parametros:
     -resultadoFraccional: Puntero al primer caracter de la parte fraccionaria.
 */
 void mostrarResultadoFinal(char * resultadoEntero, char * resultadoFraccional){
-    printf(“El numero es %s.%s”, resultadoEntero, resultadoFraccional);
+    printf("El numero es %s.%s", resultadoEntero, resultadoFraccional);
 }
 
 /**
