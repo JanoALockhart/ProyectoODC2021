@@ -4,6 +4,7 @@
 
 #include "almacenamientoParam.h"
 #include "lectorArgumentos.h"
+#include "verificadorArgumentos.h"
 
 
 /**
@@ -142,6 +143,7 @@ Parametros:
 Return: un registro con los valores de los parametros ingresados
 */
 tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
+
     //Declaraciones
     int *numParam;
     char ***argAGuardar;    //Almacena la direccion de memoria de un campo del registro
@@ -151,7 +153,7 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
 
     //Asignaciones de memoria
     numParam = (int*) malloc(sizeof(int));
-    regArgs = (int*) malloc(sizeof(tArgumentos1));
+    regArgs = (tArgumentos1 *) malloc(sizeof(tArgumentos1));
     pPalabra = (char**) malloc(sizeof(char*));
 
 
@@ -178,7 +180,11 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
         //Si no hay parametro -h leer el resto de los parametros y guardar sus valores
         argAGuardar = NULL;
         for(*numParam=1; (*numParam)<cantParam; (*numParam)++){
+            printf("hola");
             *pPalabra = *(arrParam+(*numParam));
+            printf("hola");
+            printf("%s",*pPalabra);
+
             if(argAGuardar==NULL){
                 argAGuardar = identificarParametro(*pPalabra,regArgs);
             }else{
@@ -187,6 +193,8 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
                 argAGuardar=NULL;
             }
         }
+
+        verificarValores(regArgs);
 
     }
 
@@ -198,6 +206,8 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
     if((regArgs->argD)==NULL){
         asignarDefault(&(regArgs->argD));
     }
+
+
 
     //Liberamos memoria
 

@@ -12,7 +12,6 @@ int main(int argc, char** argv)
     char *numTransformado;
     tArgumentos1 *registroParam = malloc(sizeof(tArgumentos1));
     registroParam = almacenarValores(argc, argv); //REVISAR
-    verificarValores(registroParam);
     numTransformado = ejecuccion(registroParam);
 
     exit(EXIT_SUCCESS);

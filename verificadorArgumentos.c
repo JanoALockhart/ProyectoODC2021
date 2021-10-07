@@ -43,6 +43,7 @@ int* soloNumeros(char* cadena){
     do{
         *pCarac = *(cadena+(*numCarac));
         *soloCar = ('0'<=*pCarac && *pCarac<='9')||(*pCarac=='\0');
+        (*numCarac)++;
     }while(*pCarac!='\0' && *soloCar);
 
     free(pCarac);
@@ -196,4 +197,5 @@ void verificarValores(tArgumentos1* regArgs){
         baseOrigen = verificarBase(regArgs->argD);//guardamos el valor, para luego liberar la memoria
         free(baseOrigen);
     }
+
 }
