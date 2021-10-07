@@ -21,11 +21,13 @@ float* transformarFraccionarioAB10(char *fraccionario, int baseInicial, int paso
     int *pos;          //puntero a int auxiliar para la posicion de la cadena
     int *valor;        //puntero a int auxiliar que almacena el valor en base 10 del caracter
     char *pCarac;      //puntero a char auxiliar que almacena un caracter
+    int *exponente;
 
     total = (float *) malloc(sizeof(int));
     pos = (int *) malloc(sizeof(int));
     valor = (int *) malloc(sizeof(int));
     pCarac = (char *) malloc(sizeof(char));
+    exponente = (int *) malloc(sizeof(int));
 
     *total=0.0;
     *pos=0;
@@ -34,9 +36,10 @@ float* transformarFraccionarioAB10(char *fraccionario, int baseInicial, int paso
     *pCarac = *(fraccionario+(*pos));
     while(*pCarac!='\0'){
         valor = getValue(pCarac);//DESCOMENTAR LINEA //REVISAR
-        *total += (*valor)*(1/pow(baseInicial,(*pos)+1));
+        *exponente = (*pos)+1;
+        *total += (*valor)*(1/pow(baseInicial,*exponente));
         if(pasoAPaso){
-            //papBA10();//REVISAR
+            papFractionaryOBaseT10Base(total, valor, &baseInicial,exponente);
         }
         (*pos)++;
         *pCarac = *(fraccionario+(*pos));
@@ -93,6 +96,7 @@ char* transformarFraccionarioABaseDestino(float fraccionario, int baseDestino, i
     free(numIntermedio);
     free(cantDigitos);
     free(digitoEntero);
+    free(fraccImprimir);
 
     return result;
 }

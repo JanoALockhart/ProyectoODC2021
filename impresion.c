@@ -1,3 +1,8 @@
+#include <stdlib.h>
+
+#include "verificadorArgumentos.h"
+#include "lectorArgumentos.h"
+
 /**
 Procedimiento que imprime un paso de la conversión de la parte entera de una base de origen a la base 10.
 Parametros:
@@ -61,9 +66,9 @@ Parametros:
     -OBase: Puntero a un entero que es la base de origen.
     -exp: Puntero a un entero que es el exponente el cuál se eleva la base.
 */
-void papFractionaryOBaseT10Base(int * total, int * n, int * OBase, int * exp){
+void papFractionaryOBaseT10Base(float * total, int * n, int * OBase, int * exp){
     printf("total=total+%i*(%i^-%i)\n",*n,*OBase,*exp);
-    printf("total=%i\n",*total);
+    printf("total=%f\n",*total);
     printf("------\n");
 }
 
@@ -103,6 +108,7 @@ void mostrarError(int * nroError){
         case NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN: printf("ERROR %i: El número no es posible de expresar en la base.",NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN);
 
     }
+    exit(EXIT_FAILURE);
 }
 
 void mostrarAyuda(){

@@ -9,13 +9,20 @@
 //#define TEST_ESH
 //#define TEST_IDENTIFPARAM
 //#define TEST_ENTERO
-#define TEST_FRACC
+//#define TEST_FRACC_2
 
 void ejecutarTest(){
 
     //printf("%d \n",sizeof(tArgumentos1));
     //printf("%d \n",sizeof(tArgumentos2));
     //printf("%d \n",sizeof(tParam));
+    printf("hola");
+    #ifdef TEST_FRACC_2
+    float* pNum;
+    char* num = "fafc";
+    pNum = transformarFraccionarioAB10(num,16,1);
+    printf("%f",*pNum);
+    #endif // TEST_FRACC_2
 
 
     #ifdef TEST_FRACC
