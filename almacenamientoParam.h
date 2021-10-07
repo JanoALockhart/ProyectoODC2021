@@ -3,27 +3,11 @@
 
 
 typedef struct argumentos{
-    char *argN;
-    char *argS;
-    char *argD;
-    int argV;
-    int argH;
+    char *argN;     //Almacena el numero que será cambiado de base
+    char *argS;     //Almacena la base de origen del numero
+    char *argD;     //Almacena la base de destino del numero
+    int argV;       //Indica si se deben mostrar pasos intermedios o no
+    int argH;       //Indica si el parametro ayuda fue ingresado
 } tArgumentos1;
-
-
-/*
-typedef struct parametro{
-    char *valor;
-    int ingresado;
-} tParam;
-
-
-typedef struct argumentos2{
-    tParam argN;
-    tParam argS;
-    tParam argD;
-    tParam argV;
-    tParam argH;
-} tArgumentos2;*/
 
 #endif // ALMACENAMIENTOPARAM_H_INCLUDED

@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <stdio.h>
+
 int isValid(char * n, int * base){
     int * validity;
     int * cantFrac;
@@ -113,7 +116,8 @@ void addTerminalChar(char * string, int * stringLength, int * n){
     *(string+*stringLength) = isValue(n);
     *(string+*stringLength+1) = ‘\0’;
 }*/
-
+//#define TEST_UTIL
+#ifdef TEST_UTIL
 int main(){
     int base;
     char string[5]="E1.0";
@@ -137,3 +141,4 @@ int main(){
     printf("Parte fraccionaria %s",fraccionaria);
     return 0;
 }
+#endif // TEST_UTIL

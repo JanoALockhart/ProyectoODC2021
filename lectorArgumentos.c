@@ -22,11 +22,12 @@ void guardarValorParametro(char *param, char** dirCampo){
 /**
 Metodo que verifica que el parametro que esta leyendo sea el nombre de
 un argumento existente. En caso de que no sea valido, el programa
-termina con un error. Si el argumento es correcto, se devuelve la
+termina con un error. Si el nombre del argumento es correcto, se devuelve la
 direccion de memoria del campo del registro en el que haya que almacenar
-el valor del argumento.
+el valor de este
 Parametros:
     -param: es un puntero al primer caracter del nombre del argumento
+    -registro: es el registro que almacenará el valor del parametro
 */
 char*** identificarParametro(char *param, tArgumentos1 *registro){
 
@@ -140,16 +141,19 @@ Parametros:
     -arrParam: es el arreglo que contiene todos los parametros que el usuario ingreso
 Return: un registro con los valores de los parametros ingresados
 */
-tArgumentos1 *verificarEntrada(int cantParam, char* arrParam[]){
+tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
     //Declaraciones
     int *numParam;
-    char ***argAGuardar; //Almacena la direccion de memoria de un campo del registro
-    int *estaH;//booleans
+    char ***argAGuardar;    //Almacena la direccion de memoria de un campo del registro
+    char **pPalabra;        //puntero que apunta a una palabra
+    int *estaH;             //booleans
     tArgumentos1 *regArgs;
 
     //Asignaciones de memoria
-    numParam = malloc(sizeof(int));
-    regArgs = malloc(sizeof(tArgumentos1));
+    numParam = (int*) malloc(sizeof(int));
+    regArgs = (int*) malloc(sizeof(tArgumentos1));
+    pPalabra = (char**) malloc(sizeof(char*));
+
 
     //Inicializar registro
     (regArgs->argN)=NULL;
@@ -162,16 +166,18 @@ tArgumentos1 *verificarEntrada(int cantParam, char* arrParam[]){
     //Algoritmo
     //Buscar el parametro -h
     estaH = estaParamH(cantParam,arrParam);
+    pPalabra=NULL;
     if(*estaH){
         (regArgs->argH)=1;
     }else{
         //Si no hay parametro -h leer el resto de los parametros y guardar sus valores
         argAGuardar = NULL;
-        for(*numParam=0; (*numParam)<cantParam; (*numParam)++){
+        for(*numParam=1; (*numParam)<cantParam; (*numParam)++){
+            *pPalabra = *(arrParam+(*numParam));
             if(argAGuardar==NULL){
-                argAGuardar = identificarParametro(arrParam[*numParam],regArgs);
+                argAGuardar = identificarParametro(*pPalabra,regArgs);
             }else{
-                guardarValorParametro(arrParam[*numParam],*argAGuardar);
+                guardarValorParametro(*pPalabra,*argAGuardar);
                 free(argAGuardar); //libero memoria asignada en la funcion identificarParametro
                 argAGuardar=NULL;
             }
@@ -192,6 +198,7 @@ tArgumentos1 *verificarEntrada(int cantParam, char* arrParam[]){
 
     free(numParam);
     free(estaH);
+    free(pPalabra);
 
     return regArgs;
 }
