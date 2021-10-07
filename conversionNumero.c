@@ -23,7 +23,7 @@ int ejecuccion(tArgumentos1* p){
     vervose = (int *) malloc(sizeof(int));
 
     *vervose = p->argV;
-    if(p->argH) printf("AYUDA");
+    if(p->argH) mostrarAyuda();
     else{
         separateComma(p->argN, decimalB10, fractionaryB10);
 

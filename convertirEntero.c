@@ -13,7 +13,7 @@ Parametros:
                 1. Entonces se imprimirá el paso a paso.
 Return: Un puntero a entero que va a contener al número n en base 10.
 */
-int * decimalOBaseT10Base(char * n, int * Obase, int vervose){
+int * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
     int * total;
     int * count;
     int * numberLength;
@@ -32,7 +32,7 @@ int * decimalOBaseT10Base(char * n, int * Obase, int vervose){
             value=(getValue((n+(*count)-1)));
             *exp=((*numberLength)-(*count));
             (*total) += (*value) * (int) pow( (double)(*Obase) , (double) (*exp) );
-            if(vervose) papDecimalOBaseT10Base(total, value, Obase, exp);
+            if(*vervose) papDecimalOBaseT10Base(total, value, Obase, exp);
             (*count)++;
         }
     } else *total=(*n=='0')?0:1;
@@ -53,7 +53,7 @@ Parametros:
                 1. Entonces se imprimirá el paso a paso.
 Return: Un puntero a una cadena de caracteres que va a contener al número n en base destino.
 */
-char * decimal10BaseTDBase(int * n, int * DBase, int vervose){
+char * decimal10BaseTDBase(int * n, int * DBase, int * vervose){
     char * output;
     int * count;
     int * number;
@@ -69,7 +69,7 @@ char * decimal10BaseTDBase(int * n, int * DBase, int vervose){
             *rem=(*number)%(*DBase);
             output=agregarCaracterFinal(output, count, rem);
             *number=(*number)/(*DBase);
-            if(vervose) papDecimal10BaseTDBase(number, DBase, rem);
+            if(*vervose) papDecimal10BaseTDBase(number, DBase, rem);
             (*count)++;
         }
         output=agregarCaracterFinal(output, count, number);

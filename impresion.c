@@ -94,8 +94,21 @@ Procedimiento que dado un número de error, imprime el error correspondiente.
 */
 void mostrarError(int * nroError){
     switch(*nroError){
-        case 1: printf("ERROR %i: ",*nroError); break;
+        case ERROR_ARGUMENTOS_REPETIDOS: printf("ERROR %i: Se han introducido más de una vez un argumento válido",ERROR_ARGUMENTOS_REPETIDOS); break;
+        case ERROR_ARGUMENTO_NO_EXISTENTE: printf("ERROR %i: Se han introducido argumento inválido",ERROR_ARGUMENTO_NO_EXISTENTE); break;
+        case ERROR_EN_EL_INGRESO_DE_ARGUMENTO: printf("ERROR %i: Se han introducido erroneamente valores de argumentos.",ERROR_EN_EL_INGRESO_DE_ARGUMENTO); break;
+
     }
+}
+
+void mostrarAyuda(){
+    printf("Conversor de bases es un simple programa que convierte un número en base X a base Y.\n\n");
+    printf("Opciones:\n");
+    printf("-n <number>     OBLIGATORIO. Número se quiere convertir\n");
+    printf("-s <source_base>    Base de partida que será expresado el número\n");
+    printf("-d <dest_base>     Base de destino que será expresado el resultado\n");
+    printf("-v      Imprime el paso a paso de cada operación\n");
+    printf("-h      Imprime un texto auxiliar\n");
 }
 
 
