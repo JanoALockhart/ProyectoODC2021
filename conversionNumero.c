@@ -3,10 +3,13 @@
 #include "convertirFraccionario.h";
 
 #include "impresion.h";
+
 /**
 Procedimiento que, dada una estructura de registroParametros con parametros válidos, o bien realiza las conversiones e imprime el resultado o bien imprime la ayuda de ser necesaria.
+Atributo:
+    -p: Puntero a una estructura con todos los parametros necesarios. Se consideran que están todos correctos.
 */
-int ejecuccion(){
+int ejecuccion(struc registroParametros * p){
     int * decimalB10;
     float * fractionaryB10;
     char * decimalBF;
