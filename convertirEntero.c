@@ -4,6 +4,16 @@
 
 #include "impresion.h"
 
+/**
+Funcion devuelve el resultado de transformar el numero decimal desde su base de origen a base 10.
+Parametros:
+    -n: Puntero al primer elemento de una cadena de caracteres que representara a un número en base de origen
+    -OBase: Puntero a un entero que representará la base de origen
+    -vervose: Puntero a un entero que, si el valor que apunte es:
+                0. Entonces NO se imprimirá el paso a paso.
+                1. Entonces se imprimirá el paso a paso.
+Return: Un puntero a entero que va a contener al número n en base 10.
+*/
 int * decimalOBaseT10Base(char * n, int * Obase, int vervose){
     int * total;
     int * count;
@@ -34,7 +44,17 @@ int * decimalOBaseT10Base(char * n, int * Obase, int vervose){
     return total;
 }
 
-char * decimal10BaseTDBase(char * n, int * DBase, int vervose){
+/**
+Funcion devuelve el resultado de transformar el numero decimal desde base 10 a una base destino.
+Parametros:
+    -n: Puntero a un entero que apuntara al número entero en base 10 que se quiere convertir
+    -DBase: Puntero a un entero que representará la base destino
+    -vervose: Puntero a un entero que, si el valor que apunte es:
+                0. Entonces NO se imprimirá el paso a paso.
+                1. Entonces se imprimirá el paso a paso.
+Return: Un puntero a una cadena de caracteres que va a contener al número n en base destino.
+*/
+char * decimal10BaseTDBase(int * n, int * DBase, int vervose){
     char * output;
     int * count;
     int * number;
@@ -45,10 +65,9 @@ char * decimal10BaseTDBase(char * n, int * DBase, int vervose){
         rem=(int *) malloc(sizeof(int));
         count=(int *) malloc(sizeof(int));
         *count=0;
-        *number=atoi(n);
+        *number=*n;
         while((*number)>=(*DBase)){
             *rem=(*number)%(*DBase);
-            printf("horthy \n");
             addTerminalChar(output, count, rem);
             *number=(*number)/(*DBase);
             if(vervose) papDecimal10BaseTDBase(number, DBase, rem);
