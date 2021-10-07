@@ -62,19 +62,19 @@ void ejecutarTest(){
 
     tArgumentos1 *registroParam = malloc(sizeof(tArgumentos1));
 
-    char* argv[7]={"-n","123546","-s","4","-d","6","-v"};
-    registroParam = verificarEntrada(7, argv);
+    char* argv[7]={"-s","123546","-d","4","-n","6","-v"};
+    registroParam = almacenarValores(7, argv);
     //char *argv[2]={"-n","12354"};
     //registroParam = verificarEntrada(2, argv);
 
 
 
     printf("Registro: \n");
-    printf("arg: %s \n", registroParam->argN);
-    printf("arg: %s \n", registroParam->argS);
-    printf("arg: %s \n", registroParam->argD);
-    printf("arg: %i \n", registroParam->argV);
-    printf("arg: %i \n", registroParam->argH);
+    printf("argN: %s \n", registroParam->argN);
+    printf("argS: %s \n", registroParam->argS);
+    printf("argD: %s \n", registroParam->argD);
+    printf("argV: %i \n", registroParam->argV);
+    printf("argH: %i \n", registroParam->argH);
 
 
     #endif // TEST_GUARDAR

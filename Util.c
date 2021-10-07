@@ -1,4 +1,7 @@
-/*int * isValid(char * n, int * base){
+#include <stdlib.h>
+#include <stdio.h>
+
+int isValid(char * n, int * base){
     int * validity;
     int * cantFrac;
     int * dEnteros;
@@ -56,7 +59,7 @@ int * getValue(char * value){
         default:{ *output=100000; break; }
     }
     return output;
-}*/
+}
 
 char * isValue(int * n){
     char * output;
@@ -133,6 +136,8 @@ void reverse(char * string, int * stringLength){
     }
 }
 
+//#define TEST_UTIL
+#ifdef TEST_UTIL
 int main(){
     int base, bingChilling;
     int * tres;
@@ -168,3 +173,4 @@ int main(){
     printf("Parte fraccionaria %s",fraccionaria);*/
     return 0;
 }
+#endif // TEST_UTIL

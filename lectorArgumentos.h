@@ -10,15 +10,17 @@
 
 
 
-tArgumentos1 *verificarEntrada(int cantParam, char* arrParam[]);
+tArgumentos1 *almacenarValores(int cantParam, char** arrParam);
+
 
 
 #define TESTER
 #ifdef TESTER
 int esElArgH(char* palabra);
-int* estaParamH(int cantParam, char *param[]);
+int* estaParamH(int cantParam, char** param);
 char*** identificarParametro(char *param, tArgumentos1 *registro);
 void guardarValorParametro(char *param, char** argAIngresar);
+void ejecutarTest();
 #endif // TESTER
 
 #endif // LECTORARGUMENTOS_H_INCLUDED
