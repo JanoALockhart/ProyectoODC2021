@@ -1,15 +1,10 @@
 #include <math.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include "impresion.h"
 
-int * stringLength(char * string){
-    int * length;
-    length=(int *) malloc(sizeof(int));
-    *length=0;
-    while(*(string+*length)) (*length)++;
-    return (length);
-}
+#include <stdlib.h>
+
+#include "Util.h"
+
+#include "impresion.h"
 
 /**
 Funcion devuelve el resultado de transformar el numero decimal desde su base de origen a base 10.
@@ -75,7 +70,7 @@ char * decimal10BaseTDBase(int * n, int * DBase, int vervose){
         *number=*n;
         while((*number)>=(*DBase)){
             *rem=(*number)%(*DBase);
-            addTerminalChar(output, count, rem);
+            output=agregarCaracterFinal(output, count, rem);
             *number=(*number)/(*DBase);
             if(vervose) papDecimal10BaseTDBase(number, DBase, rem);
             (*count)++;
@@ -88,7 +83,7 @@ char * decimal10BaseTDBase(int * n, int * DBase, int vervose){
     free(rem);
     return output;
 }
-/*
+
 int main(){
     char i[50]="11101";
     char t[50]="29";
@@ -101,4 +96,4 @@ int main(){
     printf("Decimal %i \n",*decimalOBaseT10Base(&i,base,vervose));
     printf("Decimal %s \n",decimal10BaseTDBase(&t,base,vervose));
     return 0;
-}*/
+}

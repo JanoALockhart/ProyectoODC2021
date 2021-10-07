@@ -2,6 +2,37 @@
 #include <stdio.h>
 
 /**
+Funcion que simula un mapeo de claves caracteres y valores enteros.
+Parametros:
+    -n: caracter que es ingresado como clave
+Return: Puntero a un valor entero que esta relacionado con n
+*/
+int * getValue(char * value){
+    int * output;
+    output=(int *) malloc(sizeof(int));
+    switch(tolower(*value)){
+        case 'a':{ *output=10; break; }
+        case 'b':{ *output=11; break; }
+        case 'c':{ *output=12; break; }
+        case 'd':{ *output=13; break; }
+        case 'e':{ *output=14; break; }
+        case 'f':{ *output=15; break; }
+        case '0':{ *output=0; break; }
+        case '1':{ *output=1; break; }
+        case '2':{ *output=2; break; }
+        case '3':{ *output=3; break; }
+        case '4':{ *output=4; break; }
+        case '5':{ *output=5; break; }
+        case '6':{ *output=6; break; }
+        case '7':{ *output=7; break; }
+        case '8':{ *output=8; break; }
+        case '9':{ *output=9; break; }
+        default:{ output=NULL; break; }
+    }
+    return output;
+}
+
+/**
 Funcion que devuelve si una cadena de caracteres es un número en una base
 Parametros:
     -n: es un puntero a la cadena de caracteres
@@ -47,37 +78,6 @@ int isValid(char * n, int * base){
 }
 
 /**
-Funcion que simula un mapeo de claves caracteres y valores enteros.
-Parametros:
-    -n: caracter que es ingresado como clave
-Return: Puntero a un valor entero que esta relacionado con n
-*/
-int * getValue(char * value){
-    int * output;
-    output=(int *) malloc(sizeof(int));
-    switch(tolower(*value)){
-        case 'a':{ *output=10; break; }
-        case 'b':{ *output=11; break; }
-        case 'c':{ *output=12; break; }
-        case 'd':{ *output=13; break; }
-        case 'e':{ *output=14; break; }
-        case 'f':{ *output=15; break; }
-        case '0':{ *output=0; break; }
-        case '1':{ *output=1; break; }
-        case '2':{ *output=2; break; }
-        case '3':{ *output=3; break; }
-        case '4':{ *output=4; break; }
-        case '5':{ *output=5; break; }
-        case '6':{ *output=6; break; }
-        case '7':{ *output=7; break; }
-        case '8':{ *output=8; break; }
-        case '9':{ *output=9; break; }
-        default:{ *output=100000; break; }
-    }
-    return output;
-}
-
-/**
 Funcion que simula un mapeo de claves enteras y valores en caracteres.
 Parametros:
     -n: entero que es ingresado como clave
@@ -103,7 +103,7 @@ char * isValue(int * n){
         case 7:{ *output='7'; break; }
         case 8:{ *output='8'; break; }
         case 9:{ *output='9'; break; }
-        default: printf("GIGA FAIL \n"); break;
+        default: output=NULL; break;
     }
     return (output);
 }
@@ -158,17 +158,33 @@ void separateComma(char * n, char * parteEntera, char * parteFraccionaria){
 }
 
 /**
-Procedimiento que, dado un puntero de una cadena de caracteres y su longitud, le agrega a isValue(n) como último elemento.
+Funcion que agrega el ultimo digito a la cadena de caracteres.
+Para esto, relocaliza la memoria reservada para la cadena y
+devuelve el puntero que apunta a la nueva direccion de memoria
 Parametros:
-    -string: Puntero al primer elemento de la cadena de caracteres.
-    -stringLength: Puntero a un entero que dirá la longitud de string.
-    -n: Puntero a un entero que se le agregará como último caracter.
+    -strNum: es la cadena de caracteres que representa el numero
+    -cantDig: es la cantidad de digitos que tiene el numero,
+        sin contar el caracter nulo ('\0').
+    -digito: es el nuevo digito que quiere agregarse al
+        final de la cadena de caracteres.
+Return: un nuevo puntero que indica la nueva ubicacion en
+    memoria de la cadena de caracteres.
 */
-void addTerminalChar(char * string, int * stringLength, int * n){
-    *(string+(*stringLength)) = *(isValue(n));
-    *(string+(*stringLength)+1) = '\0';
-}
+char* agregarCaracterFinal(char* strNum, int * cantDig, int * digito){
+    char *nuevoPunt;
+    char *carac;
 
+    carac = (char *) malloc(sizeof(char));
+
+    nuevoPunt = (char *) realloc(strNum,((*cantDig)+1)*sizeof(char));
+    carac = getValue(digito);
+    *(nuevoPunt+*cantDig)=*carac;
+    *(nuevoPunt+(*cantDig)+1)='\0';
+
+    free(carac);
+
+    return nuevoPunt;
+}
 
 /**
 Procedimiento que transforma a una cadena de caracteres en su reverso.

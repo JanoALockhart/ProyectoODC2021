@@ -47,37 +47,6 @@ float* transformarFraccionarioAB10(char *fraccionario, int baseInicial, int paso
     return total;
 }
 
-//REVISAR DONDE VA ESTA FUNCION
-/**
-Funcion que agrega el ultimo digito a la cadena de caracteres.
-Para esto, relocaliza la memoria reservada para la cadena y
-devuelve el puntero que apunta a la nueva direccion de memoria
-Parametros:
-    -strNum: es la cadena de caracteres que representa el numero
-    -cantDig: es la cantidad de digitos que tiene el numero,
-        sin contar el caracter nulo ('\0').
-    -digito: es el nuevo digito que quiere agregarse al
-        final de la cadena de caracteres.
-Return: un nuevo puntero que indica la nueva ubicacion en
-    memoria de la cadena de caracteres.
-*/
-char* argregarCaracterFinal(char* strNum, int cantDig, int digito){
-    char *nuevoPunt;
-    char *carac;
-
-    carac = (char *) malloc(sizeof(char));
-
-    nuevoPunt = (char *) realloc(strNum,(cantDig+1)*sizeof(char));
-    carac = getValue(digito);//REVISAR
-    *(nuevoPunt+cantDig)=*carac;
-    *(nuevoPunt+cantDig+1)='\0';
-
-    free(carac);
-
-    return nuevoPunt;
-}
-
-
 /**
 Esta funcion calcula la parte fraccionaria de la base
 10 a la base de destino, armando una cadena.
@@ -108,7 +77,7 @@ char* transformarFraccionarioABaseDestino(float fraccionario, int baseDestino, i
     while(*cantDigitos<MAX_PARTE_FRACC_OUTPUT){
         *(numIntermedio)*= baseDestino;
         *digitoEntero = floor(*(numIntermedio));
-        result = agregarCaracterFinal(result, *cantDigitos, *digitoEntero);
+        result = agregarCaracterFinal(result, cantDigitos, digitoEntero);
 
         if(pasoAPaso){
             //pap10AB();//REVISAR
