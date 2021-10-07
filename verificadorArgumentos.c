@@ -8,6 +8,7 @@
 #define VALOR_ARGN_NO_INGRESADO 202
 #define ERROR_ARGN_INVALIDO 203
 #define LIMITES_NUM_INCUMPLIDOS 204
+#define NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN 205
 
 #define BASE_MENOR 2
 #define BASE_MAYOR 16
@@ -118,9 +119,10 @@ void verificarArgN(char* strNumero, int baseOrigen){
     *numCarac = 0;
     do{
         *pCarac = *(strNumero+(*numCarac));
-        //Revisar con getValue que el caracter este entre 0..9,A..F y sea menor a la base
-        //sugerir: getValue devuelve null si no esta en este rango
-        //mandar error apropiado
+
+        if(getValue(pCarac)==NULL || *(getValue(pCarac))>=baseOrigen){
+            exit(NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN);
+        }
         (*numCarac)++;
     }while((*pCarac!='\0') && (*valido));
 

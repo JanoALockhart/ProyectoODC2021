@@ -164,6 +164,11 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
 
 
     //Algoritmo
+    //Si hay mas parametros de los posibles, algo se ingresó mal
+    if(cantParam>9){
+        exit(ERROR_EN_EL_INGRESO_DE_ARGUMENTO);
+    }
+
     //Buscar el parametro -h
     estaH = estaParamH(cantParam,arrParam);
     pPalabra=NULL;
