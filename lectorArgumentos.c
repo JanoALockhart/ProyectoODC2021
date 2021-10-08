@@ -197,9 +197,7 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
             asignarDefault(&(regArgs->argD));
         }
 
-        printf("Bingus \n");
         verificarValores(regArgs);
-        printf("Yaasearan \n");
 
     }
     //Liberamos memoria

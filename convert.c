@@ -10,15 +10,13 @@
 int main(int argc, char** argv)
 {
     tArgumentos1 *registroParam = malloc(sizeof(tArgumentos1));
-    printf("hola \n");
     registroParam = almacenarValores(argc, argv); //REVISAR
-    printf("Bing chilling \n");
     printf("Campos del registro: \n");
     printf("%s ",registroParam->argN);
     printf("%s ",registroParam->argS);
     printf("%s ",registroParam->argD);
     printf("%i ",registroParam->argV);
-    printf("%i ",registroParam->argH);
+    printf("%i \n",registroParam->argH);
     ejecuccion(registroParam);
 
     exit(EXIT_SUCCESS);

@@ -107,8 +107,7 @@ void mostrarError(int nroError){
         case ERROR_BASE: printf("ERROR %i: Se han introducido erroneamente alguna base.",ERROR_BASE);break;
         case VALOR_ARGN_NO_INGRESADO: printf("ERROR %i: No se ha introducido el numero.",VALOR_ARGN_NO_INGRESADO);break;
         case LIMITES_NUM_INCUMPLIDOS: printf("ERROR %i: El número o bien tiene más de 10 dígitos decimales o más de 5 dígitos fraccionales.",LIMITES_NUM_INCUMPLIDOS);break;
-        case NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN: printf("ERROR %i: El número no es posible de expresar en la base.",NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN);break;
-
+        case ERROR_ARGN_INVALIDO: printf("ERROR %i: El número no es posible de expresar en la base.",NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN);break;
     }
     exit(EXIT_FAILURE);
 }
@@ -123,4 +122,7 @@ void mostrarAyuda(){
     printf("-h      Imprime un texto auxiliar\n");
 }
 
+void directConv(int * n, int * base){
+    printf("Conversión directa. %i en base %i es %i\n",*n, *base, *n);
+}
 

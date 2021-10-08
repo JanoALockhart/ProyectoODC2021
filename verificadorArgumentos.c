@@ -78,7 +78,6 @@ int * limitesEnteroYFracc(char* strNum){
     while(*(strNum+(*pos))!='\0' && *(strNum+(*pos))!='.' && *(strNum+(*pos))!=','){
         (*cantInt)++;
         (*pos)++;
-        printf("sigma cant int %i \n",*cantInt);
     }
 
     //contar caracteres fraccionarios
@@ -108,7 +107,7 @@ Parametros:
         numero y se va a verificar
     -baseOrigen: es la base en la que el numero fue ingresada
 */
-void verificarArgN(char* strNumero, int baseOrigen){
+void verificarArgN(char* strNumero, int * baseOrigen){
     int *valido;
 
     char* pCarac;
@@ -120,23 +119,17 @@ void verificarArgN(char* strNumero, int baseOrigen){
     if(!(*valido)){
         mostrarError(LIMITES_NUM_INCUMPLIDOS);
     }
-    printf("Yogur \n");
-    printf("string %s int %i\n",strNumero,baseOrigen);
-
-    printf("isvalid %i",!(*isValid(strNumero, &baseOrigen)));
-
     free(valido);
-    valido=isValid(strNumero, &baseOrigen);
 
-    if(*valido==10){
+
+    valido=isValid(strNumero, baseOrigen);
+    if(!(*valido)){
         mostrarError(ERROR_ARGN_INVALIDO);
     }
 
     if(!(*valido)){
         mostrarError(NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN);
     }
-
-    printf("Yogurisimo \n");
 
     free(valido);
     free(pCarac);
@@ -162,7 +155,6 @@ int* verificarBase(char* strBase){
 
     esNum = soloNumeros(strBase);
 
-    printf("epa %s\n", strBase);
 
     if(*esNum){
         *base = atoi(strBase);
@@ -191,14 +183,12 @@ void verificarValores(tArgumentos1* regArgs){
 
     if((regArgs->argS)!=NULL){
         baseOrigen = verificarBase(regArgs->argS);
-        printf("Salsa\n");
     }else{
         mostrarError(ERROR_BASE); //argumento base origen es nulo (para hacer mas robusto)
     }
 
     if((regArgs->argN)!=NULL){
-        verificarArgN(regArgs->argN,*baseOrigen);
-        printf("Origen\n");
+        verificarArgN(regArgs->argN, baseOrigen);
         free(baseOrigen);
     }else{
         mostrarError(VALOR_ARGN_NO_INGRESADO);

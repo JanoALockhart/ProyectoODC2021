@@ -15,4 +15,6 @@ void mostrarError(int nroError);
 
 void mostrarAyuda();
 
+void directConv(int * n, int * base);
+
 #endif // IMPRESION_H_INCLUDED
