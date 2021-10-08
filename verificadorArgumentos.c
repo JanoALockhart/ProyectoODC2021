@@ -1,21 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "almacenamientoParam.h"
 #include "Util.h"
 #include "impresion.h"
-
-#define ERROR_BASE 200
-#define VALOR_ARGN_NO_INGRESADO 202
-#define ERROR_ARGN_INVALIDO 203
-#define LIMITES_NUM_INCUMPLIDOS 204
-#define NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN 205
-
-#define BASE_MENOR 2
-#define BASE_MAYOR 16
-
-#define MAX_PARTE_ENTERA_INPUT 10
-#define MAX_PARTE_FRACC_INPUT 5
+#include "verificadorArgumentos.h"
 
 
 
@@ -78,15 +68,16 @@ int * limitesEnteroYFracc(char* strNum){
     while(*(strNum+(*pos))!='\0' && *(strNum+(*pos))!='.' && *(strNum+(*pos))!=','){
         (*cantInt)++;
         (*pos)++;
-        printf("sigma cant int %i \n",*cantInt);
     }
 
-    //contar caracteres fraccionarios
-    while(*(strNum+(*pos))!='\0'){
-        (*cantFracc)++;
+    //contar caracteres fraccionarios si encontro una coma
+    if(*(strNum+(*pos))=='.' || *(strNum+(*pos))){
         (*pos)++;
+        while(*(strNum+(*pos))!='\0'){
+            (*cantFracc)++;
+            (*pos)++;
+        }
     }
-
     *verify=(*cantInt <= MAX_PARTE_ENTERA_INPUT) && (*cantFracc <= MAX_PARTE_FRACC_INPUT);
 
     free(cantFracc);
@@ -110,33 +101,41 @@ Parametros:
 */
 void verificarArgN(char* strNumero, int baseOrigen){
     int *valido;
-
     char* pCarac;
+    char* ultCarac;
 
     pCarac = (char*) malloc(sizeof(char));
+    ultCarac = (char*) malloc(sizeof(char));
 
+    //Verificar que tenga como maximo 10 digitos enteros y 5 fraccionarios
     valido=limitesEnteroYFracc(strNumero);
-
     if(!(*valido)){
         mostrarError(LIMITES_NUM_INCUMPLIDOS);
     }
-    printf("Yogur \n");
-    printf("string %s int %i\n",strNumero,baseOrigen);
-
-    printf("isvalid %i",!(*isValid(strNumero, &baseOrigen)));
-
     free(valido);
-    valido=isValid(strNumero, &baseOrigen);
 
-    if(*valido==10){
+    //Verificar que el ultimo caracter no sea una coma
+    *pCarac = *(strNumero+strlen(strNumero)-1);
+    if( *pCarac == '.' || *pCarac == ','){
+        mostrarError(ERROR_ARGN_INVALIDO);
+    }
+
+    //Verificar que el primer caracter no sea una coma
+    *pCarac = *(strNumero);
+    printf("%c",*strNumero);
+    if( *pCarac == '.' || *pCarac == ','){
+        mostrarError(ERROR_ARGN_INVALIDO);
+    }
+
+    //Verificar que el numero ingresado sea coherente con la base de origen
+    valido=isValid(strNumero, &baseOrigen);
+    if(!(*valido)){
         mostrarError(ERROR_ARGN_INVALIDO);
     }
 
     if(!(*valido)){
         mostrarError(NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN);
     }
-
-    printf("Yogurisimo \n");
 
     free(valido);
     free(pCarac);
@@ -161,8 +160,6 @@ int* verificarBase(char* strBase){
     base = (int*) malloc(sizeof(int));
 
     esNum = soloNumeros(strBase);
-
-    printf("epa %s\n", strBase);
 
     if(*esNum){
         *base = atoi(strBase);

@@ -6,21 +6,27 @@
 #include "verificadorArgumentos.h"
 
 
-//#define TESTER
+#define TESTER
 int main(int argc, char** argv)
 {
+
+    #ifdef TESTER
+    ejecutarTest();
+    #endif // TESTER
     tArgumentos1 *registroParam = malloc(sizeof(tArgumentos1));
-    printf("hola \n");
     registroParam = almacenarValores(argc, argv); //REVISAR
+
+    #ifdef TESTER
+    ejecutarTest();
     printf("Bing chilling \n");
     printf("Campos del registro: \n");
-    printf("%s ",registroParam->argN);
-    printf("%s ",registroParam->argS);
-    printf("%s ",registroParam->argD);
-    printf("%i ",registroParam->argV);
-    printf("%i ",registroParam->argH);
+    printf("%s \n",registroParam->argN);
+    printf("%s \n",registroParam->argS);
+    printf("%s \n",registroParam->argD);
+    printf("%i \n",registroParam->argV);
+    printf("%i \n",registroParam->argH);
+    #endif // TESTER
     ejecuccion(registroParam);
-
     exit(EXIT_SUCCESS);
     return 0;
 }

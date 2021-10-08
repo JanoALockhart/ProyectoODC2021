@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 
 /**
 Funcion que simula un mapeo de claves caracteres y valores enteros.
@@ -50,12 +51,14 @@ int * isValid(char * n, int * base){
     int * dFracciones;
     int * i;
     int * value;
+
     validity=(int *) malloc(sizeof(int));
     cantFrac=(int *) malloc(sizeof(int));
     dEnteros=(int *) malloc(sizeof(int));
     dFracciones=(int *) malloc(sizeof(int));
     i=(int *) malloc(sizeof(int));
     value=(int *) malloc(sizeof(int));
+
     *validity=1;
     *dEnteros=0;
     *dFracciones=0;

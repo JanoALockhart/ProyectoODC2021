@@ -11,7 +11,7 @@ Procedimiento que, dada una estructura de registroParametros con parametros váli
 Atributo:
     -p: Puntero a una estructura con todos los parametros necesarios. Se consideran que están todos correctos.
 */
-int ejecuccion(tArgumentos1* p){
+void ejecuccion(tArgumentos1* p){
     int * decimalB10;
     float * fractionaryB10;
     char * decimalPartNumber;

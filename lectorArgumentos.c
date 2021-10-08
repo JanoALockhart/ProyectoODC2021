@@ -103,7 +103,7 @@ Parametros:
     -cantParam: es la cantidad de argumentos ingresados
 Return: 1 si el parametro leido es -h, 0 en caso contrario.
 */
-int* estaParamH(int cantParam, char* arrParam[]){
+int* estaParamH(int cantParam, char** arrParam){
     int *estaH;
     int *numParam;
 
@@ -112,7 +112,7 @@ int* estaParamH(int cantParam, char* arrParam[]){
 
     *estaH = 0;
     for(*numParam=0; *numParam<cantParam && !(*estaH); (*numParam)++){
-        *estaH = esElArgH(arrParam[*numParam]);
+        *estaH = esElArgH(*(arrParam+(*numParam)));
     }
 
     free(numParam);
@@ -198,6 +198,8 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
         }
 
         printf("Bingus \n");
+        //Verificar que los valores almacenados en el registro
+        //cumplan las restricciones
         verificarValores(regArgs);
         printf("Yaasearan \n");
 

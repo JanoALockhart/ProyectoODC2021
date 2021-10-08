@@ -5,18 +5,29 @@
 #include "almacenamientoParam.h"
 #include "lectorArgumentos.h"
 #include "convertirFraccionario.h"
+#include "verificadorArgumentos.h"
 
 //#define TEST_ESH
 //#define TEST_IDENTIFPARAM
 //#define TEST_ENTERO
 //#define TEST_FRACC_2
-
+//#define TEST_BASE
 void ejecutarTest(){
 
     //printf("%d \n",sizeof(tArgumentos1));
     //printf("%d \n",sizeof(tArgumentos2));
     //printf("%d \n",sizeof(tParam));
-    printf("hola");
+
+    #ifdef TEST_BASE
+    char *base;
+    int *cumple, *solNum;
+
+    solNum = soloNumeros(base);
+    cumple = verificarBase(base);
+    printf("base %s soloNum: %i \n",base,*solNum);
+    printf("base %s cumple: %i\n",base,*cumple);
+    #endif // TEST_BASE
+
     #ifdef TEST_FRACC_2
     float* pNum;
     char* num = "fafc";
@@ -32,7 +43,7 @@ void ejecutarTest(){
     #endif // TEST_FRACC
 
     #ifdef TEST_ESH
-    char* arg[3]= {"-h","-","-h0"};
+    char* arg[3]= {"-hh","-","-h0"};
     printf("Es H: %i\n",esElArgH(arg[0]));
     printf("Es H: %i\n",esElArgH(arg[1]));
     printf("Es H: %i\n",esElArgH(arg[2]));

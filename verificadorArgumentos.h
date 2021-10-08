@@ -9,10 +9,16 @@
 #define LIMITES_NUM_INCUMPLIDOS 204
 #define NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN 205
 
+#define BASE_MENOR 2
+#define BASE_MAYOR 16
+
+#define MAX_PARTE_ENTERA_INPUT 10
+#define MAX_PARTE_FRACC_INPUT 5
+
 
 int* soloNumeros(char* cadena);
 
-int limitesEnteroYFracc(char* strNum);
+int * limitesEnteroYFracc(char* strNum);
 
 void verificarArgN(char* strNumero, int baseOrigen);
 
