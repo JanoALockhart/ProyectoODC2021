@@ -207,6 +207,12 @@ void reverse(char * string, int * stringLength){
     }
 }
 
+/**
+Procedimiento que transforma a un entero a una cadena de caracteres
+Parametros:
+    -n: Puntero al numero a convertir en cadena de caracteres.
+Return: Puntero a una cadena de caracteres la cual contiene al número n.
+*/
 char * integerToString(int * n){
     char * string;
     int * number;
@@ -232,6 +238,13 @@ char * integerToString(int * n){
     return string;
 }
 
+/**
+Procedimiento que verifica si una cadena esta compuesta únicamente por 0.
+Parametros:
+    -n: Puntero a una cadena de caracteres.
+Return: 0 si n NO es puramente 0.
+        1 si n es puramente 0.
+*/
 int * only0Verification(char * n){
     int * only0;
     int * count;
