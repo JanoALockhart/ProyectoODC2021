@@ -3,6 +3,6 @@
 
 int * decimalOBaseT10Base(char * n, int * Obase, int * vervose);
 
-int * decimal10BaseTDBase(char * n, int * DBase, int * vervose);
+char * decimal10BaseTDBase(int * n, int * DBase, int * vervose);
 
 #endif // CONVERTIRENTERO_H_INCLUDED

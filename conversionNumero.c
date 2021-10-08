@@ -1,7 +1,10 @@
-#include "convertirEntero.h";
-#include "convertirFraccionario.h";
-#include "impresion.h";
+#include<stdlib.h>
+
+#include "convertirEntero.h"
+#include "convertirFraccionario.h"
+#include "impresion.h"
 #include "almacenamientoParam.h"
+#include "Util.h"
 
 /**
 Procedimiento que, dada una estructura de registroParametros con parametros válidos, o bien realiza las conversiones e imprime el resultado o bien imprime la ayuda de ser necesaria.
@@ -16,26 +19,29 @@ int ejecuccion(tArgumentos1* p){
     char * decimalBF;
     char * fractionaryBF;
     int * vervose;
-
+    int * originBase;
+    int * destinationBase;
 
     decimalB10=(int *) malloc(sizeof(int));
     fractionaryB10=(float *) malloc(sizeof(float));
-    decimalBF=(char *) malloc(sizeof(char));
-    fractionaryBF=(char *) malloc(sizeof(char));
+    decimalBF=(char *) malloc(sizeof(char)*10);
+    fractionaryBF=(char *) malloc(sizeof(char)*5);
     vervose = (int *) malloc(sizeof(int));
+    originBase = (int *) malloc(sizeof(int));
+    destinationBase = (int *) malloc(sizeof(int));
     decimalPartNumber=(char *) malloc(sizeof(char));
     fractionaryPartNumber=(char *) malloc(sizeof(char));
-
     *vervose = p->argV;
     if(p->argH) mostrarAyuda();
     else{
+        *originBase=atoi(p->argS);
+        *destinationBase=atoi(p->argD);
         separateComma(p->argN, decimalPartNumber, fractionaryPartNumber);
+        decimalB10=decimalOBaseT10Base(decimalPartNumber, originBase, vervose);
+        fractionaryB10=transformarFraccionarioAB10(fractionaryPartNumber, *originBase, p->argV);
 
-        decimalB10=decimalOBaseT10Base(decimalPartNumber, p->argS, vervose);
-        fractionaryB10=transformarFraccionarioAB10(fractionaryPartNumber, p->argS, p->argV);
-
-        decimalBF=decimal10BaseTDBase(decimalB10, p->argD, vervose);
-        fractionaryBF=transformarFraccionarioABaseDestino(*fractionaryB10, p->argD, p->argV);
+        decimalBF=decimal10BaseTDBase(decimalB10, destinationBase, vervose);
+        fractionaryBF=transformarFraccionarioABaseDestino(*fractionaryB10, *destinationBase, p->argV);
 
         mostrarResultadoFinal(decimalBF, fractionaryBF);
     }
@@ -45,4 +51,5 @@ int ejecuccion(tArgumentos1* p){
     free(fractionaryBF);
     free(decimalPartNumber);
     free(fractionaryPartNumber);
+    free(originBase);
 }

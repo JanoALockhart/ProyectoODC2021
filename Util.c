@@ -41,8 +41,9 @@ Parametros:
 Return: Puntero a:
         -0 si es que n no puede ser expresado en la base
         -1 si es que n puede ser expresado en la base
+        -10 si es que n puede ser expresado en la base ERROR
 */
-int isValid(char * n, int * base){
+int * isValid(char * n, int * base){
     int * validity;
     int * cantFrac;
     int * dEnteros;
@@ -60,11 +61,12 @@ int isValid(char * n, int * base){
     *dFracciones=0;
     *cantFrac=0;
     *i=0;
-    for(;(*(n+*i)) && (*dFracciones)<5 && (*cantFrac)<2 && (*validity); (*i)++){
+    for(;(*(n+*i)) && (*dFracciones)<5 && (*cantFrac)<2 && (*validity) && (*validity)!=10; (*i)++){
         if((*(n+*i))=='.' || (*(n+*i))==',') (*cantFrac)++;
         else{
             value=getValue((n+*i));
-            if((*value)>=base) *validity=0;
+            if(value==NULL) *validity=10;
+            if((*value)>=(*base)) *validity=0;
             if(*cantFrac) (*dFracciones)++; else (*dEnteros)++;
             free(value);
         }
@@ -146,6 +148,7 @@ void separateComma(char * n, char * parteEntera, char * parteFraccionaria){
     *(parteEntera+*pos)='\0';
     *pos=0;
     if(*(n+*i)=='.' || *(n+*i)==','){
+        (*i)++;
         while(*(n+*i)){
             *(parteFraccionaria+*pos)=*(n+*i);
             (*pos)++;
@@ -199,7 +202,7 @@ void reverse(char * string, int * stringLength){
     count=(int *) malloc(sizeof(int));
     aux=(char *) malloc(sizeof(char));
     *count=0;
-    while((*count)<((*stringLength)/2)){
+    while((*count)<=((*stringLength)/2)){
         *(aux)=*(string+*count),*(string+*count)=*(string+((*stringLength)-(*count))),*(string+((*stringLength)-(*count)))=*(aux);
         (*count)++;
     }

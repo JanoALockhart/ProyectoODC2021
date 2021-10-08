@@ -188,21 +188,20 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
             }
         }
 
+        //Si no se ingresaron las bases, asignar las que están por default
+        if((regArgs->argS)==NULL){
+            asignarDefault(&(regArgs->argS));
+        }
+
+        if((regArgs->argD)==NULL){
+            asignarDefault(&(regArgs->argD));
+        }
+
+        printf("Bingus \n");
         verificarValores(regArgs);
+        printf("Yaasearan \n");
 
     }
-
-    //Si no se ingresaron las bases, asignar las que están por default
-    if((regArgs->argS)==NULL){
-        asignarDefault(&(regArgs->argS));
-    }
-
-    if((regArgs->argD)==NULL){
-        asignarDefault(&(regArgs->argD));
-    }
-
-
-
     //Liberamos memoria
 
     free(numParam);

@@ -24,31 +24,35 @@ float* transformarFraccionarioAB10(char *fraccionario, int baseInicial, int paso
     int *exponente;
 
     total = (float *) malloc(sizeof(int));
-    pos = (int *) malloc(sizeof(int));
-    valor = (int *) malloc(sizeof(int));
-    pCarac = (char *) malloc(sizeof(char));
-    exponente = (int *) malloc(sizeof(int));
 
-    *total=0.0;
-    *pos=0;
-    *valor=0;
+    printf("Amazaras (%s) \n ",fraccionario);
 
-    *pCarac = *(fraccionario+(*pos));
-    while(*pCarac!='\0'){
-        valor = getValue(pCarac);//DESCOMENTAR LINEA //REVISAR
-        *exponente = (*pos)+1;
-        *total += (*valor)*(1/pow(baseInicial,*exponente));
-        if(pasoAPaso){
-            papFractionaryOBaseT10Base(total, valor, &baseInicial,exponente);
-        }
-        (*pos)++;
+    //if((*fraccionario!='0') && *(fraccionario+1)){
+        pos = (int *) malloc(sizeof(int));
+        valor = (int *) malloc(sizeof(int));
+        pCarac = (char *) malloc(sizeof(char));
+        exponente = (int *) malloc(sizeof(int));
+
+        *total=0.0;
+        *pos=0;
+        *valor=0;
+
         *pCarac = *(fraccionario+(*pos));
-    }
+        while(*pCarac!='\0'){
+            valor = getValue(pCarac);//DESCOMENTAR LINEA //REVISAR
+            *exponente = (*pos)+1;
+            *total += (*valor)*(1/pow(baseInicial,*exponente));
+            if(pasoAPaso){
+                papFractionaryOBaseT10Base(total, valor, &baseInicial,exponente);
+            }
+            (*pos)++;
+            *pCarac = *(fraccionario+(*pos));
+        }
 
-    free(pos);
-    free(valor);
-    free(pCarac);
-
+        free(pos);
+        free(valor);
+        free(pCarac);
+    //}else *total=(*fraccionario=='0')?0:1;
     return total;
 }
 
