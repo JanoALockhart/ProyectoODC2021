@@ -35,7 +35,7 @@ void papDecimal10BaseTDBase(int * c, int * b, int * r){
     d=(int *) malloc(sizeof(int));
     i=(int *) malloc(sizeof(int));
 
-    *d=(*c)* *(b);
+    *d=(*c)*(*b)+(*r);
     *i=0;
 
     *numberLength=floor(log10(abs( (*d) ))) + 1;
@@ -103,12 +103,17 @@ void mostrarError(int nroError){
     switch(nroError){
         case ERROR_ARGUMENTOS_REPETIDOS: printf("ERROR %i: Se han introducido más de una vez un argumento válido",ERROR_ARGUMENTOS_REPETIDOS); break;
         case ERROR_ARGUMENTO_NO_EXISTENTE: printf("ERROR %i: Se han introducido argumento inválido",ERROR_ARGUMENTO_NO_EXISTENTE); break;
-        case ERROR_EN_EL_INGRESO_DE_ARGUMENTO: printf("ERROR %i: No se encontro un argumento de la forma -x. Verifique que el numero de argumentos ingresado es correcto.",ERROR_EN_EL_INGRESO_DE_ARGUMENTO); break;
+        case ERROR_EN_EL_INGRESO_DE_ARGUMENTO: printf("ERROR %i: No se encontro un argumento de la forma -x. Verifique que el numero de argumentos y el orden en el que los ha ingresado es correcto.",ERROR_EN_EL_INGRESO_DE_ARGUMENTO); break;
         case ERROR_BASE: printf("ERROR %i: Se han introducido erroneamente alguna base.",ERROR_BASE);break;
         case VALOR_ARGN_NO_INGRESADO: printf("ERROR %i: No se ha introducido el numero.",VALOR_ARGN_NO_INGRESADO);break;
         case LIMITES_NUM_INCUMPLIDOS: printf("ERROR %i: El número o bien tiene más de 10 dígitos decimales o más de 5 dígitos fraccionales.",LIMITES_NUM_INCUMPLIDOS);break;
         case NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN: printf("ERROR %i: El número no es posible de expresar en la base.",NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN);break;
-        case ERROR_ARGN_INVALIDO: printf("ERROR %i: El número no es posible de expresar en la base.",NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN);break;
+        case ERROR_ARGN_INVALIDO:   printf("ERROR %i: el valor ingresado en el argumento -n no cumple las restricciones. Recuerde \n",ERROR_ARGN_INVALIDO);
+                                    printf("que el numero puede tener como maximo %i digitos en la parte entera y %i en la parte \n",MAX_PARTE_ENTERA_INPUT,MAX_PARTE_FRACC_INPUT);
+                                    printf("fraccionaria. El numero no debe tener mas de un punto (.) o coma (,) y esta no puede \n");
+                                    printf("estar al final ni al inicio del mismo. Los digitos que los componen deben ser menores \n");
+                                    printf("o iguales a la base destino.");
+                                    break;
     }
     exit(EXIT_FAILURE);
 }

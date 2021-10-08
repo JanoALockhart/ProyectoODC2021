@@ -20,7 +20,7 @@ int* soloNumeros(char* cadena);
 
 int * limitesEnteroYFracc(char* strNum);
 
-void verificarArgN(char* strNumero, int baseOrigen);
+void verificarArgN(char* strNumero, int* baseOrigen);
 
 int* verificarBase(char* strBase);
 

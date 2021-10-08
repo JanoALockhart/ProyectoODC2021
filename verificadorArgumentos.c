@@ -102,10 +102,8 @@ Parametros:
 void verificarArgN(char* strNumero, int * baseOrigen){
     int *valido;
     char* pCarac;
-    char* ultCarac;
 
     pCarac = (char*) malloc(sizeof(char));
-    ultCarac = (char*) malloc(sizeof(char));
 
     //Verificar que tenga como maximo 10 digitos enteros y 5 fraccionarios
     valido=limitesEnteroYFracc(strNumero);
@@ -122,7 +120,6 @@ void verificarArgN(char* strNumero, int * baseOrigen){
 
     //Verificar que el primer caracter no sea una coma
     *pCarac = *(strNumero);
-    printf("%c",*strNumero);
     if( *pCarac == '.' || *pCarac == ','){
         mostrarError(ERROR_ARGN_INVALIDO);
     }
@@ -159,11 +156,6 @@ int* verificarBase(char* strBase){
     base = (int*) malloc(sizeof(int));
 
     esNum = soloNumeros(strBase);
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 843af0e79b535088a80538c24d690560be00aac9
     if(*esNum){
         *base = atoi(strBase);
         if(!(BASE_MENOR<=*base && *base<=BASE_MAYOR)){

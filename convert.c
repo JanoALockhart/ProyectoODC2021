@@ -18,7 +18,6 @@ int main(int argc, char** argv)
 
     #ifdef TESTER
     ejecutarTest();
-    printf("Bing chilling \n");
     printf("Campos del registro: \n");
     printf("%s \n",registroParam->argN);
     printf("%s \n",registroParam->argS);

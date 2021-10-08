@@ -1,5 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
+
 #include "convertirFraccionario.h"
 #include "Util.h"
 #include "impresion.h"

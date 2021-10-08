@@ -1,5 +1,6 @@
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "Util.h"
 #include "impresion.h"
 
@@ -19,9 +20,10 @@ int * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
     int * numberLength;
     int * value;
     int * exp;
+
     total=(int *) malloc(sizeof(int));
     if((*Obase)!=10){
-        if((*n!='0' || *n!='1') && *(n+1)){
+       // if((*n!='0' || *n!='1') && *(n+1)){ //REVISAR ESTE IF
             count=(int *) malloc(sizeof(int));
             numberLength=(int *) malloc(sizeof(int));
             value=(int *) malloc(sizeof(int));
@@ -40,7 +42,7 @@ int * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
             free(numberLength);
             free(value);
             free(exp);
-        } else *total=(*n=='0')?0:1;
+        //} else *total=(*n=='0')?0:1;
     }else{ *total=atoi(n); if(*vervose) directConv(total, Obase); }
     return total;
 }
@@ -62,7 +64,7 @@ char * decimal10BaseTDBase(int * n, int * DBase, int * vervose){
     int * rem;
     if((*DBase)!=10){
         output=(char *) malloc(sizeof(char));
-        if((*n!='0' || *n!='1') && *(n+1)){
+        //if((*n!='0' || *n!='1') && *(n+1)){ //REVISAR IF
             number=(int *) malloc(sizeof(int));
             rem=(int *) malloc(sizeof(int));
             count=(int *) malloc(sizeof(int));
@@ -80,7 +82,7 @@ char * decimal10BaseTDBase(int * n, int * DBase, int * vervose){
             free(count);
             free(number);
             free(rem);
-        }else *output=(*n=='0')?0:1;
+        //}else *output=(*n=='0')?0:1;
     }else{ output=integerToString(n); if(*vervose) directConv(n, DBase); }
     return output;
 }
