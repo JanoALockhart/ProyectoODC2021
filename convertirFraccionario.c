@@ -22,18 +22,19 @@ float* transformarFraccionarioAB10(char *fraccionario, int baseInicial, int paso
     int *valor;        //puntero a int auxiliar que almacena el valor en base 10 del caracter
     char *pCarac;      //puntero a char auxiliar que almacena un caracter
     int *exponente;
+    int *only0;
 
-    total = (float *) malloc(sizeof(int));
+    total = (float *) malloc(sizeof(float));
 
-    printf("Amazaras (%s) \n ",fraccionario);
+    only0=only0Verification(fraccionario);
 
-    //if((*fraccionario!='0') && *(fraccionario+1)){
+    *total=0.0;
+    if(!(*only0)){
         pos = (int *) malloc(sizeof(int));
         valor = (int *) malloc(sizeof(int));
         pCarac = (char *) malloc(sizeof(char));
         exponente = (int *) malloc(sizeof(int));
 
-        *total=0.0;
         *pos=0;
         *valor=0;
 
@@ -52,7 +53,7 @@ float* transformarFraccionarioAB10(char *fraccionario, int baseInicial, int paso
         free(pos);
         free(valor);
         free(pCarac);
-    //}else *total=(*fraccionario=='0')?0:1;
+    }else if(pasoAPaso) printf("Conversión directa. No hay parte fraccional que convertir.\n");
     return total;
 }
 
@@ -74,33 +75,33 @@ char* transformarFraccionarioABaseDestino(float fraccionario, int baseDestino, i
     float *numIntermedio, *fraccImprimir;
     int *cantDigitos, *digitoEntero;
     char *result;
-
-
-    numIntermedio = (float *) malloc(sizeof(float));
-    cantDigitos = (int *) malloc(sizeof(int));
-    digitoEntero = (int *) malloc(sizeof(int));
     result = (char *) malloc(sizeof(char));
-    fraccImprimir = (float *) malloc(sizeof(float));
-
     *result = '\0';
-    *cantDigitos=0;
-    *numIntermedio = fraccionario;
-    while((*cantDigitos)<MAX_PARTE_FRACC_OUTPUT){
-            *fraccImprimir = *numIntermedio;
-        (*numIntermedio) = (*numIntermedio)*baseDestino;
-        *digitoEntero = (int)floor(*(numIntermedio));
-        result = agregarCaracterFinal(result, cantDigitos, digitoEntero);
-        if(pasoAPaso){
-            papFractionary10BaseTDBase(&baseDestino, fraccImprimir, digitoEntero);
-        }
-        (*cantDigitos)++;
-        *numIntermedio = (*numIntermedio)-floor(*numIntermedio);
-    }
 
-    free(numIntermedio);
-    free(cantDigitos);
-    free(digitoEntero);
-    free(fraccImprimir);
+    if(fraccionario!=0){
+        numIntermedio = (float *) malloc(sizeof(float));
+        cantDigitos = (int *) malloc(sizeof(int));
+        digitoEntero = (int *) malloc(sizeof(int));
+        fraccImprimir = (float *) malloc(sizeof(float));
+
+        *cantDigitos=0;
+        *numIntermedio = fraccionario;
+        while((*cantDigitos)<MAX_PARTE_FRACC_OUTPUT){
+                *fraccImprimir = *numIntermedio;
+            (*numIntermedio) = (*numIntermedio)*baseDestino;
+            *digitoEntero = (int)floor(*(numIntermedio));
+            result = agregarCaracterFinal(result, cantDigitos, digitoEntero);
+            if(pasoAPaso){
+                papFractionary10BaseTDBase(&baseDestino, fraccImprimir, digitoEntero);
+            }
+            (*cantDigitos)++;
+            *numIntermedio = (*numIntermedio)-floor(*numIntermedio);
+        }
+        free(numIntermedio);
+        free(cantDigitos);
+        free(digitoEntero);
+        free(fraccImprimir);
+    }else if(pasoAPaso) printf("Conversión directa. No hay parte fraccional que convertir.\n");
 
     return result;
 }

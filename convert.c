@@ -26,6 +26,7 @@ int main(int argc, char** argv)
     printf("%i \n",registroParam->argV);
     printf("%i \n",registroParam->argH);
     #endif // TESTER
+
     ejecuccion(registroParam);
     exit(EXIT_SUCCESS);
     return 0;

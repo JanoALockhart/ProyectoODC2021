@@ -64,12 +64,11 @@ int * isValid(char * n, int * base){
     *dFracciones=0;
     *cantFrac=0;
     *i=0;
-    for(;(*(n+*i)) && (*dFracciones)<5 && (*cantFrac)<2 && (*validity) && (*validity)!=10; (*i)++){
+    for(;(*(n+*i)) && (*dFracciones)<5 && (*cantFrac)<2 && (*validity); (*i)++){
         if((*(n+*i))=='.' || (*(n+*i))==',') (*cantFrac)++;
         else{
             value=getValue((n+*i));
-            if(value==NULL) *validity=10;
-            if((*value)>=(*base)) *validity=0;
+            if(value==NULL || (*value)>=(*base)) *validity=0;
             if(*cantFrac) (*dFracciones)++; else (*dEnteros)++;
             free(value);
         }
@@ -209,6 +208,61 @@ void reverse(char * string, int * stringLength){
         *(aux)=*(string+*count),*(string+*count)=*(string+((*stringLength)-(*count))),*(string+((*stringLength)-(*count)))=*(aux);
         (*count)++;
     }
+}
+
+/**
+Procedimiento que transforma a un entero a una cadena de caracteres
+Parametros:
+    -n: Puntero al numero a convertir en cadena de caracteres.
+Return: Puntero a una cadena de caracteres la cual contiene al número n.
+*/
+char * integerToString(int * n){
+    char * string;
+    int * number;
+    int * count;
+    int * digit;
+    string=(char *) malloc(sizeof(char)*10);
+    number=(int *) malloc(sizeof(int));
+    count=(int *) malloc(sizeof(int));
+    digit=(int *) malloc(sizeof(int));
+    *number=*n;
+    *count=0;
+    while(!((-9<=(*number)) && ((*number)<=9))){
+        *digit=(*number)%10;
+        string=agregarCaracterFinal(string, count, digit);
+        *number=((*number)/10);
+        (*count)++;
+    }
+    string=agregarCaracterFinal(string, count, number);
+    reverse(string, count);
+    free(number);
+    free(count);
+    free(digit);
+    return string;
+}
+
+/**
+Procedimiento que verifica si una cadena esta compuesta únicamente por 0.
+Parametros:
+    -n: Puntero a una cadena de caracteres.
+Return: 0 si n NO es puramente 0.
+        1 si n es puramente 0.
+*/
+int * only0Verification(char * n){
+    int * only0;
+    int * count;
+    only0=(int *) malloc(sizeof(int));
+    count=(int *) malloc(sizeof(int));
+    *only0=(*n)=='\0';
+    if(!(*only0)){
+        *only0=1;
+        *count=0;
+        while(*(n+(*count)) && *only0){
+            if(*(n+(*count))!='0') *only0=0;
+            (*count)++;
+        }
+    }
+    return only0;
 }
 
 //#define TEST_UTIL

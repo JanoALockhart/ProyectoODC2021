@@ -99,7 +99,7 @@ Parametros:
         numero y se va a verificar
     -baseOrigen: es la base en la que el numero fue ingresada
 */
-void verificarArgN(char* strNumero, int baseOrigen){
+void verificarArgN(char* strNumero, int * baseOrigen){
     int *valido;
     char* pCarac;
     char* ultCarac;
@@ -127,8 +127,7 @@ void verificarArgN(char* strNumero, int baseOrigen){
         mostrarError(ERROR_ARGN_INVALIDO);
     }
 
-    //Verificar que el numero ingresado sea coherente con la base de origen
-    valido=isValid(strNumero, &baseOrigen);
+    valido=isValid(strNumero, baseOrigen);
     if(!(*valido)){
         mostrarError(ERROR_ARGN_INVALIDO);
     }
@@ -161,6 +160,10 @@ int* verificarBase(char* strBase){
 
     esNum = soloNumeros(strBase);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 843af0e79b535088a80538c24d690560be00aac9
     if(*esNum){
         *base = atoi(strBase);
         if(!(BASE_MENOR<=*base && *base<=BASE_MAYOR)){
@@ -188,14 +191,12 @@ void verificarValores(tArgumentos1* regArgs){
 
     if((regArgs->argS)!=NULL){
         baseOrigen = verificarBase(regArgs->argS);
-        printf("Salsa\n");
     }else{
         mostrarError(ERROR_BASE); //argumento base origen es nulo (para hacer mas robusto)
     }
 
     if((regArgs->argN)!=NULL){
-        verificarArgN(regArgs->argN,*baseOrigen);
-        printf("Origen\n");
+        verificarArgN(regArgs->argN, baseOrigen);
         free(baseOrigen);
     }else{
         mostrarError(VALOR_ARGN_NO_INGRESADO);

@@ -197,11 +197,7 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
             asignarDefault(&(regArgs->argD));
         }
 
-        printf("Bingus \n");
-        //Verificar que los valores almacenados en el registro
-        //cumplan las restricciones
         verificarValores(regArgs);
-        printf("Yaasearan \n");
 
     }
     //Liberamos memoria
