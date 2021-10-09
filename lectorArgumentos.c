@@ -103,7 +103,7 @@ Parametros:
     -cantParam: es la cantidad de argumentos ingresados
 Return: 1 si el parametro leido es -h, 0 en caso contrario.
 */
-int* estaParamH(int cantParam, char* arrParam[]){
+int* estaParamH(int cantParam, char** arrParam){
     int *estaH;
     int *numParam;
 
@@ -112,7 +112,7 @@ int* estaParamH(int cantParam, char* arrParam[]){
 
     *estaH = 0;
     for(*numParam=0; *numParam<cantParam && !(*estaH); (*numParam)++){
-        *estaH = esElArgH(arrParam[*numParam]);
+        *estaH = esElArgH(*(arrParam+(*numParam)));
     }
 
     free(numParam);
@@ -136,6 +136,7 @@ void asignarDefault(char **campoRegistro){
 
 /**
 Este metodo se encarga de leer los parametros ingresados dentro del main
+y guardarlos en un registro de tipo argmentos tArgumentos1.
 Parametros:
     -cantParam: es la cantidad de parametros que ingreso el usuario
     -arrParam: es el arreglo que contiene todos los parametros que el usuario ingreso
@@ -155,25 +156,20 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
     regArgs = (tArgumentos1 *) malloc(sizeof(tArgumentos1));
 
     //Inicializar registro
-    (regArgs->argN)=NULL;
-    (regArgs->argD)=NULL;
-    (regArgs->argS)=NULL;
-    (regArgs->argV)=0;
-    (regArgs->argH)=0;
-
-
-    //Algoritmo
-    //Si hay mas parametros de los posibles, algo se ingresó mal
-    if(cantParam>9){
-        mostrarError(ERROR_EN_EL_INGRESO_DE_ARGUMENTO);
-    }
+    constructor(regArgs);
 
     //Buscar el parametro -h
     estaH = estaParamH(cantParam,arrParam);
-    pPalabra=NULL;
+
     if(*estaH){
-        (regArgs->argH)=1;
+        mostrarAyuda();
     }else{
+        pPalabra=NULL;
+
+        //Si hay mas parametros de los posibles, algo se ingresó mal
+        if(cantParam>9){
+            mostrarError(ERROR_EN_EL_INGRESO_DE_ARGUMENTO);
+        }
         //Si no hay parametro -h leer el resto de los parametros y guardar sus valores
         argAGuardar = NULL;
         for(*numParam=1; (*numParam)<cantParam; (*numParam)++){
@@ -196,9 +192,6 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
         if((regArgs->argD)==NULL){
             asignarDefault(&(regArgs->argD));
         }
-
-        verificarValores(regArgs);
-
     }
     //Liberamos memoria
 

@@ -1,21 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "almacenamientoParam.h"
 #include "Util.h"
 #include "impresion.h"
-
-#define ERROR_BASE 200
-#define VALOR_ARGN_NO_INGRESADO 202
-#define ERROR_ARGN_INVALIDO 203
-#define LIMITES_NUM_INCUMPLIDOS 204
-#define NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN 205
-
-#define BASE_MENOR 2
-#define BASE_MAYOR 16
-
-#define MAX_PARTE_ENTERA_INPUT 10
-#define MAX_PARTE_FRACC_INPUT 5
+#include "verificadorArgumentos.h"
 
 
 
@@ -80,13 +70,16 @@ int * limitesEnteroYFracc(char* strNum){
         (*pos)++;
     }
 
-    //contar caracteres fraccionarios
-    while(*(strNum+(*pos))!='\0'){
-        (*cantFracc)++;
+    //contar caracteres fraccionarios si encontro una coma
+    if(*(strNum+(*pos))=='.' || *(strNum+(*pos))){
         (*pos)++;
+        while(*(strNum+(*pos))!='\0'){
+            (*cantFracc)++;
+            (*pos)++;
+        }
     }
 
-    *verify=(*cantInt <= MAX_PARTE_ENTERA_INPUT) && (*cantFracc <= MAX_PARTE_FRACC_INPUT);
+    *verify=((*cantInt <= MAX_PARTE_ENTERA_INPUT) && (*cantFracc <= MAX_PARTE_FRACC_INPUT));
 
     free(cantFracc);
     free(cantInt);
@@ -109,29 +102,32 @@ Parametros:
 */
 void verificarArgN(char* strNumero, int * baseOrigen){
     int *valido;
-
     char* pCarac;
 
     pCarac = (char*) malloc(sizeof(char));
-
-    valido=limitesEnteroYFracc(strNumero);
-
-    if(!(*valido)){
-        mostrarError(LIMITES_NUM_INCUMPLIDOS);
-    }
-    free(valido);
-
 
     valido=isValid(strNumero, baseOrigen);
     if(!(*valido)){
         mostrarError(ERROR_ARGN_INVALIDO);
     }
-
-    if(!(*valido)){
-        mostrarError(NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN);
-    }
-
     free(valido);
+    //Verificar que tenga como maximo 10 digitos enteros y 5 fraccionarios
+    valido=limitesEnteroYFracc(strNumero);
+    if(!(*valido)){
+        mostrarError(LIMITES_NUM_INCUMPLIDOS);
+    }
+    free(valido);
+
+    //Verificar que el ultimo caracter no sea una coma
+    *pCarac = *(strNumero+strlen(strNumero)-1);
+    if( *pCarac == '.' || *pCarac == ','){
+        mostrarError(ERROR_ARGN_INVALIDO);
+    }
+    //Verificar que el primer caracter no sea una coma
+    *pCarac = *(strNumero);
+    if( *pCarac == '.' || *pCarac == ','){
+        mostrarError(ERROR_ARGN_INVALIDO);
+    }
     free(pCarac);
 }
 
@@ -154,8 +150,6 @@ int* verificarBase(char* strBase){
     base = (int*) malloc(sizeof(int));
 
     esNum = soloNumeros(strBase);
-
-
     if(*esNum){
         *base = atoi(strBase);
         if(!(BASE_MENOR<=*base && *base<=BASE_MAYOR)){

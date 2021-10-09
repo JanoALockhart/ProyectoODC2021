@@ -5,34 +5,62 @@
 #include "almacenamientoParam.h"
 #include "lectorArgumentos.h"
 #include "convertirFraccionario.h"
+#include "verificadorArgumentos.h"
+#include "Util.h"
 
 //#define TEST_ESH
 //#define TEST_IDENTIFPARAM
 //#define TEST_ENTERO
+#define TEST_FRACC
 //#define TEST_FRACC_2
-
+//#define TEST_BASE
+//#define TEST_REALLOC
 void ejecutarTest(){
 
     //printf("%d \n",sizeof(tArgumentos1));
     //printf("%d \n",sizeof(tArgumentos2));
     //printf("%d \n",sizeof(tParam));
-    printf("hola");
-    #ifdef TEST_FRACC_2
-    float* pNum;
-    char* num = "fafc";
-    pNum = transformarFraccionarioAB10(num,16,1);
-    printf("%f",*pNum);
-    #endif // TEST_FRACC_2
 
+    #ifdef TEST_REALLOC
+    char *string;
+    int cantDig;
+    int dig = 1;
+
+    string = (char*)malloc(sizeof(char));
+    *string = '\0';
+    printf("%s",string);
+    cantDig=0;
+    while(cantDig<5){
+        string = agregarCaracterFinal(string,&cantDig,&dig);
+        printf("%s\n",string);
+        cantDig++;
+    }
+    #endif // TEST_REALLOC
+    #ifdef TEST_BASE
+    char *base;
+    int *cumple, *solNum;
+
+    solNum = soloNumeros(base);
+    cumple = verificarBase(base);
+    printf("base %s soloNum: %i \n",base,*solNum);
+    printf("base %s cumple: %i\n",base,*cumple);
+    #endif // TEST_BASE
 
     #ifdef TEST_FRACC
-    char* strNum = transformarFraccionarioABaseDestino(0.6789, 16, 1);
-    printf("%s \n",strNum);
-
+    float* pNum;
+    char* num = "de";
+    pNum = transformarFraccionarioAB10(num,16,1);
+    printf("%f\n",*pNum);
+    int cant=0;
+    while(cant<10){
+        char* strNum = transformarFraccionarioABaseDestino(0.6789, 16, 1);
+        printf("%s \n",strNum);
+        cant++;
+    }
     #endif // TEST_FRACC
 
     #ifdef TEST_ESH
-    char* arg[3]= {"-h","-","-h0"};
+    char* arg[3]= {"-hh","-","-h0"};
     printf("Es H: %i\n",esElArgH(arg[0]));
     printf("Es H: %i\n",esElArgH(arg[1]));
     printf("Es H: %i\n",esElArgH(arg[2]));

@@ -1,5 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
+
 #include "convertirFraccionario.h"
 #include "Util.h"
 #include "impresion.h"
@@ -25,10 +27,12 @@ float* transformarFraccionarioAB10(char *fraccionario, int baseInicial, int paso
     int *only0;
 
     total = (float *) malloc(sizeof(float));
-
     only0=only0Verification(fraccionario);
 
     *total=0.0;
+    if(pasoAPaso){
+        mostrarTitulo("PARTE FRACCIONARIA DE BASE ORIGEN A BASE 10");
+    }
     if(!(*only0)){
         pos = (int *) malloc(sizeof(int));
         valor = (int *) malloc(sizeof(int));
@@ -37,10 +41,10 @@ float* transformarFraccionarioAB10(char *fraccionario, int baseInicial, int paso
 
         *pos=0;
         *valor=0;
-
         *pCarac = *(fraccionario+(*pos));
+
         while(*pCarac!='\0'){
-            valor = getValue(pCarac);//DESCOMENTAR LINEA //REVISAR
+            valor = getValue(pCarac);
             *exponente = (*pos)+1;
             *total += (*valor)*(1/pow(baseInicial,*exponente));
             if(pasoAPaso){
@@ -53,7 +57,12 @@ float* transformarFraccionarioAB10(char *fraccionario, int baseInicial, int paso
         free(pos);
         free(valor);
         free(pCarac);
-    }else if(pasoAPaso) printf("Conversión directa. No hay parte fraccional que convertir.\n");
+
+    }else if(pasoAPaso){
+        msgConversionDirecta();
+    }
+
+    free(only0);
     return total;
 }
 
@@ -66,10 +75,12 @@ Parametros:
     -baseDestino: es la base a la que será pasado el
         número fraccionario.
     -pasoAPaso: Si es 0, no muestra por pantalla los
-        pasos realizados para obtener el resultado
+        pasos realizados para obtener el resultado.
+        Caso contrario si lo hace.
 Return: un puntero a una cadena de caracteres que representa
-    el numero fraccionario sin el "0.". El espacio de memoria
-    apuntado por el puntero debe liberarse con un free().
+    el numero fraccionario sin el "0." al principio.
+    El espacio de memoria apuntado por el puntero debe
+    liberarse con un free().
 */
 char* transformarFraccionarioABaseDestino(float fraccionario, int baseDestino, int pasoAPaso){
     float *numIntermedio, *fraccImprimir;
@@ -78,6 +89,9 @@ char* transformarFraccionarioABaseDestino(float fraccionario, int baseDestino, i
     result = (char *) malloc(sizeof(char));
     *result = '0';
 
+    if(pasoAPaso){
+        mostrarTitulo("PARTE FRACCIONARIA DE BASE 10 A BASE DESTINO");
+    }
     if(fraccionario!=0){
         numIntermedio = (float *) malloc(sizeof(float));
         cantDigitos = (int *) malloc(sizeof(int));
@@ -86,8 +100,9 @@ char* transformarFraccionarioABaseDestino(float fraccionario, int baseDestino, i
 
         *cantDigitos=0;
         *numIntermedio = fraccionario;
+
         while((*cantDigitos)<MAX_PARTE_FRACC_OUTPUT){
-                *fraccImprimir = *numIntermedio;
+            *fraccImprimir = *numIntermedio;
             (*numIntermedio) = (*numIntermedio)*baseDestino;
             *digitoEntero = (int)floor(*(numIntermedio));
             result = agregarCaracterFinal(result, cantDigitos, digitoEntero);
@@ -101,8 +116,9 @@ char* transformarFraccionarioABaseDestino(float fraccionario, int baseDestino, i
         free(cantDigitos);
         free(digitoEntero);
         free(fraccImprimir);
-    }else if(pasoAPaso) printf("Conversión directa. No hay parte fraccional que convertir.\n");
-
+    }else if(pasoAPaso){
+        msgConversionDirecta();
+    }
     return result;
 }
 

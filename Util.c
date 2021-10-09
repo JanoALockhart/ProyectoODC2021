@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 
 /**
 Funcion que simula un mapeo de claves caracteres y valores enteros.
@@ -46,34 +47,27 @@ Return: Puntero a:
 int * isValid(char * n, int * base){
     int * validity;
     int * cantFrac;
-    int * dEnteros;
-    int * dFracciones;
     int * i;
     int * value;
+
     validity=(int *) malloc(sizeof(int));
     cantFrac=(int *) malloc(sizeof(int));
-    dEnteros=(int *) malloc(sizeof(int));
-    dFracciones=(int *) malloc(sizeof(int));
     i=(int *) malloc(sizeof(int));
     value=(int *) malloc(sizeof(int));
+
     *validity=1;
-    *dEnteros=0;
-    *dFracciones=0;
     *cantFrac=0;
     *i=0;
-    for(;(*(n+*i)) && (*dFracciones)<5 && (*cantFrac)<2 && (*validity); (*i)++){
+    for(;(*(n+*i)!='\0') && (*cantFrac)<2 && (*validity); (*i)++){
         if((*(n+*i))=='.' || (*(n+*i))==',') (*cantFrac)++;
         else{
             value=getValue((n+*i));
             if(value==NULL || (*value)>=(*base)) *validity=0;
-            if(*cantFrac) (*dFracciones)++; else (*dEnteros)++;
             free(value);
         }
     }
-    if(*(cantFrac)>=2 || *(dEnteros)>=10 || *(dFracciones)>5) *validity=0;
+    if(*(cantFrac)>=2) *validity=0;
     free(cantFrac);
-    free(dEnteros);
-    free(dFracciones);
     free(i);
     return validity;
 }
@@ -164,7 +158,8 @@ Funcion que agrega el ultimo digito a la cadena de caracteres.
 Para esto, relocaliza la memoria reservada para la cadena y
 devuelve el puntero que apunta a la nueva direccion de memoria
 Parametros:
-    -strNum: es la cadena de caracteres que representa el numero
+    -strNum: es un puntero a memoria dinamica que contiene
+        la cadena de caracteres que representa el numero
     -cantDig: es la cantidad de digitos que tiene el numero,
         sin contar el caracter nulo ('\0').
     -digito: es el nuevo digito que quiere agregarse al
@@ -196,7 +191,7 @@ Parametros:
     -string: Puntero al primer elemento de la cadena de caracteres.
     -stringLength: Puntero a un entero que dirá la longitud de string.
 */
-void reverse(char * string, int * stringLength){
+void revertir(char * string, int * stringLength){
     int * count;
     char * aux;
     count=(int *) malloc(sizeof(int));
@@ -244,8 +239,11 @@ char * floatToString(float * n){
 Procedimiento que verifica si una cadena esta compuesta únicamente por 0.
 Parametros:
     -n: Puntero a una cadena de caracteres.
-Return: 0 si n NO es puramente 0.
-        1 si n es puramente 0.
+Return: Un puntero que apunta a:
+        .0 si n NO es puramente 0.
+        .1 si n es puramente 0.
+        El estapacio en memoria apuntado por el puntero
+        debe ser liberado con un free()
 */
 int * only0Verification(char * n){
     int * only0;

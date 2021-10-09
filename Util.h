@@ -7,13 +7,13 @@ int * getValue(char * value);
 
 char * isValue(int * n);
 
-int * stringLength(char * string);
+int * stringLength(char * str);
 
 void separateComma(char * n, char * parteEntera, char * parteFraccionaria);
 
-char* agregarCaracterFinal(char * string, int * stringLength, int * n);
+char* agregarCaracterFinal(char * strNum, int * stringLength, int * n);
 
-void reverse(char * string, int * stringLength);
+void revertir(char * str, int * stringLength);
 
 char * floatToString(float * n);
 
