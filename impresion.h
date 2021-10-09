@@ -19,4 +19,6 @@ void directConv(int * n, int * base);
 
 void mostrarTitulo(char * titulo);
 
+void msgConversionDirecta();
+
 #endif // IMPRESION_H_INCLUDED

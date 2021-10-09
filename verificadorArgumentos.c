@@ -106,6 +106,12 @@ void verificarArgN(char* strNumero, int * baseOrigen){
 
     pCarac = (char*) malloc(sizeof(char));
 
+    valido=isValid(strNumero, baseOrigen);
+    if(!(*valido)){
+        mostrarError(ERROR_ARGN_INVALIDO);
+    }
+    free(valido);
+
     //Verificar que tenga como maximo 10 digitos enteros y 5 fraccionarios
     valido=limitesEnteroYFracc(strNumero);
     if(!(*valido)){
@@ -123,15 +129,6 @@ void verificarArgN(char* strNumero, int * baseOrigen){
     *pCarac = *(strNumero);
     if( *pCarac == '.' || *pCarac == ','){
         mostrarError(ERROR_ARGN_INVALIDO);
-    }
-
-    valido=isValid(strNumero, baseOrigen);
-    if(!(*valido)){
-        mostrarError(ERROR_ARGN_INVALIDO);
-    }
-
-    if(!(*valido)){
-        mostrarError(NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN);
     }
 
     free(valido);

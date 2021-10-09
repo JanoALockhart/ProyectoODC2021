@@ -102,18 +102,18 @@ Procedimiento que dado un número de error, imprime el error correspondiente.
 */
 void mostrarError(int nroError){
     switch(nroError){
-        case ERROR_ARGUMENTOS_REPETIDOS: printf("ERROR %i: Se han introducido más de una vez un argumento válido",ERROR_ARGUMENTOS_REPETIDOS); break;
-        case ERROR_ARGUMENTO_NO_EXISTENTE: printf("ERROR %i: Se han introducido argumento inválido",ERROR_ARGUMENTO_NO_EXISTENTE); break;
+        case ERROR_ARGUMENTOS_REPETIDOS: printf("ERROR %i: Se han introducido mas de una vez un argumento valido",ERROR_ARGUMENTOS_REPETIDOS); break;
+        case ERROR_ARGUMENTO_NO_EXISTENTE: printf("ERROR %i: Se han introducido argumento invalido",ERROR_ARGUMENTO_NO_EXISTENTE); break;
         case ERROR_EN_EL_INGRESO_DE_ARGUMENTO: printf("ERROR %i: No se encontro un argumento de la forma -x. Verifique que el numero de argumentos y el orden en el que los ha ingresado es correcto.",ERROR_EN_EL_INGRESO_DE_ARGUMENTO); break;
         case ERROR_BASE: printf("ERROR %i: Se han introducido erroneamente alguna base.",ERROR_BASE);break;
-        case VALOR_ARGN_NO_INGRESADO: printf("ERROR %i: No se ha introducido el numero.",VALOR_ARGN_NO_INGRESADO);break;
-        case LIMITES_NUM_INCUMPLIDOS: printf("ERROR %i: El número o bien tiene más de 10 dígitos decimales o más de 5 dígitos fraccionales.",LIMITES_NUM_INCUMPLIDOS);break;
-        case NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN: printf("ERROR %i: El número no es posible de expresar en la base.",NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN);break;
+        case VALOR_ARGN_NO_INGRESADO: printf("ERROR %i: No se ha introducido el argumento -n <numero>.",VALOR_ARGN_NO_INGRESADO);break;
+        case LIMITES_NUM_INCUMPLIDOS: printf("ERROR %i: El numero tiene mas de 10 digitos decimales o mas de 5 digitos fraccionales.",LIMITES_NUM_INCUMPLIDOS);break;
+        case NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN: printf("ERROR %i: El numero no es posible de expresar en la base. \n Verifique que los digitos sean menores o iguales a la base.",NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN);break;
         case ERROR_ARGN_INVALIDO:   printf("ERROR %i: el valor ingresado en el argumento -n no cumple las restricciones. Recuerde \n",ERROR_ARGN_INVALIDO);
                                     printf("que el numero puede tener como maximo %i digitos en la parte entera y %i en la parte \n",MAX_PARTE_ENTERA_INPUT,MAX_PARTE_FRACC_INPUT);
                                     printf("fraccionaria. El numero no debe tener mas de un punto (.) o coma (,) y esta no puede \n");
                                     printf("estar al final ni al inicio del mismo. Los digitos que los componen deben ser menores \n");
-                                    printf("o iguales a la base destino.");
+                                    printf("o iguales a la base de origen.");
                                     break;
     }
     exit(EXIT_FAILURE);
@@ -133,7 +133,7 @@ void mostrarAyuda(){
     printf("-s <source_base>    Base de origen en la que esta expresado el numero \n");
     printf("                    ingresado en <number>. Debe estar entre 2 y 16 en base\n");
     printf("                    decimal. Si el argumento no es ingresado, se asume base 10\n");
-    printf("-d <dest_base>      Base de destino que sera expresado el resultado de\n");
+    printf("-d <dest_base>      Base de destino en la que sera expresado el resultado de\n");
     printf("                    la conversion. Debe estar entre 2 y 16 en base decimal \n");
     printf("                    Si el argumento no es ingresado se asume base 10.\n");
     printf("-v                  Imprime el paso a paso de cada computacion de la conversion.\n");
@@ -141,7 +141,7 @@ void mostrarAyuda(){
 }
 
 void directConv(int * n, int * base){
-    printf("Conversión directa. %i en base %i es %i\n",*n, *base, *n);
+    printf("Conversion directa. %i en base %i es %i\n",*n, *base, *n);
 }
 
 void imprimirRaya(int largo, char carac){
@@ -158,4 +158,8 @@ void mostrarTitulo(char* titulo){
     imprimirRaya(strlen(titulo),'-');
     printf("%s\n",titulo);
     imprimirRaya(strlen(titulo),'-');
+}
+
+void msgConversionDirecta(){
+    printf("Conversion directa. No hay parte fraccional que convertir.\n");
 }

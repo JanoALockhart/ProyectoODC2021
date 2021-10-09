@@ -47,36 +47,27 @@ Return: Puntero a:
 int * isValid(char * n, int * base){
     int * validity;
     int * cantFrac;
-    int * dEnteros;
-    int * dFracciones;
     int * i;
     int * value;
 
     validity=(int *) malloc(sizeof(int));
     cantFrac=(int *) malloc(sizeof(int));
-    dEnteros=(int *) malloc(sizeof(int));
-    dFracciones=(int *) malloc(sizeof(int));
     i=(int *) malloc(sizeof(int));
     value=(int *) malloc(sizeof(int));
 
     *validity=1;
-    *dEnteros=0;
-    *dFracciones=0;
     *cantFrac=0;
     *i=0;
-    for(;(*(n+*i)) && (*dFracciones)<5 && (*cantFrac)<2 && (*validity); (*i)++){
+    for(;(*(n+*i)!='\0') && (*cantFrac)<2 && (*validity); (*i)++){
         if((*(n+*i))=='.' || (*(n+*i))==',') (*cantFrac)++;
         else{
             value=getValue((n+*i));
             if(value==NULL || (*value)>=(*base)) *validity=0;
-            if(*cantFrac) (*dFracciones)++; else (*dEnteros)++;
             free(value);
         }
     }
-    if(*(cantFrac)>=2 || *(dEnteros)>=10 || *(dFracciones)>5) *validity=0;
+    if(*(cantFrac)>=2) *validity=0;
     free(cantFrac);
-    free(dEnteros);
-    free(dFracciones);
     free(i);
     return validity;
 }
