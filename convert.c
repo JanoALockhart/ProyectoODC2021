@@ -5,28 +5,23 @@
 #include "conversionNumero.h"
 #include "verificadorArgumentos.h"
 
+//#define TESTER
 
-#define TESTER
 int main(int argc, char** argv)
 {
+    tArgumentos1 *registroParam;
 
+    registroParam = almacenarValores(argc, argv);
     #ifdef TESTER
-    ejecutarTest();
+    printf("ArgN: %s\n",registroParam->argN);
+    printf("ArgS: %s\n",registroParam->argS);
+    printf("ArgD: %s\n",registroParam->argD);
+    printf("ArgV: %i\n",registroParam->argV);
+    printf("ArgH: %i\n",registroParam->argH);
     #endif // TESTER
-    tArgumentos1 *registroParam = malloc(sizeof(tArgumentos1));
-    registroParam = almacenarValores(argc, argv); //REVISAR
+    verificarValores(registroParam);
+    cambioDeBaseNumero(registroParam);
 
-    #ifdef TESTER
-    ejecutarTest();
-    printf("Campos del registro: \n");
-    printf("%s \n",registroParam->argN);
-    printf("%s \n",registroParam->argS);
-    printf("%s \n",registroParam->argD);
-    printf("%i \n",registroParam->argV);
-    printf("%i \n",registroParam->argH);
-    #endif // TESTER
-
-    ejecuccion(registroParam);
     exit(EXIT_SUCCESS);
     return 0;
 }

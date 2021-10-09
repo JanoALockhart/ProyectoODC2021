@@ -161,19 +161,18 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
     (regArgs->argV)=0;
     (regArgs->argH)=0;
 
-
-    //Algoritmo
-    //Si hay mas parametros de los posibles, algo se ingresó mal
-    if(cantParam>9){
-        mostrarError(ERROR_EN_EL_INGRESO_DE_ARGUMENTO);
-    }
-
     //Buscar el parametro -h
     estaH = estaParamH(cantParam,arrParam);
-    pPalabra=NULL;
+
     if(*estaH){
-        (regArgs->argH)=1;
+        mostrarAyuda();
     }else{
+        pPalabra=NULL;
+
+        //Si hay mas parametros de los posibles, algo se ingresó mal
+        if(cantParam>9){
+            mostrarError(ERROR_EN_EL_INGRESO_DE_ARGUMENTO);
+        }
         //Si no hay parametro -h leer el resto de los parametros y guardar sus valores
         argAGuardar = NULL;
         for(*numParam=1; (*numParam)<cantParam; (*numParam)++){
@@ -196,9 +195,6 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
         if((regArgs->argD)==NULL){
             asignarDefault(&(regArgs->argD));
         }
-
-        verificarValores(regArgs);
-
     }
     //Liberamos memoria
 

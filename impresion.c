@@ -52,7 +52,8 @@ void papDecimal10BaseTDBase(int * c, int * b, int * r){
     for(;(*i)<(*numberLength)+2;(*i)++){
         printf("*");
     }
-    printf("\n %i \n", *r);
+    printf("\n%i\n", *r);
+
     printf("div(%i,%i)=%i\n", *d, *b, *c);
     printf("------\n");
 
@@ -103,12 +104,14 @@ Procedimiento que dado un número de error, imprime el error correspondiente.
 void mostrarError(int nroError){
     switch(nroError){
         case ERROR_ARGUMENTOS_REPETIDOS: printf("ERROR %i: Se han introducido mas de una vez un argumento valido",ERROR_ARGUMENTOS_REPETIDOS); break;
-        case ERROR_ARGUMENTO_NO_EXISTENTE: printf("ERROR %i: Se han introducido argumento invalido",ERROR_ARGUMENTO_NO_EXISTENTE); break;
-        case ERROR_EN_EL_INGRESO_DE_ARGUMENTO: printf("ERROR %i: No se encontro un argumento de la forma -x. Verifique que el numero de argumentos y el orden en el que los ha ingresado es correcto.",ERROR_EN_EL_INGRESO_DE_ARGUMENTO); break;
+        case ERROR_ARGUMENTO_NO_EXISTENTE:  printf("ERROR %i: Se han introducido argumento invalido. Utilize el\n",ERROR_ARGUMENTO_NO_EXISTENTE);
+                                            printf("argumento -h para ver los argumentos disponibles.\n");
+                                            break;
+        case ERROR_EN_EL_INGRESO_DE_ARGUMENTO: printf("ERROR %i: No se encontro un argumento de la forma '-x'. Verifique que el numero de argumentos y el orden en el que los ha ingresado es correcto.",ERROR_EN_EL_INGRESO_DE_ARGUMENTO); break;
         case ERROR_BASE: printf("ERROR %i: Se han introducido erroneamente alguna base.",ERROR_BASE);break;
         case VALOR_ARGN_NO_INGRESADO: printf("ERROR %i: No se ha introducido el argumento -n <numero>.",VALOR_ARGN_NO_INGRESADO);break;
         case LIMITES_NUM_INCUMPLIDOS: printf("ERROR %i: El numero tiene mas de 10 digitos decimales o mas de 5 digitos fraccionales.",LIMITES_NUM_INCUMPLIDOS);break;
-        case NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN: printf("ERROR %i: El numero no es posible de expresar en la base. \n Verifique que los digitos sean menores o iguales a la base.",NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN);break;
+        case NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN: printf("ERROR %i: El numero no es posible de expresar en la base. \n Verifique que los digitos sean menores o iguales a la base de origen.",NUM_Y_BASE_ORIGEN_NO_CORRESPONDEN);break;
         case ERROR_ARGN_INVALIDO:   printf("ERROR %i: el valor ingresado en el argumento -n no cumple las restricciones. Recuerde \n",ERROR_ARGN_INVALIDO);
                                     printf("que el numero puede tener como maximo %i digitos en la parte entera y %i en la parte \n",MAX_PARTE_ENTERA_INPUT,MAX_PARTE_FRACC_INPUT);
                                     printf("fraccionaria. El numero no debe tener mas de un punto (.) o coma (,) y esta no puede \n");
@@ -120,24 +123,25 @@ void mostrarError(int nroError){
 }
 
 void mostrarAyuda(){
-    printf("Sintaxis: convert -n <number> [-s <source_base>] [-d <dest_base>] [-v] [-h] \n\n");
+    printf("SINTAXIS: convert -n <number> [-s <source_base>] [-d <dest_base>] [-v] [-h] \n\n");
 
     printf("convert es un programa que convierte el numero <number> expresado en la\n");
     printf("base de origen <source_base> a la base destino <dest_base>.\n\n");
 
-    printf("Argumentos:\n");
+    printf("ARGUMENTOS:\n");
     printf("-n <number>         OBLIGATORIO. Es el numero se quiere convertir. Debe ser\n");
     printf("                    coherente con la base indicada como <source_base>. Puede\n");
     printf("                    tener como maximo 10 digitos en la parte entera y 5 en\n");
-    printf("                    parte fraccionaria.\n");
+    printf("                    parte fraccionaria.\n\n");
     printf("-s <source_base>    Base de origen en la que esta expresado el numero \n");
     printf("                    ingresado en <number>. Debe estar entre 2 y 16 en base\n");
-    printf("                    decimal. Si el argumento no es ingresado, se asume base 10\n");
+    printf("                    decimal. Si el argumento no es ingresado, se asume base 10\n\n");
     printf("-d <dest_base>      Base de destino en la que sera expresado el resultado de\n");
     printf("                    la conversion. Debe estar entre 2 y 16 en base decimal \n");
-    printf("                    Si el argumento no es ingresado se asume base 10.\n");
-    printf("-v                  Imprime el paso a paso de cada computacion de la conversion.\n");
-    printf("-h                  Imprime este texto de ayuda.\n");
+    printf("                    Si el argumento no es ingresado se asume base 10.\n\n");
+    printf("-v                  Imprime el paso a paso de cada computacion de la conversion.\n\n");
+    printf("-h                  Imprime este texto de ayuda.\n\n");
+    exit(EXIT_SUCCESS);
 }
 
 void directConv(int * n, int * base){

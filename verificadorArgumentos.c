@@ -111,7 +111,6 @@ void verificarArgN(char* strNumero, int * baseOrigen){
         mostrarError(ERROR_ARGN_INVALIDO);
     }
     free(valido);
-
     //Verificar que tenga como maximo 10 digitos enteros y 5 fraccionarios
     valido=limitesEnteroYFracc(strNumero);
     if(!(*valido)){
@@ -124,14 +123,11 @@ void verificarArgN(char* strNumero, int * baseOrigen){
     if( *pCarac == '.' || *pCarac == ','){
         mostrarError(ERROR_ARGN_INVALIDO);
     }
-
     //Verificar que el primer caracter no sea una coma
     *pCarac = *(strNumero);
     if( *pCarac == '.' || *pCarac == ','){
         mostrarError(ERROR_ARGN_INVALIDO);
     }
-
-    free(valido);
     free(pCarac);
 }
 

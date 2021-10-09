@@ -11,8 +11,8 @@ Procedimiento que, dada una estructura de registroParametros con parametros váli
 Atributo:
     -p: Puntero a una estructura con todos los parametros necesarios. Se consideran que están todos correctos.
 */
-void ejecuccion(tArgumentos1* p){
-    int * decimalB10;
+void cambioDeBaseNumero(tArgumentos1* p){
+    long int * decimalB10;
     float * fractionaryB10;
     char * decimalPartNumber;
     char * fractionaryPartNumber;
@@ -22,7 +22,7 @@ void ejecuccion(tArgumentos1* p){
     int * originBase;
     int * destinationBase;
 
-    decimalB10=(int *) malloc(sizeof(int));
+    decimalB10=(long int *) malloc(sizeof(long int));
     fractionaryB10=(float *) malloc(sizeof(float));
     decimalBF=(char *) malloc(sizeof(char)*10);
     fractionaryBF=(char *) malloc(sizeof(char)*5);
@@ -33,19 +33,17 @@ void ejecuccion(tArgumentos1* p){
     fractionaryPartNumber=(char *) malloc(sizeof(char));
 
     *vervose = p->argV;
-    if(p->argH) mostrarAyuda();
-    else{
-        *originBase=atoi(p->argS);
-        *destinationBase=atoi(p->argD);
-        separateComma(p->argN, decimalPartNumber, fractionaryPartNumber);
-        decimalB10=decimalOBaseT10Base(decimalPartNumber, originBase, vervose);
-        fractionaryB10=transformarFraccionarioAB10(fractionaryPartNumber, *originBase, p->argV);
+    *originBase=atoi(p->argS);
+    *destinationBase=atoi(p->argD);
 
-        decimalBF=decimal10BaseTDBase(decimalB10, destinationBase, vervose);
-        fractionaryBF=transformarFraccionarioABaseDestino(*fractionaryB10, *destinationBase, p->argV);
+    separateComma(p->argN, decimalPartNumber, fractionaryPartNumber);
+    decimalB10=decimalOBaseT10Base(decimalPartNumber, originBase, vervose);
+    fractionaryB10=transformarFraccionarioAB10(fractionaryPartNumber, *originBase, p->argV);
 
-        mostrarResultadoFinal(p->argN,p->argS,p->argD,decimalBF, fractionaryBF);
-    }
+    decimalBF=decimal10BaseTDBase(decimalB10, destinationBase, vervose);
+    fractionaryBF=transformarFraccionarioABaseDestino(*fractionaryB10, *destinationBase, p->argV);
+
+    mostrarResultadoFinal(p->argN,p->argS,p->argD,decimalBF, fractionaryBF);
 
     free(decimalB10);
     free(fractionaryB10);

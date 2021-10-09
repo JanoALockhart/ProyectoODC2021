@@ -14,14 +14,14 @@ Parametros:
                 1. Entonces se imprimirá el paso a paso.
 Return: Un puntero a entero que va a contener al número n en base 10.
 */
-int * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
-    int * total;
+long int * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
+    long int * total;
     int * count;
     int * numberLength;
     int * value;
     int * exp;
 
-    total=(int *) malloc(sizeof(int));
+    total=(long int *) malloc(sizeof(long int));
 
     if(*vervose) mostrarTitulo("PARTE ENTERA DE BASE ORIGEN A BASE 10");
     if((*Obase)!=10){
@@ -60,7 +60,7 @@ Parametros:
                 1. Entonces se imprimirá el paso a paso.
 Return: Un puntero a una cadena de caracteres que va a contener al número n en base destino.
 */
-char * decimal10BaseTDBase(int * n, int * DBase, int * vervose){
+char * decimal10BaseTDBase(long int * n, int * DBase, int * vervose){
     char * output;
     int * count;
     int * number;
