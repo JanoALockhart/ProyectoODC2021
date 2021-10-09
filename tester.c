@@ -11,15 +11,50 @@
 //#define TEST_ESH
 //#define TEST_IDENTIFPARAM
 //#define TEST_ENTERO
-#define TEST_FRACC
+//#define TEST_FRACC
 //#define TEST_FRACC_2
 //#define TEST_BASE
 //#define TEST_REALLOC
+//#define TEST_COMMA
+#define TEST_CONVERTIRNUM
 void ejecutarTest(){
 
     //printf("%d \n",sizeof(tArgumentos1));
     //printf("%d \n",sizeof(tArgumentos2));
     //printf("%d \n",sizeof(tParam));
+    #ifdef TEST_CONVERTIRNUM
+
+    tArgumentos1 *reg;
+    reg = (tArgumentos1*) malloc(sizeof(tArgumentos1));
+    reg->argN="abc.de";
+    reg->argS="16";
+    reg->argD="2";
+    reg->argH=0;
+    reg->argV=1;
+
+    cambioDeBaseNumero(reg);
+
+
+    #endif // TEST_CONVERTIRNUM
+
+
+    #ifdef TEST_COMMA
+
+    char* parteInt;
+    char* parteFra;
+    char* num;
+
+    num = "abc.de";
+    parteInt = (char *) malloc(sizeof(char)*11);
+    parteFra = (char *) malloc(sizeof(char)*6);
+
+    separateComma(num,parteInt,parteFra);
+
+    printf("%s\n",parteInt);
+    printf("%s\n",parteFra);
+
+
+    #endif // TEST_COMMA
 
     #ifdef TEST_REALLOC
     char *string;

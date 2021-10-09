@@ -76,6 +76,7 @@ char * decimal10BaseTDBase(long int * n, int * DBase, int * vervose){
             rem=(int *) malloc(sizeof(int));
             count=(int *) malloc(sizeof(int));
 
+            *output='\0';
             *count=0;
             *number=*n;
             while((*number)>=(*DBase)){

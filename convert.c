@@ -6,7 +6,7 @@
 #include "verificadorArgumentos.h"
 
 //#define TESTER
-//#define TESTER2
+#define TESTER2
 int main(int argc, char** argv)
 {
     #ifndef TESTER2
