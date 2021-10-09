@@ -10,4 +10,7 @@ typedef struct argumentos{
     int argH;       //Indica si el parametro ayuda fue ingresado
 } tArgumentos1;
 
+void constructor(tArgumentos1* registro);
+void destructor(tArgumentos1* registro);
+
 #endif // ALMACENAMIENTOPARAM_H_INCLUDED

@@ -7,9 +7,15 @@
 #include "Util.h"
 
 /**
-Procedimiento que, dada una estructura de registroParametros con parametros válidos, o bien realiza las conversiones e imprime el resultado o bien imprime la ayuda de ser necesaria.
-Atributo:
-    -p: Puntero a una estructura con todos los parametros necesarios. Se consideran que están todos correctos.
+Procedimiento que, dada una estructura de tipo tArgumentos1,
+separa por un lado la parte entera y por otro la parte fraccionaria.
+Luego transforma estos desde la base de origen a base 10 con
+el método correspondiente. Los numeros obtenidos son pasados
+de la base 10 a la base destino con los métodos correspondientes.
+Por último, se muestra el numero obtenido por pantalla.
+Parámetro:
+    -p: Puntero a una estructura con todos los parámetros necesarios.
+        Se asume que todos fueron verificados previamente.
 */
 void cambioDeBaseNumero(tArgumentos1* p){
     long int * decimalB10;

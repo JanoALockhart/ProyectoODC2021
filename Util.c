@@ -158,7 +158,8 @@ Funcion que agrega el ultimo digito a la cadena de caracteres.
 Para esto, relocaliza la memoria reservada para la cadena y
 devuelve el puntero que apunta a la nueva direccion de memoria
 Parametros:
-    -strNum: es la cadena de caracteres que representa el numero
+    -strNum: es un puntero a memoria dinamica que contiene
+        la cadena de caracteres que representa el numero
     -cantDig: es la cantidad de digitos que tiene el numero,
         sin contar el caracter nulo ('\0').
     -digito: es el nuevo digito que quiere agregarse al
@@ -170,15 +171,16 @@ char* agregarCaracterFinal(char* strNum, int * cantDig, int * digito){
     char *nuevoPunt;
     char *carac;
 
-    carac = (char *) malloc(sizeof(char));
-
-    nuevoPunt = (char *) realloc(strNum,((*cantDig)+1)*sizeof(char));
+    nuevoPunt = (char *) malloc(((*cantDig)+1)*sizeof(char));
+    strcpy(nuevoPunt,strNum);
+    //nuevoPunt = (char *) realloc(strNum,((*cantDig)+1)*sizeof(char));
 
     carac = isValue(digito);
     *(nuevoPunt+(*cantDig))=*carac;
     *(nuevoPunt+(*cantDig)+1)='\0';
 
     free(carac);
+    free(strNum);
 
     return nuevoPunt;
 }
@@ -189,7 +191,7 @@ Parametros:
     -string: Puntero al primer elemento de la cadena de caracteres.
     -stringLength: Puntero a un entero que dirá la longitud de string.
 */
-void reverse(char * string, int * stringLength){
+void revertir(char * string, int * stringLength){
     int * count;
     char * aux;
     count=(int *) malloc(sizeof(int));
@@ -207,25 +209,25 @@ Parametros:
     -n: Puntero al numero a convertir en cadena de caracteres.
 Return: Puntero a una cadena de caracteres la cual contiene al número n.
 */
-char * integerToString(int * n){
+char * integerToString(long int * n){
     char * string;
-    int * number;
+    long int * number;
     int * count;
     int * digit;
     string=(char *) malloc(sizeof(char)*10);
-    number=(int *) malloc(sizeof(int));
+    number=(long int *) malloc(sizeof(long int));
     count=(int *) malloc(sizeof(int));
     digit=(int *) malloc(sizeof(int));
     *number=*n;
     *count=0;
     while(!((-9<=(*number)) && ((*number)<=9))){
-        *digit=(*number)%10;
+        *digit=(int)(*number)%10;
         string=agregarCaracterFinal(string, count, digit);
         *number=((*number)/10);
         (*count)++;
     }
-    string=agregarCaracterFinal(string, count, number);
-    reverse(string, count);
+    string=agregarCaracterFinal(string, count, (int *)number);
+    revertir(string, count);
     free(number);
     free(count);
     free(digit);
@@ -236,8 +238,11 @@ char * integerToString(int * n){
 Procedimiento que verifica si una cadena esta compuesta únicamente por 0.
 Parametros:
     -n: Puntero a una cadena de caracteres.
-Return: 0 si n NO es puramente 0.
-        1 si n es puramente 0.
+Return: Un puntero que apunta a:
+        .0 si n NO es puramente 0.
+        .1 si n es puramente 0.
+        El estapacio en memoria apuntado por el puntero
+        debe ser liberado con un free()
 */
 int * only0Verification(char * n){
     int * only0;

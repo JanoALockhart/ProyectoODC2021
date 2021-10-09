@@ -8,39 +8,47 @@
 
 /**
 Procedimiento que imprime un paso de la conversión de la parte entera de una base de origen a la base 10.
+Muestra el total que se va obteniendo a medida que se multiplica cada digito del numero
+por la base elevada a la posicion.
 Parametros:
     -total: Puntero a un entero que es el resultado que quedo después de hacer las operaciones aritmeticas.
     -digit: Puntero a un entero que es el valor del dígito.
     -OBase: Puntero a un entero que es la base de origen.
     -exp: Puntero a un entero que es el exponente el cuál se eleva la base.
 */
-void papDecimalOBaseT10Base(int * total, int * digit, int * OBase, int * exp){
+void papDecimalOBaseT10Base(long int * total, int * digit, int * OBase, int * exp){
     printf("total=total+%i*(%i^%i)\n",*digit,*OBase,*exp);
-    printf("total=%i\n",*total);
+    printf("total=%li\n",*total);
     printf("------\n");
 }
 
 /**
 Procedimiento que imprime un paso de la conversión de la parte entera de una base 10 a una base destino.
+Imprime en consola el siguiente formato:
+    dividendo | baseDestino
+              **************
+    resto
+    div(dividendo,baseDestino)=siguienteDividendo
+
 Parametros:
-    -c: Puntero a un entero que es el cociente
-    -b: Puntero a un entero que es la base destino
-    -r: Puntero a un entero que es el resto
+    -c: Puntero a un entero que es el resultado de la division.
+    -b: Puntero a un entero que es la base destino.
+    -r: Puntero a un entero que es el resto.
 */
-void papDecimal10BaseTDBase(int * c, int * b, int * r){
+void papDecimal10BaseTDBase(long int * c, int * b, int * r){
     int * i;
     int * numberLength;
-    int * d; // Puntero a un entero que es el dividendo
+    long int * d; // Puntero a un entero que es el dividendo
 
     numberLength=(int *) malloc(sizeof(int));
-    d=(int *) malloc(sizeof(int));
+    d=(long int *) malloc(sizeof(long int));
     i=(int *) malloc(sizeof(int));
 
     *d=(*c)*(*b)+(*r);
     *i=0;
 
     *numberLength=floor(log10(abs( (*d) ))) + 1;
-    printf("%i |%i\n", *d, *b);
+    printf("%li |%i\n", *d, *b);
 
     for(;(*i)<=(*numberLength);(*i)++){
         printf(" ");
@@ -54,7 +62,7 @@ void papDecimal10BaseTDBase(int * c, int * b, int * r){
     }
     printf("\n%i\n", *r);
 
-    printf("div(%i,%i)=%i\n", *d, *b, *c);
+    printf("div(%li,%i)=%li\n", *d, *b, *c);
     printf("------\n");
 
     free(numberLength);
@@ -64,9 +72,11 @@ void papDecimal10BaseTDBase(int * c, int * b, int * r){
 
 /**
 Procedimiento que imprime un paso de la conversión de la parte fraccional de una base de origen a la base 10.
+Muestra el total que se va obteniendo a medida que se multiplica cada digito del numero
+por la base elevada a la posicion.
 Parametros:
     -total: Puntero a un entero que es el resultado que quedo después de hacer las operaciones aritmeticas.
-    -n: Puntero a un entero que es el valor del dígito.
+    -n: Puntero a un entero que es el valor del dígito del numero fraccionario que se esta multiplicando.
     -OBase: Puntero a un entero que es la base de origen.
     -exp: Puntero a un entero que es el exponente el cuál se eleva la base.
 */
@@ -81,7 +91,7 @@ Procedimiento que imprime un paso de la conversión de la parte fraccional de una
 Parametros:
     -DBase: Puntero a un entero que es la base de destino.
     -n: Puntero al numero a multiplicarse por la base de destino.
-    -digit: Puntero al dígito entero que resulta de multiplicar la base de destino con n.
+    -digit: Puntero a la parte entera que resulta de multiplicar la base de destino con n.
 */
 void papFractionary10BaseTDBase(int * DBase, float * n, int * digit){
     printf("%i * %f = %f // %i \n",*DBase, *n, (*n)*(*DBase), *digit);
@@ -90,6 +100,9 @@ void papFractionary10BaseTDBase(int * DBase, float * n, int * digit){
 /**
 Procedimiento que imprime el resultado final de la conversión.
 Parametros:
+    -numOriginal: es el número ingresado para ser transformado.
+    -bOrigen: es la base en la que estaba expresado el numeroOriginal.
+    -bDestino: es la base a la que se transformó el numero.
     -resultadoEntero: Puntero al primer caracter de la parte entera.
     -resultadoFraccional: Puntero al primer caracter de la parte fraccionaria.
 */
@@ -98,8 +111,10 @@ void mostrarResultadoFinal(char * numOriginal, char * bOrigen, char * bDestino, 
 }
 
 /**
-Procedimiento que dado un número de error, imprime el error correspondiente.
-    nroError: Puntero al entero que servira como clave del error.
+Procedimiento que dado un número de error, imprime el mensaje de error correspondiente.
+Luego, finaliza el programa con un EXIT_FAILURE
+Parámetro:
+    -nroError: Puntero al entero que servira como clave del error.
 */
 void mostrarError(int nroError){
     switch(nroError){
@@ -122,6 +137,12 @@ void mostrarError(int nroError){
     exit(EXIT_FAILURE);
 }
 
+/**
+Procedimiento que muestra el mensaje de ayuda mostrando la sintaxis
+y el significado de cada uno de los parametros que pueden ser.
+Luego de esto, el programa termina con EXIT_SUCCESS.
+ingresados al programa.
+*/
 void mostrarAyuda(){
     printf("SINTAXIS: convert -n <number> [-s <source_base>] [-d <dest_base>] [-v] [-h] \n\n");
 
@@ -144,10 +165,24 @@ void mostrarAyuda(){
     exit(EXIT_SUCCESS);
 }
 
-void directConv(int * n, int * base){
-    printf("Conversion directa. %i en base %i es %i\n",*n, *base, *n);
+/**
+Procedimiento que muestra un mensaje cuando
+la conversión es trivial.
+    -Parámetros:
+        -n: es un puntero a int que almacena el numero a transformar.
+        -base: es un puntero a la base que se quiere transformar.
+*/
+void directConv(long int * n, int * base){
+    printf("Conversion directa. %li en base %i es %li\n",*n, *base, *n);
 }
 
+/**
+Procedimiento que imprime una raya con el caracter
+y longitud especificados.
+Parámetros:
+    -largo: es la longitud de la raya.
+    -carac: es el caracter con el que se formará la raya.
+*/
 void imprimirRaya(int largo, char carac){
     int *contador;
     contador = (int *) malloc(sizeof(int));
@@ -158,12 +193,22 @@ void imprimirRaya(int largo, char carac){
     printf("\n");
 }
 
+/**
+Procedimiento que muestra el titulo indicado entre
+dos rayas.
+    -titulo: es un puntero a la cadena de caracteres
+        que será mostrada.
+*/
 void mostrarTitulo(char* titulo){
     imprimirRaya(strlen(titulo),'-');
     printf("%s\n",titulo);
     imprimirRaya(strlen(titulo),'-');
 }
 
+/**
+Procedimiento que muestra un mensaje cuando
+la transformacion de la parte fraccionaria es trivial.
+*/
 void msgConversionDirecta(){
     printf("Conversion directa. No hay parte fraccional que convertir.\n");
 }

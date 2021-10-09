@@ -136,6 +136,7 @@ void asignarDefault(char **campoRegistro){
 
 /**
 Este metodo se encarga de leer los parametros ingresados dentro del main
+y guardarlos en un registro de tipo argmentos tArgumentos1.
 Parametros:
     -cantParam: es la cantidad de parametros que ingreso el usuario
     -arrParam: es el arreglo que contiene todos los parametros que el usuario ingreso
@@ -155,11 +156,7 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
     regArgs = (tArgumentos1 *) malloc(sizeof(tArgumentos1));
 
     //Inicializar registro
-    (regArgs->argN)=NULL;
-    (regArgs->argD)=NULL;
-    (regArgs->argS)=NULL;
-    (regArgs->argV)=0;
-    (regArgs->argH)=0;
+    constructor(regArgs);
 
     //Buscar el parametro -h
     estaH = estaParamH(cantParam,arrParam);

@@ -6,9 +6,12 @@
 #include "verificadorArgumentos.h"
 
 //#define TESTER
-
+//#define TESTER2
 int main(int argc, char** argv)
 {
+    #ifndef TESTER2
+
+
     tArgumentos1 *registroParam;
 
     registroParam = almacenarValores(argc, argv);
@@ -23,5 +26,8 @@ int main(int argc, char** argv)
     cambioDeBaseNumero(registroParam);
 
     exit(EXIT_SUCCESS);
+    #else
+    ejecutarTest();
+    #endif // TESTER2
     return 0;
 }
