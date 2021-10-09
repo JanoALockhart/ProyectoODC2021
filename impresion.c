@@ -171,7 +171,7 @@ la conversión es trivial.
         -n: es un puntero a int que almacena el numero a transformar.
         -base: es un puntero a la base que se quiere transformar.
 */
-void directConv(long int * n, int * base){
+void directConv(float* n, int * base){
     printf("Conversion directa. %li en base %i es %li\n",*n, *base, *n);
 }
 

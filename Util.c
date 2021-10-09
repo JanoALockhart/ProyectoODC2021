@@ -192,7 +192,7 @@ Parametros:
     -string: Puntero al primer elemento de la cadena de caracteres.
     -stringLength: Puntero a un entero que dirá la longitud de string.
 */
-void revertir(char * string, int * stringLength){
+void reverse(char * string, int * stringLength){
     int * count;
     char * aux;
     count=(int *) malloc(sizeof(int));

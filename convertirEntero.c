@@ -45,8 +45,8 @@ float * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
             free(numberLength);
             free(value);
             free(exp);
-        } else *total=(*n=='0')?0:1;
-    }else{ *total=(float) atoi(n); if(*vervose) directConv((int *) total, Obase); }
+        //} else *total=(*n=='0')?0:1;
+    }else{ *total=(float) atoi(n); if(*vervose) directConv(total, Obase); }
     return total;
 }
 
@@ -92,6 +92,6 @@ char * decimal10BaseTDBase(float * n, int * DBase, int * vervose){
             free(number);
             free(rem);
         }else *output=(*n=='0')?0:1;
-    }else{ output=floatToString(n); if(*vervose) directConv((int *) n, DBase); }
+    }else{ output=floatToString(n); if(*vervose) directConv( n, DBase); }
     return output;
 }

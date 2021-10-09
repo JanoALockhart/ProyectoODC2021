@@ -13,7 +13,7 @@ void separateComma(char * n, char * parteEntera, char * parteFraccionaria);
 
 char* agregarCaracterFinal(char * strNum, int * stringLength, int * n);
 
-void revertir(char * str, int * stringLength);
+void reverse(char * str, int * stringLength);
 
 char * floatToString(float * n);
 
