@@ -18,7 +18,7 @@ Parámetro:
         Se asume que todos fueron verificados previamente.
 */
 void cambioDeBaseNumero(tArgumentos1* p){
-    long int * decimalB10;
+    float * decimalB10;
     float * fractionaryB10;
     char * decimalPartNumber;
     char * fractionaryPartNumber;
@@ -28,7 +28,7 @@ void cambioDeBaseNumero(tArgumentos1* p){
     int * originBase;
     int * destinationBase;
 
-    decimalB10=(long int *) malloc(sizeof(long int));
+    decimalB10=(float *) malloc(sizeof(float));
     fractionaryB10=(float *) malloc(sizeof(float));
     decimalBF=(char *) malloc(sizeof(char)*(10+1));
     fractionaryBF=(char *) malloc(sizeof(char)*(5+1));

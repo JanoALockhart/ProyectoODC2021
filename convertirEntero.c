@@ -15,14 +15,13 @@ Parametros:
 Return: Un puntero a entero que va a contener al número n en base 10.
 El espacio en memoria apuntado por el puntero debe liberarse con free()
 */
-long int * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
-    long int * total;
+float * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
+    float * total;
     int * count;
     int * numberLength;
     int * value;
     int * exp;
-
-    total=(long int *) malloc(sizeof(long int));
+    total=(float *) malloc(sizeof(float));
 
     if(*vervose) mostrarTitulo("PARTE ENTERA DE BASE ORIGEN A BASE 10");
     if((*Obase)!=10){
@@ -31,14 +30,14 @@ long int * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
             numberLength=(int *) malloc(sizeof(int));
             value=(int *) malloc(sizeof(int));
             exp=(int *) malloc(sizeof(int));
-            *total=0;
+            *total=0.0;
             *count=1;
             numberLength=stringLength(n);
 
             while((*count)<=(*numberLength)){
                 value=(getValue((n+(*count)-1)));
                 *exp=((*numberLength)-(*count));
-                (*total) += (*value) * (int) pow( (double)(*Obase) , (double) (*exp) );
+                (*total) += ((float) *value) * (powf((float) (*Obase) , (float) (*exp) ));
                 if(*vervose) papDecimalOBaseT10Base(total, value, Obase, exp);
                 (*count)++;
             }
@@ -46,8 +45,8 @@ long int * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
             free(numberLength);
             free(value);
             free(exp);
-        //} else *total=(*n=='0')?0:1;
-    }else{ *total=atoi(n); if(*vervose) directConv(total, Obase); }
+        } else *total=(*n=='0')?0:1;
+    }else{ *total=(float) atoi(n); if(*vervose) directConv((int *) total, Obase); }
     return total;
 }
 
@@ -62,17 +61,17 @@ Parametros:
 Return: Un puntero a una cadena de caracteres que va a contener al número n en base destino.
 El espacio en memoria apuntado por el puntero debe liberarse con free()
 */
-char * decimal10BaseTDBase(long int * n, int * DBase, int * vervose){
+char * decimal10BaseTDBase(float * n, int * DBase, int * vervose){
     char * output;
     int * count;
-    long int * number;
+    float * number;
     int * rem;
 
     if(*vervose) mostrarTitulo("PARTE ENTERA DE BASE 10 A BASE DESTINO");
     if((*DBase)!=10){
-        output=(char *) malloc(sizeof(char));
-        //if((*n!='0' || *n!='1') && *(n+1)){ //REVISAR IF
-            number=(long int *) malloc(sizeof(long int));
+        output=(char *) malloc(sizeof(char)*43);
+        if((*n!='0' || *n!='1') && *(n+1)){
+            number=(float *) malloc(sizeof(float));
             rem=(int *) malloc(sizeof(int));
             count=(int *) malloc(sizeof(int));
 
@@ -82,18 +81,17 @@ char * decimal10BaseTDBase(long int * n, int * DBase, int * vervose){
             while((*number)>=(*DBase)){
                 *rem=(int) (*number)%(*DBase);
                 output=agregarCaracterFinal(output, count, rem);
-                *number=(*number)/(*DBase);
+                *number=floorf((*number)/(*DBase));
                 if(*vervose) papDecimal10BaseTDBase(number, DBase, rem);
                 (*count)++;
             }
-            output=agregarCaracterFinal(output, count, (int*)number);
-            revertir(output, count);
-
+            *rem=(float) *number;
+            output=agregarCaracterFinal(output, count, rem);
+            reverse(output, count);
             free(count);
             free(number);
             free(rem);
-        //}else *output=(*n=='0')?0:1;
-    }else{ output=integerToString(n); if(*vervose) directConv(n, DBase); }
-
+        }else *output=(*n=='0')?0:1;
+    }else{ output=floatToString(n); if(*vervose) directConv((int *) n, DBase); }
     return output;
 }

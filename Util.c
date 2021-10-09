@@ -210,25 +210,26 @@ Parametros:
     -n: Puntero al numero a convertir en cadena de caracteres.
 Return: Puntero a una cadena de caracteres la cual contiene al número n.
 */
-char * integerToString(long int * n){
+char * floatToString(float * n){
     char * string;
-    long int * number;
+    float * number;
     int * count;
     int * digit;
     string=(char *) malloc(sizeof(char)*10);
-    number=(long int *) malloc(sizeof(long int));
+    number=(float *) malloc(sizeof(float));
     count=(int *) malloc(sizeof(int));
     digit=(int *) malloc(sizeof(int));
     *number=*n;
     *count=0;
     while(!((-9<=(*number)) && ((*number)<=9))){
-        *digit=(int)(*number)%10;
+        *digit=(int) fmod((*number),10.0);
         string=agregarCaracterFinal(string, count, digit);
-        *number=((*number)/10);
+        *number=floorf(((*number)/10.0));
         (*count)++;
     }
-    string=agregarCaracterFinal(string, count, (int *)number);
-    revertir(string, count);
+    *digit=(int) *number;
+    string=agregarCaracterFinal(string, count, digit);
+    reverse(string, count);
     free(number);
     free(count);
     free(digit);
@@ -261,42 +262,3 @@ int * only0Verification(char * n){
     }
     return only0;
 }
-
-//#define TEST_UTIL
-#ifdef TEST_UTIL
-int main(){
-    int base, bingChilling;
-    int * tres;
-    int * bingus;
-    tres=(int *) malloc(sizeof(int));
-    bingus=(int *) malloc(sizeof(int));
-    *tres=1;
-    *bingus=11;
-    char * string[3];
-    *string='n';
-    *(string+1)=' ';
-    *(string+2)='\n';
-    addTerminalChar(string, tres, bingus);
-    printf("%s",string);
-   /* base=16;
-    if(*isValid(string,base)){
-        printf("TRUE\n");
-    }else{
-        printf("FALSE\n");
-    }
-    int * testIsValue;
-    testIsValue=(int *) malloc(sizeof(int));
-    for(int i=0;i<16;i++){
-        *testIsValue=i;
-        printf("1 a %c \n",*isValue(testIsValue));
-    }
-    bingChilling=
-    printf("Length of string %i \n",*stringLength(string));
-    char entera[4];
-    char fraccionaria[4];
-    separateComma(string,entera,fraccionaria);
-    printf("Parte entera %s \n",entera);
-    printf("Parte fraccionaria %s",fraccionaria);*/
-    return 0;
-}
-#endif // TEST_UTIL
