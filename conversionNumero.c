@@ -31,6 +31,7 @@ void ejecuccion(tArgumentos1* p){
     destinationBase = (int *) malloc(sizeof(int));
     decimalPartNumber=(char *) malloc(sizeof(char));
     fractionaryPartNumber=(char *) malloc(sizeof(char));
+
     *vervose = p->argV;
     if(p->argH) mostrarAyuda();
     else{
@@ -43,12 +44,15 @@ void ejecuccion(tArgumentos1* p){
         decimalBF=decimal10BaseTDBase(decimalB10, destinationBase, vervose);
         fractionaryBF=transformarFraccionarioABaseDestino(*fractionaryB10, *destinationBase, p->argV);
 
-        mostrarResultadoFinal(decimalBF, fractionaryBF);
+        mostrarResultadoFinal(p->argN,p->argS,p->argD,decimalBF, fractionaryBF);
     }
+
     free(decimalB10);
     free(fractionaryB10);
     free(decimalBF);
     free(fractionaryBF);
+    free(vervose);
+    free(destinationBase);
     free(decimalPartNumber);
     free(fractionaryPartNumber);
     free(originBase);

@@ -9,12 +9,14 @@ void papFractionaryOBaseT10Base(float* total, int * n, int * OBase, int * exp);
 
 void papFractionary10BaseTDBase(int * TBase, float * n, int * digit);
 
-void mostrarResultadoFinal(char * resultadoEntero, char * resultadoFraccional);
+void mostrarResultadoFinal(char * numOriginal, char * bOrigen, char * bDestino, char * resultadoEntero, char * resultadoFraccional);
 
 void mostrarError(int nroError);
 
 void mostrarAyuda();
 
 void directConv(int * n, int * base);
+
+void mostrarTitulo(char * titulo);
 
 #endif // IMPRESION_H_INCLUDED

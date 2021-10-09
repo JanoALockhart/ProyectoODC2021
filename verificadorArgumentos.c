@@ -78,7 +78,8 @@ int * limitesEnteroYFracc(char* strNum){
             (*pos)++;
         }
     }
-    *verify=(*cantInt <= MAX_PARTE_ENTERA_INPUT) && (*cantFracc <= MAX_PARTE_FRACC_INPUT);
+
+    *verify=((*cantInt <= MAX_PARTE_ENTERA_INPUT) && (*cantFracc <= MAX_PARTE_FRACC_INPUT));
 
     free(cantFracc);
     free(cantInt);

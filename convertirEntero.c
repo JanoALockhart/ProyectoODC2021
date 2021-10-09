@@ -31,6 +31,7 @@ int * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
             *total=0;
             *count=1;
             numberLength=stringLength(n);
+            if(*vervose) mostrarTitulo("PARTE ENTERA DE BASE ORIGEN A BASE 10");
             while((*count)<=(*numberLength)){
                 value=(getValue((n+(*count)-1)));
                 *exp=((*numberLength)-(*count));
@@ -70,6 +71,7 @@ char * decimal10BaseTDBase(int * n, int * DBase, int * vervose){
             count=(int *) malloc(sizeof(int));
             *count=0;
             *number=*n;
+            if(*vervose) mostrarTitulo("PARTE ENTERA DE BASE 10 A BASE DESTINO");
             while((*number)>=(*DBase)){
                 *rem=(*number)%(*DBase);
                 output=agregarCaracterFinal(output, count, rem);

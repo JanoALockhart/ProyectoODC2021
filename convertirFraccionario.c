@@ -39,8 +39,10 @@ float* transformarFraccionarioAB10(char *fraccionario, int baseInicial, int paso
 
         *pos=0;
         *valor=0;
-
         *pCarac = *(fraccionario+(*pos));
+        if(pasoAPaso){
+            mostrarTitulo("PARTE FRACCIONARIA DE BASE ORIGEN A BASE 10");
+        }
         while(*pCarac!='\0'){
             valor = getValue(pCarac);//DESCOMENTAR LINEA //REVISAR
             *exponente = (*pos)+1;
@@ -88,6 +90,9 @@ char* transformarFraccionarioABaseDestino(float fraccionario, int baseDestino, i
 
         *cantDigitos=0;
         *numIntermedio = fraccionario;
+        if(pasoAPaso){
+            mostrarTitulo("PARTE FRACCIONARIA DE BASE 10 A BASE DESTINO");
+        }
         while((*cantDigitos)<MAX_PARTE_FRACC_OUTPUT){
                 *fraccImprimir = *numIntermedio;
             (*numIntermedio) = (*numIntermedio)*baseDestino;

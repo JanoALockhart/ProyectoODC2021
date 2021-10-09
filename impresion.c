@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <String.h>
 
 #include "verificadorArgumentos.h"
 #include "lectorArgumentos.h"
@@ -48,7 +49,7 @@ void papDecimal10BaseTDBase(int * c, int * b, int * r){
     *numberLength=floor(log10(abs(*b))) + 1;
     *i=0;
 
-    for(;(*i)<(*numberLength);(*i)++){
+    for(;(*i)<(*numberLength)+2;(*i)++){
         printf("*");
     }
     printf("\n %i \n", *r);
@@ -91,8 +92,8 @@ Parametros:
     -resultadoEntero: Puntero al primer caracter de la parte entera.
     -resultadoFraccional: Puntero al primer caracter de la parte fraccionaria.
 */
-void mostrarResultadoFinal(char * resultadoEntero, char * resultadoFraccional){
-    printf("El numero es %s.%s", resultadoEntero, resultadoFraccional);
+void mostrarResultadoFinal(char * numOriginal, char * bOrigen, char * bDestino, char * resultadoEntero, char * resultadoFraccional){
+    printf("El numero %s en base %s es %s.%s en base %s", numOriginal, bOrigen, resultadoEntero, resultadoFraccional, bDestino);
 }
 
 /**
@@ -119,16 +120,42 @@ void mostrarError(int nroError){
 }
 
 void mostrarAyuda(){
-    printf("Conversor de bases es un simple programa que convierte un número en base X a base Y.\n\n");
-    printf("Opciones:\n");
-    printf("-n <number>     OBLIGATORIO. Número se quiere convertir\n");
-    printf("-s <source_base>    Base de partida que será expresado el número\n");
-    printf("-d <dest_base>     Base de destino que será expresado el resultado\n");
-    printf("-v      Imprime el paso a paso de cada operación\n");
-    printf("-h      Imprime un texto auxiliar\n");
+    printf("Sintaxis: convert -n <number> [-s <source_base>] [-d <dest_base>] [-v] [-h] \n\n");
+
+    printf("convert es un programa que convierte el numero <number> expresado en la\n");
+    printf("base de origen <source_base> a la base destino <dest_base>.\n\n");
+
+    printf("Argumentos:\n");
+    printf("-n <number>         OBLIGATORIO. Es el numero se quiere convertir. Debe ser\n");
+    printf("                    coherente con la base indicada como <source_base>. Puede\n");
+    printf("                    tener como maximo 10 digitos en la parte entera y 5 en\n");
+    printf("                    parte fraccionaria.\n");
+    printf("-s <source_base>    Base de origen en la que esta expresado el numero \n");
+    printf("                    ingresado en <number>. Debe estar entre 2 y 16 en base\n");
+    printf("                    decimal. Si el argumento no es ingresado, se asume base 10\n");
+    printf("-d <dest_base>      Base de destino que sera expresado el resultado de\n");
+    printf("                    la conversion. Debe estar entre 2 y 16 en base decimal \n");
+    printf("                    Si el argumento no es ingresado se asume base 10.\n");
+    printf("-v                  Imprime el paso a paso de cada computacion de la conversion.\n");
+    printf("-h                  Imprime este texto de ayuda.\n");
 }
 
 void directConv(int * n, int * base){
     printf("Conversión directa. %i en base %i es %i\n",*n, *base, *n);
 }
 
+void imprimirRaya(int largo, char carac){
+    int *contador;
+    contador = (int *) malloc(sizeof(int));
+
+    for(*contador=0;*contador<largo;(*contador)++){
+        printf("%c",carac);
+    }
+    printf("\n");
+}
+
+void mostrarTitulo(char* titulo){
+    imprimirRaya(strlen(titulo),'-');
+    printf("%s\n",titulo);
+    imprimirRaya(strlen(titulo),'-');
+}
