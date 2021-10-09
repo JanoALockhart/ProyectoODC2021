@@ -12,7 +12,7 @@ Atributo:
     -p: Puntero a una estructura con todos los parametros necesarios. Se consideran que están todos correctos.
 */
 int ejecuccion(tArgumentos1* p){
-    int * decimalB10;
+    float * decimalB10;
     float * fractionaryB10;
     char * decimalPartNumber;
     char * fractionaryPartNumber;
@@ -22,7 +22,7 @@ int ejecuccion(tArgumentos1* p){
     int * originBase;
     int * destinationBase;
 
-    decimalB10=(int *) malloc(sizeof(int));
+    decimalB10=(float *) malloc(sizeof(float));
     fractionaryB10=(float *) malloc(sizeof(float));
     decimalBF=(char *) malloc(sizeof(char)*10);
     fractionaryBF=(char *) malloc(sizeof(char)*5);

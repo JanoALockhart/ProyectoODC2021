@@ -13,9 +13,9 @@ Parametros:
     -OBase: Puntero a un entero que es la base de origen.
     -exp: Puntero a un entero que es el exponente el cuál se eleva la base.
 */
-void papDecimalOBaseT10Base(int * total, int * digit, int * OBase, int * exp){
+void papDecimalOBaseT10Base(float * total, int * digit, int * OBase, int * exp){
     printf("total=total+%i*(%i^%i)\n",*digit,*OBase,*exp);
-    printf("total=%i\n",*total);
+    printf("total=%f\n",*total);
     printf("------\n");
 }
 
@@ -26,7 +26,7 @@ Parametros:
     -b: Puntero a un entero que es la base destino
     -r: Puntero a un entero que es el resto
 */
-void papDecimal10BaseTDBase(int * c, int * b, int * r){
+void papDecimal10BaseTDBase(float * c, int * b, int * r){
     int * i;
     int * numberLength;
     int * d; // Puntero a un entero que es el dividendo
@@ -35,7 +35,7 @@ void papDecimal10BaseTDBase(int * c, int * b, int * r){
     d=(int *) malloc(sizeof(int));
     i=(int *) malloc(sizeof(int));
 
-    *d=(*c)* *(b);
+    *d=(int) (*c)* *(b);
     *i=0;
 
     *numberLength=floor(log10(abs( (*d) ))) + 1;
@@ -52,7 +52,7 @@ void papDecimal10BaseTDBase(int * c, int * b, int * r){
         printf("*");
     }
     printf("\n %i \n", *r);
-    printf("div(%i,%i)=%i\n", *d, *b, *c);
+    printf("div(%i,%i)=%f\n", *d, *b, *c);
     printf("------\n");
 
     free(numberLength);

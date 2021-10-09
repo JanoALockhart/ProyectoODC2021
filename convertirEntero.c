@@ -13,26 +13,26 @@ Parametros:
                 1. Entonces se imprimirá el paso a paso.
 Return: Un puntero a entero que va a contener al número n en base 10.
 */
-int * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
-    int * total;
+float * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
+    float * total;
     int * count;
     int * numberLength;
     int * value;
     int * exp;
-    total=(int *) malloc(sizeof(int));
+    total=(float *) malloc(sizeof(float));
     if((*Obase)!=10){
         if((*n!='0' || *n!='1') && *(n+1)){
             count=(int *) malloc(sizeof(int));
             numberLength=(int *) malloc(sizeof(int));
             value=(int *) malloc(sizeof(int));
             exp=(int *) malloc(sizeof(int));
-            *total=0;
+            *total=0.0;
             *count=1;
             numberLength=stringLength(n);
             while((*count)<=(*numberLength)){
                 value=(getValue((n+(*count)-1)));
                 *exp=((*numberLength)-(*count));
-                (*total) += (*value) * (int) pow( (double)(*Obase) , (double) (*exp) );
+                (*total) += ((float) *value) * (powf((float) (*Obase) , (float) (*exp) ));
                 if(*vervose) papDecimalOBaseT10Base(total, value, Obase, exp);
                 (*count)++;
             }
@@ -41,7 +41,7 @@ int * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
             free(value);
             free(exp);
         } else *total=(*n=='0')?0:1;
-    }else{ *total=atoi(n); if(*vervose) directConv(total, Obase); }
+    }else{ *total=(float) atoi(n); if(*vervose) directConv((int *) total, Obase); }
     return total;
 }
 
@@ -55,32 +55,33 @@ Parametros:
                 1. Entonces se imprimirá el paso a paso.
 Return: Un puntero a una cadena de caracteres que va a contener al número n en base destino.
 */
-char * decimal10BaseTDBase(int * n, int * DBase, int * vervose){
+char * decimal10BaseTDBase(float * n, int * DBase, int * vervose){
     char * output;
     int * count;
-    int * number;
+    float * number;
     int * rem;
     if((*DBase)!=10){
-        output=(char *) malloc(sizeof(char));
+        output=(char *) malloc(sizeof(char)*43);
         if((*n!='0' || *n!='1') && *(n+1)){
-            number=(int *) malloc(sizeof(int));
+            number=(float *) malloc(sizeof(float));
             rem=(int *) malloc(sizeof(int));
             count=(int *) malloc(sizeof(int));
             *count=0;
             *number=*n;
             while((*number)>=(*DBase)){
-                *rem=(*number)%(*DBase);
+                *rem=(int) (*number)%(*DBase);
                 output=agregarCaracterFinal(output, count, rem);
-                *number=(*number)/(*DBase);
+                *number=floorf((*number)/(*DBase));
                 if(*vervose) papDecimal10BaseTDBase(number, DBase, rem);
                 (*count)++;
             }
-            output=agregarCaracterFinal(output, count, number);
+            *rem=(float) *number;
+            output=agregarCaracterFinal(output, count, rem);
             reverse(output, count);
             free(count);
             free(number);
             free(rem);
         }else *output=(*n=='0')?0:1;
-    }else{ output=integerToString(n); if(*vervose) directConv(n, DBase); }
+    }else{ output=floatToString(n); if(*vervose) directConv((int *) n, DBase); }
     return output;
 }

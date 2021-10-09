@@ -18,7 +18,7 @@ int main(int argc, char** argv)
     printf("%i ",registroParam->argV);
     printf("%i \n",registroParam->argH);
     ejecuccion(registroParam);
-
+    printf("LLego al final\n");
     exit(EXIT_SUCCESS);
     return 0;
 }

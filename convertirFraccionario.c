@@ -44,7 +44,7 @@ float* transformarFraccionarioAB10(char *fraccionario, int baseInicial, int paso
             *exponente = (*pos)+1;
             *total += (*valor)*(1/pow(baseInicial,*exponente));
             if(pasoAPaso){
-                papFractionaryOBaseT10Base(total, valor, &baseInicial,exponente);
+                papFractionaryOBaseT10Base(total, valor, &baseInicial, exponente); // here
             }
             (*pos)++;
             *pCarac = *(fraccionario+(*pos));
@@ -76,7 +76,7 @@ char* transformarFraccionarioABaseDestino(float fraccionario, int baseDestino, i
     int *cantDigitos, *digitoEntero;
     char *result;
     result = (char *) malloc(sizeof(char));
-    *result = '\0';
+    *result = '0';
 
     if(fraccionario!=0){
         numIntermedio = (float *) malloc(sizeof(float));
