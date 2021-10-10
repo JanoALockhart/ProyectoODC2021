@@ -2,6 +2,14 @@
 
 #include "almacenamientoParam.h"
 
+/**
+Procedimiento que inicializa los campos del registro
+indicado por parámetro con valores por defecto.
+Los campos correspondientes a los argumentos n, s y
+d son inicializados como NULL.
+Los campos correspondientes a los argumentos v y h
+son inicializados como 0.
+*/
 void constructor(tArgumentos1* registro){
     registro->argN = NULL;
     registro->argS = NULL;
@@ -10,7 +18,12 @@ void constructor(tArgumentos1* registro){
     registro->argH = 0;
 }
 
-
+/**
+Procedimiento que libera la memoria a la que apuntan
+el registro y sus campos.
+Parámetro:
+    -registro: es el registro cuya memoria será liberada.
+*/
 void destructor(tArgumentos1* registro){
     if(registro->argN!=NULL){
         free(registro->argN);
