@@ -30,13 +30,11 @@ void cambioDeBaseNumero(tArgumentos1* p){
 
     decimalB10=(float *) malloc(sizeof(float));
     fractionaryB10=(float *) malloc(sizeof(float));
-    decimalBF=(char *) malloc(sizeof(char)*(10+1));
-    fractionaryBF=(char *) malloc(sizeof(char)*(5+1));
     vervose = (int *) malloc(sizeof(int));
     originBase = (int *) malloc(sizeof(int));
     destinationBase = (int *) malloc(sizeof(int));
-    decimalPartNumber=(char *) malloc(sizeof(char));
-    fractionaryPartNumber=(char *) malloc(sizeof(char));
+    decimalPartNumber=(char *) malloc(sizeof(char)*(10+1));
+    fractionaryPartNumber=(char *) malloc(sizeof(char)*(5+1));
 
     *vervose = p->argV;
     *originBase=atoi(p->argS);
@@ -54,10 +52,10 @@ void cambioDeBaseNumero(tArgumentos1* p){
     free(decimalB10);
     free(fractionaryB10);
     free(decimalBF);
-    free(fractionaryBF);//free problematico
+    free(fractionaryBF);
     free(vervose);
     free(destinationBase);
-    free(decimalPartNumber);//free problematico
-    free(fractionaryPartNumber);//free problematico
+    free(decimalPartNumber);
+    free(fractionaryPartNumber);
     free(originBase);
 }

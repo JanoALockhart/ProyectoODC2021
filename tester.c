@@ -2,10 +2,12 @@
 #include <stdio.h>
 #include <inttypes.h>
 #include <string.h>
+#include <float.h>
 #include "almacenamientoParam.h"
 #include "lectorArgumentos.h"
 #include "convertirFraccionario.h"
 #include "verificadorArgumentos.h"
+#include "conversionNumero.h"
 #include "Util.h"
 
 //#define TEST_ESH
@@ -24,9 +26,10 @@ void ejecutarTest(){
     //printf("%d \n",sizeof(tParam));
     #ifdef TEST_CONVERTIRNUM
 
+    printf("%f",FLT_MAX);
     tArgumentos1 *reg;
     reg = (tArgumentos1*) malloc(sizeof(tArgumentos1));
-    reg->argN="abc.de";
+    reg->argN="fffffFFFFF.fffff";
     reg->argS="16";
     reg->argD="2";
     reg->argH=0;

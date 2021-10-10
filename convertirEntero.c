@@ -25,7 +25,7 @@ float * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
 
     if(*vervose) mostrarTitulo("PARTE ENTERA DE BASE ORIGEN A BASE 10");
     if((*Obase)!=10){
-       // if((*n!='0' || *n!='1') && *(n+1)){ //REVISAR ESTE IF
+       if((*n!='0' || *n!='1') && *(n+1)){
             count=(int *) malloc(sizeof(int));
             numberLength=(int *) malloc(sizeof(int));
             value=(int *) malloc(sizeof(int));
@@ -45,7 +45,7 @@ float * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
             free(numberLength);
             free(value);
             free(exp);
-        //} else *total=(*n=='0')?0:1;
+        } else *total=(*n=='0')?0:1;
     }else{ *total=(float) atoi(n); if(*vervose) directConv(total, Obase); }
     return total;
 }
@@ -68,9 +68,13 @@ char * decimal10BaseTDBase(float * n, int * DBase, int * vervose){
     int * rem;
 
     if(*vervose) mostrarTitulo("PARTE ENTERA DE BASE 10 A BASE DESTINO");
+
     if((*DBase)!=10){
-        output=(char *) malloc(sizeof(char)*43);
-        if((*n!='0' || *n!='1') && *(n+1)){
+        output=(char *) malloc(sizeof(char));
+
+
+        //if((*n!='0' || *n!='1') && *(n+1)){
+
             number=(float *) malloc(sizeof(float));
             rem=(int *) malloc(sizeof(int));
             count=(int *) malloc(sizeof(int));
@@ -85,13 +89,13 @@ char * decimal10BaseTDBase(float * n, int * DBase, int * vervose){
                 if(*vervose) papDecimal10BaseTDBase(number, DBase, rem);
                 (*count)++;
             }
-            *rem=(float) *number;
+            *rem=(int) *number;
             output=agregarCaracterFinal(output, count, rem);
             reverse(output, count);
             free(count);
             free(number);
             free(rem);
-        }else *output=(*n=='0')?0:1;
+        //}else *output=(*n=='0')?0:1;
     }else{ output=floatToString(n); if(*vervose) directConv( n, DBase); }
     return output;
 }

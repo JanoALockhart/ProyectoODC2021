@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <String.h>
 #include <ctype.h>
+#include <math.h>
 
 /**
 Funcion que simula un mapeo de claves caracteres y valores enteros.
@@ -172,11 +173,12 @@ char* agregarCaracterFinal(char* strNum, int * cantDig, int * digito){
     char *nuevoPunt;
     char *carac;
 
-    nuevoPunt = (char *) malloc(((*cantDig)+1)*sizeof(char));
+    nuevoPunt = (char *) malloc(((*cantDig)+2)*sizeof(char));
     strcpy(nuevoPunt,strNum);
-    //nuevoPunt = (char *) realloc(strNum,((*cantDig)+1)*sizeof(char));
+    //nuevoPunt = (char *) realloc(strNum,((*cantDig)+2)*sizeof(char));
 
     carac = isValue(digito);
+
     *(nuevoPunt+(*cantDig))=*carac;
     *(nuevoPunt+(*cantDig)+1)='\0';
 

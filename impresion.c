@@ -18,7 +18,7 @@ Parametros:
 */
 void papDecimalOBaseT10Base(float * total, int * digit, int * OBase, int * exp){
     printf("total=total+%i*(%i^%i)\n",*digit,*OBase,*exp);
-    printf("total=%f\n",*total);
+    printf("total=%.0f\n",*total);
     printf("------\n");
 }
 
@@ -38,30 +38,30 @@ Parametros:
 void papDecimal10BaseTDBase(float * c, int * b, int * r){
     int * i;
     int * numberLength;
-    long int * d; // Puntero a un entero que es el dividendo
+    float * d; // Puntero a un entero que es el dividendo
 
     numberLength=(int *) malloc(sizeof(int));
-    d=(long int *) malloc(sizeof(long int));
+    d=(float *) malloc(sizeof(float));
     i=(int *) malloc(sizeof(int));
 
-    *d=(int) (*c)* *(b);
+    *d=(*c)*(*b)+(*r);
     *i=0;
 
-    *numberLength=floor(log10(abs( (*d) ))) + 1;
-    printf("%li |%i\n", *d, *b);
+    *numberLength= (int) floor(log10(*d)) + 1;
+    printf("%.0f |%i\n", *d, *b);
 
     for(;(*i)<=(*numberLength);(*i)++){
         printf(" ");
     }
 
-    *numberLength=floor(log10(abs(*b))) + 1;
+    *numberLength=floor(log10(*b)) + 1;
     *i=0;
 
     for(;(*i)<(*numberLength)+2;(*i)++){
         printf("*");
     }
     printf("\n %i \n", *r);
-    printf("div(%i,%i)=%f\n", *d, *b, *c);
+    printf("div(%.0f,%i)=%.0f\n", *d, *b, *c);
     printf("------\n");
 
     free(numberLength);
@@ -172,7 +172,7 @@ la conversión es trivial.
         -base: es un puntero a la base que se quiere transformar.
 */
 void directConv(float* n, int * base){
-    printf("Conversion directa. %li en base %i es %li\n",*n, *base, *n);
+    printf("Conversion directa. %f en base %i es %f\n",*n, *base, *n);
 }
 
 /**

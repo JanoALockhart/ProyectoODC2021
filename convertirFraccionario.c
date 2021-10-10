@@ -87,7 +87,7 @@ char* transformarFraccionarioABaseDestino(float fraccionario, int baseDestino, i
     int *cantDigitos, *digitoEntero;
     char *result;
     result = (char *) malloc(sizeof(char));
-    *result = '0';
+    *result = '\0';
 
     if(pasoAPaso){
         mostrarTitulo("PARTE FRACCIONARIA DE BASE 10 A BASE DESTINO");
