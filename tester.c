@@ -26,7 +26,7 @@ void ejecutarTest(){
     //printf("%d \n",sizeof(tParam));
     #ifdef TEST_CONVERTIRNUM
 
-    printf("%f",FLT_MAX);
+    printf("%f\n",FLT_MAX);
     tArgumentos1 *reg;
     reg = (tArgumentos1*) malloc(sizeof(tArgumentos1));
     reg->argN="fffffFFFFF.fffff";
@@ -34,6 +34,12 @@ void ejecutarTest(){
     reg->argD="2";
     reg->argH=0;
     reg->argV=1;
+
+    printf("ArgN: %s\n",reg->argN);
+    printf("ArgS: %s\n",reg->argS);
+    printf("ArgD: %s\n",reg->argD);
+    printf("ArgV: %i\n",reg->argV);
+    printf("ArgH: %i\n",reg->argH);
 
     cambioDeBaseNumero(reg);
 

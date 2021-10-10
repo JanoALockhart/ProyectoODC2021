@@ -6,22 +6,13 @@
 #include "verificadorArgumentos.h"
 
 //#define TESTER
-//define TESTER2
+//#define TESTER2
 int main(int argc, char** argv)
 {
     #ifndef TESTER2
-
-
     tArgumentos1 *registroParam;
 
     registroParam = almacenarValores(argc, argv);
-    #ifdef TESTER
-    printf("ArgN: %s\n",registroParam->argN);
-    printf("ArgS: %s\n",registroParam->argS);
-    printf("ArgD: %s\n",registroParam->argD);
-    printf("ArgV: %i\n",registroParam->argV);
-    printf("ArgH: %i\n",registroParam->argH);
-    #endif // TESTER
     verificarValores(registroParam);
     cambioDeBaseNumero(registroParam);
 
