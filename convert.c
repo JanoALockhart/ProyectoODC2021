@@ -16,6 +16,7 @@ int main(int argc, char** argv)
     verificarValores(registroParam);
     cambioDeBaseNumero(registroParam);
 
+    destructor(registroParam);
     exit(EXIT_SUCCESS);
     #else
     ejecutarTest();
