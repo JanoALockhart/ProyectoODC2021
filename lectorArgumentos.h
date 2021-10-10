@@ -14,12 +14,15 @@ tArgumentos1 *almacenarValores(int cantParam, char** arrParam);
 
 
 
-#define TESTER
-#ifdef TESTER
+
 int esElArgH(char* palabra);
 int* estaParamH(int cantParam, char** param);
 char*** identificarParametro(char *param, tArgumentos1 *registro);
 void guardarValorParametro(char *param, char** argAIngresar);
+
+
+//#define TESTER
+#ifdef TESTER
 void ejecutarTest();
 #endif // TESTER
 

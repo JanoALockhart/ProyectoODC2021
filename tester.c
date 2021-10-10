@@ -18,12 +18,23 @@
 //#define TEST_BASE
 //#define TEST_REALLOC
 //#define TEST_COMMA
-#define TEST_CONVERTIRNUM
+//#define TEST_CONVERTIRNUM
+#define TEST_DEFAULT
+
 void ejecutarTest(){
 
     //printf("%d \n",sizeof(tArgumentos1));
     //printf("%d \n",sizeof(tArgumentos2));
     //printf("%d \n",sizeof(tParam));
+
+    #ifdef TEST_DEFAULT
+    char *argv[3] = {"nom","-n","123"};
+    int argc = 3;
+
+    almacenarValores(argc, argv);
+
+    #endif // TEST_DEFAULT
+
     #ifdef TEST_CONVERTIRNUM
 
     printf("%f\n",FLT_MAX);
