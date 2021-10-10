@@ -21,6 +21,7 @@ float * decimalOBaseT10Base(char * n, int * Obase, int * vervose){
     int * numberLength;
     int * value;
     int * exp;
+
     total=(float *) malloc(sizeof(float));
 
     if(*vervose) mostrarTitulo("PARTE ENTERA DE BASE ORIGEN A BASE 10");
@@ -72,9 +73,7 @@ char * decimal10BaseTDBase(float * n, int * DBase, int * vervose){
     if((*DBase)!=10){
         output=(char *) malloc(sizeof(char));
 
-
         //if((*n!='0' || *n!='1') && *(n+1)){
-
             number=(float *) malloc(sizeof(float));
             rem=(int *) malloc(sizeof(int));
             count=(int *) malloc(sizeof(int));
