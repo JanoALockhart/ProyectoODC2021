@@ -18,7 +18,8 @@
 #define MAX_PARTE_FRACC_INPUT 5
 
 
-int* soloNumeros(char* cadena);
+
+int * isValid(char * n, int * base);
 
 int * limitesEnteroYFracc(char* strNum);
 

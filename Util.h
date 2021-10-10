@@ -1,7 +1,7 @@
 #ifndef UTIL_H_INCLUDED
 #define UTIL_H_INCLUDED
 
-int * isValid(char * n, int * base);
+int* soloNumeros(char* cadena);
 
 int * getValue(char * value);
 

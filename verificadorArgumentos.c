@@ -7,40 +7,43 @@
 #include "impresion.h"
 #include "verificadorArgumentos.h"
 
-
-
-//Esta funcion iria en util.c
 /**
-Esta funcion se encarga de verificar que una cadena de
-caracteres este formada solo por digitos del 0 al 9.
-Parametro:
-    -cadena: es un puntero a la cadena de caracteres
-        que se quiere verificar
-Return: un puntero a int que almacena 1 si la cadena
-    esta compuesta solo de numeros, 0 en caso contrario
-    El espacio en memoria al que apunta el
-    puntero debe liberarse con un free()
+Funcion que devuelve si una cadena de caracteres es un número en una base
+Parametros:
+    -n: es un puntero a la cadena de caracteres
+        que es el numero.
+    -baseInicial: es la base que quiere ver si n puede ser expresada
+Return: Puntero a:
+        -0 si es que n no puede ser expresado en la base
+        -1 si es que n puede ser expresado en la base
+        -10 si es que n puede ser expresado en la base ERROR
 */
-int* soloNumeros(char* cadena){
-    char *pCarac;
-    int *numCarac;
-    int *soloCar;
+int * isValid(char * n, int * base){
+    int * validity;
+    int * cantFrac;
+    int * i;
+    int * value;
 
-    pCarac = (char*) malloc(sizeof(char));
-    numCarac = (int*) malloc(sizeof(int));
-    soloCar = (int*) malloc(sizeof(int));
+    validity=(int *) malloc(sizeof(int));
+    cantFrac=(int *) malloc(sizeof(int));
+    i=(int *) malloc(sizeof(int));
+    value=(int *) malloc(sizeof(int));
 
-    *numCarac = 0;
-    do{
-        *pCarac = *(cadena+(*numCarac));
-        *soloCar = ('0'<=*pCarac && *pCarac<='9')||(*pCarac=='\0');
-        (*numCarac)++;
-    }while(*pCarac!='\0' && *soloCar);
-
-    free(pCarac);
-    free(numCarac);
-
-    return soloCar;
+    *validity=1;
+    *cantFrac=0;
+    *i=0;
+    for(;(*(n+*i)!='\0') && (*cantFrac)<2 && (*validity); (*i)++){
+        if((*(n+*i))=='.' || (*(n+*i))==',') (*cantFrac)++;
+        else{
+            value=getValue((n+*i));
+            if(value==NULL || (*value)>=(*base)) *validity=0;
+            free(value);
+        }
+    }
+    if(*(cantFrac)>=2) *validity=0;
+    free(cantFrac);
+    free(i);
+    return validity;
 }
 
 /**
