@@ -1,5 +1,6 @@
 #include<stdlib.h>
 
+#include "conversionNumero.h"
 #include "convertirEntero.h"
 #include "convertirFraccionario.h"
 #include "impresion.h"
@@ -10,11 +11,12 @@
 Procedimiento que, dada una estructura de tipo tArgumentos1,
 separa por un lado la parte entera y por otro la parte fraccionaria.
 Luego transforma estos desde la base de origen a base 10 con
-el método correspondiente. Los numeros obtenidos son pasados
-de la base 10 a la base destino con los métodos correspondientes.
-Por último, se muestra el numero obtenido por pantalla.
+las funciones correspondiente. Los números obtenidos son pasados
+de la base 10 a la base destino con las funciones correspondientes.
+Por último, se muestra por pantalla el numero resultante de
+concatenar la parte entera y la parte fraccionaria en la base de destino
 Parámetro:
-    -p: Puntero a una estructura con todos los parámetros necesarios.
+    -p(tArgumentos1*): Puntero a una estructura con todos los parámetros necesarios.
         Se asume que todos fueron verificados previamente.
 */
 void cambioDeBaseNumero(tArgumentos1* p){

@@ -1,21 +1,22 @@
 #include <math.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 #include "convertirFraccionario.h"
 #include "Util.h"
 #include "impresion.h"
 
 /**
-Funcion devuelve el resultado de transformar el numero
-fraccionario desde su base de origen a base 10.
-Parametros:
-    -fraccionario: es un puntero a la cadena de caracteres
+Función devuelve el resultado de transformar el numero
+fraccionario desde su base de origen a base 10. Si la
+parte fraccionaria es 0, se imprime un mensaje indicando
+que la conversión es directa.
+Parámetros:
+    -fraccionario(char*): es un puntero a la cadena de caracteres
         que es el numero fraccionario. No debe ser NULL
-    -baseInicial: es la base en la que encuentra el numero fraccionario
-    -pasoAPaso: indica si cada paso de la resolucion debe imprimirse por pantalla.
+    -baseInicial(int): es la base en la que encuentra el numero fraccionario
+    -pasoAPaso(int): indica si cada paso de la resolucion debe imprimirse por pantalla.
         Si se ingresa 0, no imprime por panralla, con cualquier otro numero se imprime.
-Return: un puntero a float que almacena el numero fraccionario en base 10.
+Return(float*): un puntero a float que almacena el numero fraccionario en base 10.
     El espacio en memoria al que apunta el puntero debe liberarse con un free()
 */
 float* transformarFraccionarioAB10(char *fraccionario, int baseInicial, int pasoAPaso){
@@ -68,16 +69,19 @@ float* transformarFraccionarioAB10(char *fraccionario, int baseInicial, int paso
 
 /**
 Esta funcion calcula la parte fraccionaria de la base
-10 a la base de destino, armando una cadena.
+10 a la base de destino, armando una cadena. Si no hay
+parte fraccionaria que convertir, es decir, que fraccionario
+es igual a 0, se imprime un mensaje que indica que la conversión
+es directa.
 Parametros:
-    -fraccionario: es el numero fraccionario en base 10
+    -fraccionario(float): es el numero fraccionario en base 10
         que será llevado a la base destino.
-    -baseDestino: es la base a la que será pasado el
+    -baseDestino(int): es la base a la que será pasado el
         número fraccionario.
-    -pasoAPaso: Si es 0, no muestra por pantalla los
+    -pasoAPaso(int): Si es 0, no muestra por pantalla los
         pasos realizados para obtener el resultado.
         Caso contrario si lo hace.
-Return: un puntero a una cadena de caracteres que representa
+Return(char*): un puntero a una cadena de caracteres que representa
     el numero fraccionario sin el "0." al principio.
     El espacio de memoria apuntado por el puntero debe
     liberarse con un free().

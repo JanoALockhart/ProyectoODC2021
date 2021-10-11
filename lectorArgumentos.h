@@ -1,6 +1,5 @@
 #ifndef LECTORARGUMENTOS_H_INCLUDED
 #define LECTORARGUMENTOS_H_INCLUDED
-#include "almacenamientoParam.h"
 
 #define BASE_DEFAULT "10"
 
@@ -11,10 +10,6 @@
 
 
 tArgumentos1 *almacenarValores(int cantParam, char** arrParam);
-
-
-
-
 int esElArgH(char* palabra);
 int* estaParamH(int cantParam, char** param);
 char*** identificarParametro(char *param, tArgumentos1 *registro);

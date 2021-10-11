@@ -20,7 +20,7 @@ void constructor(tArgumentos1* registro){
 
 /**
 Procedimiento que libera la memoria a la que apuntan
-el registro y sus campos.
+el registro ingresado por parámtetro y sus campos.
 Parámetro:
     -registro: es el registro cuya memoria será liberada.
 */

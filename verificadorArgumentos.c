@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -8,15 +7,15 @@
 #include "verificadorArgumentos.h"
 
 /**
-Funcion que devuelve si una cadena de caracteres es un número en una base
+Funcion que verifica si una cadena de caracteres es un número coherente
+con la base especificada.
 Parametros:
-    -n: es un puntero a la cadena de caracteres
+    -n(char*): es un puntero a la cadena de caracteres
         que es el numero.
-    -baseInicial: es la base que quiere ver si n puede ser expresada
-Return: Puntero a:
+    -baseInicial(int*): es la base que quiere ver si n puede ser expresada
+Return(int*): un puntero a entero que almacena
         -0 si es que n no puede ser expresado en la base
         -1 si es que n puede ser expresado en la base
-        -10 si es que n puede ser expresado en la base ERROR
 */
 int * isValid(char * n, int * base){
     int * validity;
@@ -47,14 +46,14 @@ int * isValid(char * n, int * base){
 }
 
 /**
-Funcion que verifica que el numero ingresado
+Función que verifica que el numero ingresado
 no sobrepase los limites para la cantidad de digitos
-enteros y de digitos fraccionarios.
-Parmametro:
-    -strNum: es la cadena de caracteres que representa
-        el numero a verificar.
-Return: 1 si el numero cumple las restricciones, 0
-    en caso contrario.
+enteros y de digitos fraccionarios, 10 y 5 respectivamente.
+Parámetro:
+    -strNum(char*): es la cadena de caracteres que representa
+        el número a verificar.
+Return(int*): un puntero a int que almacena
+    1 si el numero cumple las restricciones, 0 en caso contrario.
 */
 int * limitesEnteroYFracc(char* strNum){
     int *cantInt, *cantFracc, *pos;
@@ -93,15 +92,16 @@ int * limitesEnteroYFracc(char* strNum){
 
 
 /**
-Esta funcion se encarga de verificar que el valor
+Procedimiento que se encarga de verificar que el valor
 del argumento -n sean correctos. Es decir, que cada
-digito que lo conforma sea valido y este entre 0 y la baseOrigen,
-este ultimo sin incluir. (0<=digito<baseOrigen). Si no se
+dígito que lo conforma sea válido y esté entre 0 y la baseOrigen-1,
+incluidos. (0<=digito<=baseOrigen-1). Si no se
 cumple esto, el programa finaliza con un error.
 Parametros:
-    -strNumero: es la cadena ingresada que representa el
-        numero y se va a verificar
-    -baseOrigen: es la base en la que el numero fue ingresada
+    -strNumero(char*): es la cadena ingresada que representa el
+        número que se va a verificar
+    -baseOrigen(int*): es un puntero a int que almacena
+        la base en la que el numero fue ingresada
 */
 void verificarArgN(char* strNumero, int * baseOrigen){
     int *valido;
@@ -135,13 +135,15 @@ void verificarArgN(char* strNumero, int * baseOrigen){
 }
 
 /**
-Funcion que se encarga de verificar que la base
-sea un valor valido. En caso de que no lo sea
-finaliza el programa con error.
-Parametro:
-    -strBase: es el valor de la base en formato
-        cadena y distinto de NULL.
-Return: un puntero a entero que almacena el valor
+Función que se encarga de verificar que la base
+sea un valor válido, es decir, que sea una cadena
+formada sólo por números y se encuentre entre
+2 y 16 incluidos. En caso de que no se verifiquen
+estas condiciones, el programa finaliza con un error.
+Parámetro:
+    -strBase(char*): es el valor de la base en formato
+        cadena. Debe ser distinto de NULL.
+Return(int*): un puntero a entero que almacena el valor
     de la base.
     El espacio en memoria al que apunta el
     puntero debe liberarse con un free()
@@ -167,10 +169,11 @@ int* verificarBase(char* strBase){
 }
 
 /**
-Funcion que se encarga de verificar que los valores
+Procedimientos que se encarga de verificar que los valores
 de los campos del registro pasado por parametro
 sean correctos. En caso de que alguno de los campos
-sea NULL, el programa termina con un error.
+sea NULL o alguno de los valores sea inválido,
+el programa termina con un error.
 Parametro:
     -regArgs: es el registro con los argumentos a verificar
 */

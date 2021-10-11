@@ -1,9 +1,7 @@
 #ifndef VERIFICADORARGUMENTOS_H_INCLUDED
 #define VERIFICADORARGUMENTOS_H_INCLUDED
 
-
 #include "almacenamientoParam.h"
-
 
 #define ERROR_BASE 200
 #define VALOR_ARGN_NO_INGRESADO 202

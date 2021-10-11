@@ -1,18 +1,17 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "almacenamientoParam.h"
 #include "lectorArgumentos.h"
-#include "verificadorArgumentos.h"
 #include "impresion.h"
 
 /**
-Metodo que compia el valor del argumento pasado por parametro
-en el campo correspondiente del registro.
-Parametros:
-    -param: es el valor del argumento ingresado a copiar
-    -dirCampo: es la direccion de memoria del campo del
+Procedimiento que copia el valor del argumento pasado por parametro,
+como una cadena de caracteres, en la dirección  de memoria,
+también pasada por parámetro, del campo correspondiente del registro.
+Parámetros:
+    -param(char*): es el valor del argumento ingresado a copiar
+    -dirCampo(char**): es un puntero que almacena la direccion de memoria del campo del
         registro en el que se quiere guardar el valor.
 */
 void guardarValorParametro(char *param, char** dirCampo){
@@ -21,14 +20,16 @@ void guardarValorParametro(char *param, char** dirCampo){
 }
 
 /**
-Metodo que verifica que el parametro que esta leyendo sea el nombre de
-un argumento existente. En caso de que no sea valido, el programa
+Función que verifica que el parámetro que esta leyendo sea el nombre de
+un argumento existente. En caso de que no sea válido, el programa
 termina con un error. Si el nombre del argumento es correcto, se devuelve la
-direccion de memoria del campo del registro en el que haya que almacenar
-el valor de este
+dirección de memoria del campo del registro en el que haya que almacenar
+el valor inmediatamente después.
 Parametros:
-    -param: es un puntero al primer caracter del nombre del argumento
-    -registro: es el registro que almacenará el valor del parametro
+    -param(char*): es un puntero al primer caracter del nombre del argumento.
+    -registro(tArgumentos1*): es un puntero al registro que almacenará el valor del parámetro.
+Return(char***): es el puntero que almacena la dirección de memoria del
+    campo en el que se deberá almacenar un valor.
 */
 char*** identificarParametro(char *param, tArgumentos1 *registro){
     char*** dirDevolver;
@@ -85,23 +86,24 @@ char*** identificarParametro(char *param, tArgumentos1 *registro){
 }
 
 /**
-Metodo que verifica si la palabra pasada por parámetro
+Función que verifica si la palabra pasada por parámetro
 es de la forma "-h"
 Parametro:
-    -palabra: es el puntero a la cadena de caracteres que se quiere analizar
-Return: 0 si el parametro ingresado no es "-h", cualquier otro numero en caso contrario
+    -palabra(char*): es el puntero a la cadena de caracteres que se quiere analizar.
+Return(int): 0 si el parametro ingresado no es "-h", 1 en caso contrario.
 */
 int esElArgH(char *palabra){
    return ((*palabra=='-') && (*(palabra+1)!='\0') && (*(palabra+1)=='h') && (*(palabra+2)=='\0'));
 }
 
 /**
-Este metodo verifica si en el arreglo de argumentos ingresados
+Función que verifica si en el arreglo de argumentos ingresados
 se encuentra el parametro "-h".
 Parametros:
-    -arrParam: es el arreglo de argumentos ingresado
-    -cantParam: es la cantidad de argumentos ingresados
-Return: 1 si el parametro leido es -h, 0 en caso contrario.
+    -arrParam(char**): es el arreglo de argumentos ingresado.
+    -cantParam(int): es la cantidad de argumentos ingresados.
+Return(int*): puntero a entero que almacena 1 si el parametro "-h" se encuentra entre los argumentos
+    ingresados, 0 en caso contrario.
 */
 int* estaParamH(int cantParam, char** arrParam){
     int *estaH;
@@ -121,10 +123,10 @@ int* estaParamH(int cantParam, char** arrParam){
 }
 
 /**
-Metodo que se encarga de asignar el valor por defecto
-al campo del registro indicado por parametro
-Parametro:
-    -campoRegistro: es la direccion de memoria del campo
+Procedimiento que se encarga de asignar el valor por defecto,
+en este caso "10", al campo del registro indicado por parámetro
+Parámetro:
+    -campoRegistro(char**): es un puntero a la dirección de memoria del campo
         al que se le quiere asignar el valor por defecto.
 */
 void asignarDefault(char **campoRegistro){
@@ -135,12 +137,18 @@ void asignarDefault(char **campoRegistro){
 }
 
 /**
-Este metodo se encarga de leer los parametros ingresados dentro del main
-y guardarlos en un registro de tipo argmentos tArgumentos1.
-Parametros:
-    -cantParam: es la cantidad de parametros que ingreso el usuario
-    -arrParam: es el arreglo que contiene todos los parametros que el usuario ingreso
-Return: un registro con los valores de los parametros ingresados
+Función que se encarga de recorrer los parámetros ingresados dentro del main
+y, si no se ingresó el argumento de ayuda, guardar los valores en los campos
+correspondientes en un registro de tipo argmentos tArgumentos1. Observación:
+estos valores no necesariamente serán válidos ya que la verificación no es
+responsabilidad de este módulo.
+En caso de que el parámetro -h sea encontrado, se muestra un mensaje de ayuda por consola.
+Si alguna de las bases no fue ingresada, se asigna la base 10 por defecto.
+Parámetros:
+    -cantParam(int): es la cantidad de parametros que ingresó el usuario.
+    -arrParam(char**): es el arreglo que contiene todos los parámetros que el usuario ingresó
+Return(tArgumentos*): un puntero a un registro de tipo tArgumentos1
+    con los valores de los parámetros ingresados.
 */
 tArgumentos1 *almacenarValores(int cantParam, char** arrParam){
 

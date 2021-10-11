@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include <String.h>
 #include <ctype.h>
 #include <math.h>
@@ -9,9 +8,9 @@
 Esta funcion se encarga de verificar que una cadena de
 caracteres este formada solo por digitos del 0 al 9.
 Parametro:
-    -cadena: es un puntero a la cadena de caracteres
+    -cadena(char*): es un puntero a la cadena de caracteres
         que se quiere verificar
-Return: un puntero a int que almacena 1 si la cadena
+Return(int*): un puntero a int que almacena 1 si la cadena
     esta compuesta solo de numeros, 0 en caso contrario
     El espacio en memoria al que apunta el
     puntero debe liberarse con un free()
@@ -41,8 +40,8 @@ int* soloNumeros(char* cadena){
 /**
 Funcion que simula un mapeo de claves caracteres y valores enteros.
 Parametros:
-    -n: caracter que es ingresado como clave
-Return: Puntero a un valor entero que esta relacionado con n
+    -n(char*): caracter que es ingresado como clave
+Return(int*): Puntero a un valor entero que esta relacionado con n
 */
 int * getValue(char * value){
     int * output;
@@ -74,8 +73,8 @@ int * getValue(char * value){
 /**
 Funcion que simula un mapeo de claves enteras y valores en caracteres.
 Parametros:
-    -n: entero que es ingresado como clave
-Return: Puntero a un caracter que es el valor relacionado con n
+    -n(int*): entero que es ingresado como clave
+Return(char*): Puntero a un caracter que es el valor relacionado con n
 */
 char * isValue(int * n){
     char * output;
@@ -105,8 +104,8 @@ char * isValue(int * n){
 /**
 Funcion que calcula la cantidad de caracteres de una cadena.
 Parametros:
-    -n: Puntero al primer elemento de una cadena de caracteres
-Return: Puntero al entero que dice la cantidad de caracteres.
+    -n(char*): Puntero al primer elemento de una cadena de caracteres
+Return(int*): Puntero al entero que dice la cantidad de caracteres.
 */
 int * stringLength(char * string){
     int * length;
@@ -118,11 +117,11 @@ int * stringLength(char * string){
 
 /**
 Procedimiento que, dado un número expresado en una cadena de caracteres, separa su parte entera de la parte fraccional.
-Luego, referenciara a las partes enteras y partes fraccional a dos parametros de entrada.
+Luego, referenciara a las partes entera y fraccional a dos parametros de entrada.
 Parametros:
-    -n: Puntero al primer elemento de la cadena de caracteres.
-    -parteEntera: Puntero a un caracter que servirá para devolver la parte entera.
-    -parteFraccionaria: Puntero a un caracter que servirá para devolver la parte fraccional.
+    -n(char*): Puntero al primer elemento de la cadena de caracteres.
+    -parteEntera(char*): Puntero a un caracter que servirá para devolver la parte entera.
+    -parteFraccionaria(char*): Puntero a un caracter que servirá para devolver la parte fraccional.
 */
 void separateComma(char * n, char * parteEntera, char * parteFraccionaria){
     int * pos;
@@ -157,13 +156,13 @@ Funcion que agrega el ultimo digito a la cadena de caracteres.
 Para esto, relocaliza la memoria reservada para la cadena y
 devuelve el puntero que apunta a la nueva direccion de memoria
 Parametros:
-    -strNum: es un puntero a memoria dinamica que contiene
+    -strNum(char*): es un puntero a memoria dinamica que contiene
         la cadena de caracteres que representa el numero
-    -cantDig: es la cantidad de digitos que tiene el numero,
+    -cantDig(int*): es la cantidad de digitos que tiene el numero,
         sin contar el caracter nulo ('\0').
-    -digito: es el nuevo digito que quiere agregarse al
+    -digito(int*): es el nuevo digito que quiere agregarse al
         final de la cadena de caracteres.
-Return: un nuevo puntero que indica la nueva ubicacion en
+Return(char*): un nuevo puntero que indica la nueva ubicacion en
     memoria de la cadena de caracteres.
 */
 char* agregarCaracterFinal(char* strNum, int * cantDig, int * digito){
@@ -188,8 +187,8 @@ char* agregarCaracterFinal(char* strNum, int * cantDig, int * digito){
 /**
 Procedimiento que transforma a una cadena de caracteres en su reverso.
 Parametros:
-    -string: Puntero al primer elemento de la cadena de caracteres.
-    -stringLength: Puntero a un entero que dirá la longitud de string.
+    -string(char*): Puntero al primer elemento de la cadena de caracteres.
+    -stringLength(int*): Puntero a un entero que dirá la longitud de string.
 */
 void reverse(char * string, int * stringLength){
     int * count;
@@ -206,8 +205,8 @@ void reverse(char * string, int * stringLength){
 /**
 Procedimiento que transforma a un entero a una cadena de caracteres
 Parametros:
-    -n: Puntero al numero a convertir en cadena de caracteres.
-Return: Puntero a una cadena de caracteres la cual contiene al número n.
+    -n(float*): Puntero al numero a convertir en cadena de caracteres.
+Return(char*): Puntero a una cadena de caracteres la cual contiene al número n.
 */
 char * floatToString(float * n){
     char * string;
@@ -238,8 +237,8 @@ char * floatToString(float * n){
 /**
 Procedimiento que verifica si una cadena esta compuesta únicamente por 0.
 Parametros:
-    -n: Puntero a una cadena de caracteres.
-Return: Un puntero que apunta a:
+    -n(char*): Puntero a una cadena de caracteres.
+Return(int*): Un puntero que apunta a:
         .0 si n NO es puramente 0.
         .1 si n es puramente 0.
         El estapacio en memoria apuntado por el puntero
