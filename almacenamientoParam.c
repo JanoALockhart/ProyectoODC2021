@@ -15,7 +15,7 @@ void constructor(tArgumentos1* registro){
     registro->argS = NULL;
     registro->argD = NULL;
     registro->argV = 0;
-    registro->argH = 0;
+    registro->signo = 0;
 }
 
 /**

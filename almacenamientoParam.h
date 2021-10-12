@@ -7,7 +7,7 @@ typedef struct argumentos{
     char *argS;     //Almacena la base de origen del numero
     char *argD;     //Almacena la base de destino del numero
     int argV;       //Indica si se deben mostrar pasos intermedios o no
-    int argH;       //Indica si el parametro ayuda fue ingresado
+    int signo;       //Indica si el parametro ayuda fue ingresado
 } tArgumentos1;
 
 void constructor(tArgumentos1* registro);
