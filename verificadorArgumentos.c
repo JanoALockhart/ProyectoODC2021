@@ -181,6 +181,7 @@ void verificarValores(tArgumentos1* regArgs){
 
     int* baseOrigen;
 
+    baseOrigen=NULL;
     if((regArgs->argS)!=NULL){
         baseOrigen = verificarBase(regArgs->argS);
     }else{
