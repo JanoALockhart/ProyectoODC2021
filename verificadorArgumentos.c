@@ -103,12 +103,13 @@ Parametros:
     -baseOrigen(int*): es un puntero a int que almacena
         la base en la que el numero fue ingresada
 */
-void verificarArgN(char* strNumero, int * baseOrigen){
+void verificarArgN(char* strNumero, int * baseOrigen/*, int * sign*/){
     int *valido;
-    int * sign;
     char* pCarac;
 
     pCarac = (char*) malloc(sizeof(char));
+
+   // if(){}
 
     valido=isValid(strNumero, baseOrigen);
     if(!(*valido)){
@@ -169,17 +170,30 @@ int* verificarBase(char* strBase){
     return base;
 }
 
-int * verifySign(char * number){
+/**
+Funcion que verifica, si y solo si el numero tiene al menos dos caracteres, el signo de un numero ingresado como caracter.
+Luego, si es que efectivamente el numero estaba signado, entonces remueve el signo.
+Parametro:
+    -number: es el puntero a un caracter del numero.
+Return: Puntero a un entero. Si su valor:
+            * Es 0, entonces el numero no tiene signo o su signo es +.
+            * Es 1, entonces el numero tiene signo -.
+        La funcion devuelve 0 si es que la verificación no se pudo hacer al ser que el numero tenia un o menos caracteres.
+*/
+int * verifySignAndModify(char * number){
     int * sign;
+    int * length;
     sign=(int *) malloc(sizeof(int));
-    if(*number=='-'){
+    length=stringLength(number);
+    if(*number=='-' && ((*length)>1)){
         *sign=1;
         removeFirstChar(number);
     }
     else{
         *sign=0;
-        if(*number=='+') removeFirstChar(number);
+        if(*number=='+'&& ((*length)>1)) removeFirstChar(number);
     }
+    free(length);
     return sign;
 }
 
@@ -189,10 +203,11 @@ de los campos del registro pasado por parametro
 sean correctos. En caso de que alguno de los campos
 sea NULL o alguno de los valores sea inválido,
 el programa termina con un error.
+Tambien el procedimiento le da a la estructura de argumentos el signo.
 Parametro:
     -regArgs: es el registro con los argumentos a verificar
 */
-void verificarValores(tArgumentos1* regArgs){
+void verificarValoresYSignar(tArgumentos1* regArgs){
 
     int* baseOrigen;
 
@@ -206,7 +221,7 @@ void verificarValores(tArgumentos1* regArgs){
     }
 
     if((regArgs->argN)!=NULL){
-        sign=verifySign(regArgs->argN);
+        sign=verifySignAndModify(regArgs->argN);
         regArgs->signo=*sign;
         verificarArgN(regArgs->argN, baseOrigen);
         free(baseOrigen);

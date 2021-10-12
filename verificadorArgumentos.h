@@ -17,14 +17,14 @@
 
 
 
-int * isValid(char * n, int * base);
+int * isValid(char * n, int * base); // ESTA
 
-int * limitesEnteroYFracc(char* strNum);
+int * limitesEnteroYFracc(char* strNum); // ESTA
 
-void verificarArgN(char* strNumero, int* baseOrigen);
+void verificarArgN(char* strNumero, int* baseOrigen); // ESTA
 
-int* verificarBase(char* strBase);
+int* verificarBase(char* strBase); // ESTA
 
-void verificarValores(tArgumentos1* regArgs);
+void verificarValoresYSignar(tArgumentos1* regArgs);
 
 #endif // VERIFICADORARGUMENTOS_H_INCLUDED

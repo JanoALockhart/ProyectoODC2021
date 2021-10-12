@@ -16,7 +16,7 @@ int main(int argc, char** argv)
     tArgumentos1 *registroParam;
 
     registroParam = almacenarValores(argc, argv);
-    verificarValores(registroParam);
+    verificarValoresYSignar(registroParam);
     cambioDeBaseNumero(registroParam);
 
     destructor(registroParam);
