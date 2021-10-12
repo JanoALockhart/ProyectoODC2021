@@ -260,3 +260,20 @@ int * only0Verification(char * n){
     }
     return only0;
 }
+
+/**
+Procedimiento que le saca el primer caracter a una cadena.
+Parametros:
+    -n(char*): Puntero a una cadena de caracteres.
+*/
+void * removeFirstChar(char * number){
+    int * count;
+    count=(int *) malloc(sizeof(int));
+    *count=1;
+    while(*(number+*count)){
+        *(number+(*count)-1)=*(number+(*count));
+        (*count)++;
+    }
+    *(number+(*count)-1)='\0';
+    free(count);
+}

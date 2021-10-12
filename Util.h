@@ -19,4 +19,6 @@ char * doubleToString(double * n);
 
 int * only0Verification(char * n);
 
+void * removeFirstChar(char * number);
+
 #endif // UTIL_H_INCLUDED

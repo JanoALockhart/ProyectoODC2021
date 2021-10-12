@@ -105,8 +105,12 @@ Parametros:
     -resultadoEntero(char*): Puntero al primer caracter de la parte entera.
     -resultadoFraccional(char*): Puntero al primer caracter de la parte fraccionaria.
 */
-void mostrarResultadoFinal(char * numOriginal, char * bOrigen, char * bDestino, char * resultadoEntero, char * resultadoFraccional){
-    printf("El numero %s en base %s es %s.%s en base %s", numOriginal, bOrigen, resultadoEntero, resultadoFraccional, bDestino);
+void mostrarResultadoFinal(char * numOriginal, char * bOrigen, char * bDestino, char * resultadoEntero, char * resultadoFraccional, int sign){
+    char * minus;
+    minus=(char *) malloc(sizeof(char));
+    *minus=sign?'-':' ';
+    printf("El numero %s en base %s es %c%s.%s en base %s", numOriginal, bOrigen, *minus, resultadoEntero, resultadoFraccional, bDestino);
+    free(minus);
 }
 
 /**

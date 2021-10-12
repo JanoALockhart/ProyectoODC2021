@@ -49,7 +49,9 @@ void cambioDeBaseNumero(tArgumentos1* p){
     decimalBF=decimal10BaseTDBase(decimalB10, destinationBase, vervose);
     fractionaryBF=transformarFraccionarioABaseDestino(*fractionaryB10, *destinationBase, p->argV);
 
-    mostrarResultadoFinal(p->argN,p->argS,p->argD,decimalBF, fractionaryBF);
+    if(p->signo && p->argV) mostrarTitulo("Ya que se ingreso un numero negativo, se multiplica por -1 el resultado obtenido.");
+
+    mostrarResultadoFinal(p->argN,p->argS,p->argD,decimalBF, fractionaryBF, p->signo);
 
     free(decimalB10);
     free(fractionaryB10);

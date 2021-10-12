@@ -105,6 +105,7 @@ Parametros:
 */
 void verificarArgN(char* strNumero, int * baseOrigen){
     int *valido;
+    int * sign;
     char* pCarac;
 
     pCarac = (char*) malloc(sizeof(char));
@@ -168,6 +169,20 @@ int* verificarBase(char* strBase){
     return base;
 }
 
+int * verifySign(char * number){
+    int * sign;
+    sign=(int *) malloc(sizeof(int));
+    if(*number=='-'){
+        *sign=1;
+        removeFirstChar(number);
+    }
+    else{
+        *sign=0;
+        if(*number=='+') removeFirstChar(number);
+    }
+    return sign;
+}
+
 /**
 Procedimientos que se encarga de verificar que los valores
 de los campos del registro pasado por parametro
@@ -181,6 +196,8 @@ void verificarValores(tArgumentos1* regArgs){
 
     int* baseOrigen;
 
+    int* sign;
+
     baseOrigen=NULL;
     if((regArgs->argS)!=NULL){
         baseOrigen = verificarBase(regArgs->argS);
@@ -189,8 +206,11 @@ void verificarValores(tArgumentos1* regArgs){
     }
 
     if((regArgs->argN)!=NULL){
+        sign=verifySign(regArgs->argN);
+        regArgs->signo=*sign;
         verificarArgN(regArgs->argN, baseOrigen);
         free(baseOrigen);
+        free(sign);
     }else{
         mostrarError(VALOR_ARGN_NO_INGRESADO);
     }
@@ -199,5 +219,4 @@ void verificarValores(tArgumentos1* regArgs){
         baseOrigen = verificarBase(regArgs->argD);//guardamos el valor, para luego liberar la memoria
         free(baseOrigen);
     }
-
 }
