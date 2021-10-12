@@ -15,7 +15,7 @@ char* agregarCaracterFinal(char * strNum, int * stringLength, int * n);
 
 void reverse(char * str, int * stringLength);
 
-char * floatToString(float * n);
+char * doubleToString(double * n);
 
 int * only0Verification(char * n);
 

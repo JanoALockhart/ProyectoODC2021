@@ -203,26 +203,26 @@ void reverse(char * string, int * stringLength){
 }
 
 /**
-Procedimiento que transforma a un entero a una cadena de caracteres
+Procedimiento que transforma a un double a una cadena de caracteres
 Parametros:
-    -n(float*): Puntero al numero a convertir en cadena de caracteres.
+    -n(double*): Puntero al numero a convertir en cadena de caracteres.
 Return(char*): Puntero a una cadena de caracteres la cual contiene al número n.
 */
-char * floatToString(float * n){
+char * doubleToString(double * n){
     char * string;
-    float * number;
+    double * number;
     int * count;
     int * digit;
     string=(char *) malloc(sizeof(char)*10);
-    number=(float *) malloc(sizeof(float));
+    number=(double *) malloc(sizeof(double));
     count=(int *) malloc(sizeof(int));
     digit=(int *) malloc(sizeof(int));
     *number=*n;
     *count=0;
     while(!((-9<=(*number)) && ((*number)<=9))){
-        *digit=(int) fmod((*number),10.0);
+        *digit=(int) fmod ((*number),10.0);
         string=agregarCaracterFinal(string, count, digit);
-        *number=floorf(((*number)/10.0));
+        *number=floor(((*number)/10.0));
         (*count)++;
     }
     *digit=(int) *number;

@@ -11,14 +11,14 @@ Procedimiento que imprime un paso de la conversión de la parte entera de una bas
 Muestra el total que se va obteniendo a medida que se multiplica cada digito del numero
 por la base elevada a la posicion.
 Parámetros:
-    -total(float*): Puntero a float que es el resultado que quedo después de hacer las operaciones aritmeticas.
+    -total(double*): Puntero a double que es el resultado que quedo después de hacer las operaciones aritmeticas.
     -digit(int*): Puntero a un entero que es el valor del dígito.
     -OBase(int*): Puntero a un entero que es la base de origen.
     -exp(int*): Puntero a un entero que es el exponente el cuál se eleva la base.
 */
-void papDecimalOBaseT10Base(float * total, int * digit, int * OBase, int * exp){
+void papDecimalOBaseT10Base(double * total, int * digit, int * OBase, int * exp){
     printf("total=total+%i*(%i^%i)\n",*digit,*OBase,*exp);
-    printf("total=%.0f\n",*total);
+    printf("total=%f\n",*total);
     printf("------\n");
 }
 
@@ -31,17 +31,17 @@ Imprime en consola el siguiente formato:
     div(dividendo,baseDestino)=siguienteDividendo
 
 Parametros:
-    -c(float*): Puntero a float que es el resultado de la division.
+    -c(double*): Puntero a double que es el resultado de la division.
     -b(int*): Puntero a un entero que es la base destino.
     -r(int*): Puntero a un entero que es el resto.
 */
-void papDecimal10BaseTDBase(float * c, int * b, int * r){
+void papDecimal10BaseTDBase(double * c, int * b, int * r){
     int * i;
     int * numberLength;
-    float * d; // Puntero a un entero que es el dividendo
+    double * d; // Puntero a un entero que es el dividendo
 
     numberLength=(int *) malloc(sizeof(int));
-    d=(float *) malloc(sizeof(float));
+    d=(double *) malloc(sizeof(double));
     i=(int *) malloc(sizeof(int));
 
     *d=(*c)*(*b)+(*r);
@@ -166,10 +166,10 @@ void mostrarAyuda(){
 /**
 Procedimiento que muestra un mensaje cuando la conversión es trivial.
     -Parámetros:
-        -n(float*): es un puntero a int que almacena el numero a transformar.
+        -n(double*): es un puntero a int que almacena el numero a transformar.
         -base(int*): es un puntero a la base que se quiere transformar.
 */
-void directConv(float* n, int * base){
+void directConvDouble(double* n, int * base){
     printf("Conversion directa. %f en base %i es %f\n",*n, *base, *n);
 }
 

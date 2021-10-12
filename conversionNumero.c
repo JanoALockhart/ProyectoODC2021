@@ -20,7 +20,7 @@ Parámetro:
         Se asume que todos fueron verificados previamente.
 */
 void cambioDeBaseNumero(tArgumentos1* p){
-    float * decimalB10;
+    double * decimalB10;
     float * fractionaryB10;
     char * decimalPartNumber;
     char * fractionaryPartNumber;
@@ -30,7 +30,7 @@ void cambioDeBaseNumero(tArgumentos1* p){
     int * originBase;
     int * destinationBase;
 
-    decimalB10=(float *) malloc(sizeof(float));
+    decimalB10=(double *) malloc(sizeof(double));
     fractionaryB10=(float *) malloc(sizeof(float));
     vervose = (int *) malloc(sizeof(int));
     originBase = (int *) malloc(sizeof(int));
