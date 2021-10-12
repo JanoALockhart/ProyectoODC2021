@@ -1,8 +1,8 @@
 #include <stdlib.h>
-#include "almacenamientoParam.h"
-#include "lectorArgumentos.h"
-#include "conversionNumero.h"
-#include "verificadorArgumentos.h"
+#include "almacenamientoDatos/almacenamientoParam.h"
+#include "input/lectorArgumentos.h"
+#include "conversion/conversionNumero.h"
+#include "input/verificadorArgumentos.h"
 
 /**
 Función principal del programa
